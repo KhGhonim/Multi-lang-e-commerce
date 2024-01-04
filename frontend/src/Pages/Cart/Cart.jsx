@@ -19,60 +19,53 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Close } from "@mui/icons-material";
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useGetlodaByNameQuery } from "../../Redux/product";
 import Lottie from "lottie-react";
 import loading from "../../Components/loading/loading.json";
-
+import ProductDetails from "./ProductDetails";
 const AllProducts = "shops?populate=*";
-const MenProduct = "shops?populate=*&filters[catagory][$eq]=men"
-const WomenProduct = "shops?populate=*&filters[catagory][$eq]=women"
+const MenProduct = "shops?populate=*&filters[catagory][$eq]=men";
+const WomenProduct = "shops?populate=*&filters[catagory][$eq]=women";
 
-const Images = [
-  {
-    src: "https://m.media-amazon.com/images/I/A1UqyudfKnL._CLa%7C2140%2C2000%7C611h4gSNd3L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX425_.png",
-  },
-  {
-    src: "https://m.media-amazon.com/images/I/A1rcXo55giL._CLa%7C2140%2C2000%7C61ezDdc-zIL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX466_.png",
-  },
-  {
-    src: "https://m.media-amazon.com/images/I/B1MuEgxHlwS._CLa%7C2140%2C2000%7C51%2BdBPB7FVL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX522_.png",
-  },
-];
+
 function Cart() {
   const theme = useTheme();
   const [Products, setProducts] = useState(AllProducts);
+  const [open, setOpen] = useState(false);
+  const [MiniCart, setMiniCart] = useState({});
+  const { data, error, isLoading } = useGetlodaByNameQuery(Products);
   const handleChange = (event, NewValue) => {
     if (NewValue !== null) {
-      setProducts(NewValue)
+      setProducts(NewValue);
     }
   };
-  const [value, setValue] = useState(2);
-  const [open, setOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = (value) => {
     setOpen(false);
   };
-  const { data, error, isLoading } = useGetlodaByNameQuery(Products);
 
   if (isLoading) {
     return (
-      <div>
-      <Lottie
-        animationData={loading}
-        loop={true}
-        autoplay={true}
-        style={{ width: "50%", height: "50%" }}
-      />;
-</div>
-    )
+      <div style={{ alignItems: "center" }}>
+        <Lottie
+          animationData={loading}
+          loop={true}
+          autoplay={true}
+          style={{ width: "100%", height: "50%" }}
+        />
+        ;
+      </div>
+    );
   }
   if (error) {
     return (
-      <Typography variant="h2" color="initial">{error.error}</Typography>
-    )
+      <Typography variant="h2" color="initial">
+        {error.error}
+      </Typography>
+    );
   }
 
   if (data) {
@@ -152,7 +145,6 @@ function Cart() {
                 }}
                 className="MuiProductsButton"
                 value={WomenProduct}
-
               >
                 Women Catagory
               </ToggleButton>
@@ -213,7 +205,11 @@ function Cart() {
                     color="primary"
                     startIcon={<AddShoppingCartIcon />}
                     sx={{ textTransform: "capitalize" }}
-                    onClick={handleClickOpen}
+                    onClick={() => {
+                      handleClickOpen();
+                      setMiniCart(item);
+                      console.log(item)
+                    }}
                   >
                     Add to Cart
                   </Button>
@@ -221,108 +217,33 @@ function Cart() {
                     name="simple-controlled"
                     value={item.attributes.rating}
                     precision={0.5}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
+
                   />
                 </CardActions>
               </Card>
-              <Dialog
-          sx={{
-            ".MuiPaper-root": {
-              maxWidth: { xs: "100%", sm: "100%", md: "960px" },
-              borderRadius: "15px",
-            },
-          }}
-          onClose={handleClose}
-          open={open}
-        >
-          <IconButton
-            sx={{ position: "absolute", right: 3, top: 5, zIndex: 99 }}
-            aria-label=""
-            onClick={handleClose}
-          >
-            <Close />
-          </IconButton>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: { xs: "column", sm: "column", md: "row" },
-            }}
-          >
-            <Box sx={{ mr: 3, ml: 1, my: 2 }}>
-              <img
-                src="https://m.media-amazon.com/images/I/A1QP1cTDMHL._CLa%7C2140%2C2000%7C41w6c%2Bow-6L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX466_.png"
-                alt=""
-                style={{
-                  width: "250px",
-                  height: "250px",
-                  borderRadius: "10px",
-                  // @ts-ignore
-                  background: theme.palette.backGround.main,
-                }}
-              />
-            </Box>
-            <Stack
-              sx={{
-                alignItems: { xs: "center", sm: "center", md: "flex-start" },
-              }}
-            >
-              <Typography variant="h4" color="inherit">
-                Women's Fashion
-              </Typography>
-              <Typography variant="subtitle1" color="red">
-                $12.99
-              </Typography>
-              <Typography margin={1} color="inherit" fontSize={"15px"}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eveniet, architecto.
-              </Typography>
-              <Stack
-                direction={"row"}
-                alignItems={"center"}
-                justifyContent={"flex-start"}
-                sx={{ mb: "3px" }}
-              >
-                {Images.map((item) => (
-                  <img
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      margin: 5,
-                      marginTop: 23,
-                      borderRadius: "10px",
-                    }}
-                    key={item.src}
-                    src={item.src}
-                    alt=""
-                  />
-                ))}
-              </Stack>
-              <Button
-                variant="contained"
-                sx={{
-                  textTransform: "capitalize",
-                  m: 1,
-                  width: "120px",
-                  mb: 2,
-                }}
-                color="primary"
-                startIcon={<ShoppingCartCheckoutIcon />}
-              >
-                Buy Now
-              </Button>
-            </Stack>
-          </Box>
-        </Dialog>
             </Box>
           ))}
         </Stack>
+        <Dialog
+                sx={{
+                  ".MuiPaper-root": {
+                    maxWidth: { xs: "100%", sm: "100%", md: "960px" },
+                    borderRadius: "15px",
+                  },
+                }}
+                onClose={handleClose}
+                open={open}
+              >
+                <IconButton
+                  sx={{ position: "absolute", right: 3, top: 5, zIndex: 99 }}
+                  aria-label=""
+                  onClick={handleClose}
+                >
+                  <Close />
+                </IconButton>
 
-
+                <ProductDetails MiniCart={MiniCart} />
+              </Dialog>
       </Container>
     );
   }
