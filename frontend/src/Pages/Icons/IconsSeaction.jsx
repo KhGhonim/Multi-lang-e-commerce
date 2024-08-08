@@ -1,5 +1,4 @@
 import {
-
   Stack,
   IconButton,
   Typography,
@@ -35,15 +34,18 @@ function IconsSeaction() {
   const theme = useTheme();
   return (
     <Container
+      maxWidth="lg"
       sx={{
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: { sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" },
+        gap: 1,
         alignItems: "center",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
+        justifyContent: "center",
+        p: 1,
         mt: 2,
         bgcolor: theme.palette.mode === "dark" ? "#0006" : "#fff",
-        p:0,
-        width: "90%"
+        width: "100%",
+        borderRadius: "5px",
       }}
     >
       {IconsSectionsBox.map((item) => (
@@ -62,7 +64,6 @@ function IconsSeaction() {
               md: "1px solid #64748b",
               ":last-child": { borderRight: "none" },
             },
-            
           }}
           divider={<Divider orientation="vertical" flexItem />}
         >

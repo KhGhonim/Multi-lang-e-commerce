@@ -13,6 +13,7 @@ import {
   IconButton,
   Box,
 } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -27,6 +28,31 @@ const AllProducts = "shops?populate=*";
 const MenProduct = "shops?populate=*&filters[catagory][$eq]=men";
 const WomenProduct = "shops?populate=*&filters[catagory][$eq]=women";
 
+const parentVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+      duration: 1.5,
+      staggerChildren: 0.2,
+    },
+  },
+  exit: { opacity: 0, y: 50, transition: { duration: 1, ease: "easeIn" } },
+};
+
+const childVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 10 },
+  },
+  exit: { opacity: 0, y: 50, transition: { duration: 1, ease: "easeInOut" } },
+};
 
 function Cart() {
   const theme = useTheme();
@@ -34,6 +60,7 @@ function Cart() {
   const [open, setOpen] = useState(false);
   const [MiniCart, setMiniCart] = useState({});
   const { data, error, isLoading } = useGetlodaByNameQuery(Products);
+
   const handleChange = (event, NewValue) => {
     if (NewValue !== null) {
       setProducts(NewValue);
@@ -49,12 +76,18 @@ function Cart() {
 
   if (isLoading) {
     return (
-      <div style={{ alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Lottie
           animationData={loading}
           loop={true}
           autoplay={true}
-          style={{ width: "100%", height: "50%" }}
+          style={{ width: "25%", height: "25%" }}
         />
         ;
       </div>
@@ -152,98 +185,111 @@ function Cart() {
           </Box>
         </Box>
 
-        <Stack
-          direction={"row"}
-          flexWrap={"wrap"}
-          sx={{
-            alignItems: "center",
-            justifyContent: {
-              xs: "center",
-              sm: "space-between",
-              md: "space-between",
-              lg: "space-between",
-            },
-          }}
-        >
-          {data.data.map((item) => (
-            <Box key={item.attributes.title} sx={{ mt: 3, mb: 2, mr: 1 }}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={`${item.attributes.image.data[0].attributes.url}`}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      justifyContent={"space-between"}
-                    >
-                      <Typography gutterBottom variant="h5" component="div">
-                        {item.attributes.title}
+        <AnimatePresence mode="wait">
+          <Stack
+            component={motion.div}
+            key={data.data.length}
+            variants={parentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            direction={"row"}
+            flexWrap={"wrap"}
+            sx={{
+              alignItems: "center",
+              justifyContent: {
+                xs: "center",
+                sm: "space-between",
+                md: "space-between",
+                lg: "space-between",
+              },
+            }}
+          >
+            {data.data.map((item) => (
+              <Box
+                component={motion.div}
+                variants={childVariants}
+                key={item.attributes.title}
+                sx={{ mt: 3, mb: 2, mr: 1 }}
+              >
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="250"
+                      image={`${item.attributes.image.data[0].attributes.url}`}
+                      alt="green iguana"
+                    />
+                    <CardContent>
+                      <Stack
+                        direction={"row"}
+                        alignItems={"center"}
+                        justifyContent={"space-between"}
+                      >
+                        <Typography gutterBottom variant="h5" component="div">
+                          {item.attributes.title}
+                        </Typography>
+                        <Typography variant="caption" color="inherit">
+                          ${item.attributes.price}
+                        </Typography>
+                      </Stack>
+                      <Typography variant="body2" color="text.secondary">
+                        {item.attributes.description}
                       </Typography>
-                      <Typography variant="caption" color="inherit">
-                        ${item.attributes.price}
-                      </Typography>
-                    </Stack>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.attributes.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Button
-                    size="small"
-                    color="primary"
-                    startIcon={<AddShoppingCartIcon />}
-                    sx={{ textTransform: "capitalize" }}
-                    onClick={() => {
-                      handleClickOpen();
-                      setMiniCart(item);
-                      console.log(item)
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
-                    Add to Cart
-                  </Button>
-                  <Rating
-                    name="simple-controlled"
-                    value={item.attributes.rating}
-                    precision={0.5}
+                    <Button
+                      size="small"
+                      color="primary"
+                      startIcon={<AddShoppingCartIcon />}
+                      sx={{ textTransform: "capitalize" }}
+                      onClick={() => {
+                        handleClickOpen();
+                        setMiniCart(item);
+                        console.log(item);
+                      }}
+                    >
+                      Add to Cart
+                    </Button>
+                    <Rating
+                      name="simple-controlled"
+                      value={item.attributes.rating}
+                      precision={0.5}
+                    />
+                  </CardActions>
+                </Card>
+              </Box>
+            ))}
+          </Stack>
+        </AnimatePresence>
 
-                  />
-                </CardActions>
-              </Card>
-            </Box>
-          ))}
-        </Stack>
         <Dialog
-                sx={{
-                  ".MuiPaper-root": {
-                    maxWidth: { xs: "100%", sm: "100%", md: "960px" },
-                    borderRadius: "15px",
-                  },
-                }}
-                onClose={handleClose}
-                open={open}
-              >
-                <IconButton
-                  sx={{ position: "absolute", right: 3, top: 5, zIndex: 99 }}
-                  aria-label=""
-                  onClick={handleClose}
-                >
-                  <Close />
-                </IconButton>
+          sx={{
+            ".MuiPaper-root": {
+              maxWidth: { xs: "100%", sm: "100%", md: "960px" },
+              borderRadius: "15px",
+            },
+          }}
+          onClose={handleClose}
+          open={open}
+        >
+          <IconButton
+            sx={{ position: "absolute", right: 3, top: 5, zIndex: 99 }}
+            aria-label=""
+            onClick={handleClose}
+          >
+            <Close />
+          </IconButton>
 
-                <ProductDetails MiniCart={MiniCart} />
-              </Dialog>
+          <ProductDetails MiniCart={MiniCart} />
+        </Dialog>
       </Container>
     );
   }
