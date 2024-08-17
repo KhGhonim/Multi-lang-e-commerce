@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   padding: 0;
@@ -5,7 +9,13 @@ body {
   scroll-behavior: smooth;
 }
 
+.scroll {
+  scrollbar-width: none;
+}
 
+.scroll::-webkit-scrollbar {
+  display: none;
+}
  
 
  

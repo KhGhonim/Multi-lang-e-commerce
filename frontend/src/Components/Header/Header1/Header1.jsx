@@ -65,10 +65,10 @@ const Header1 = ({ setMode }) => {
         >
           Hot{" "}
         </Typography>
-        <Typography variant="body1" color="#fff">
+        <p className="text-white font-bold text-xs md:text-base">
           {" "}
           Free Express Shipping
-        </Typography>
+        </p>
       </Box>
 
       {/* The Dark and Light mode */}
@@ -118,7 +118,6 @@ const Header1 = ({ setMode }) => {
                 mt: 0,
                 mb: 0,
                 ".MuiTypography-root": {
-                  fontSize: "15px",
                   borderRadius: "15px",
                   color: "white",
                 },
@@ -158,9 +157,15 @@ const Header1 = ({ setMode }) => {
             color: "#fff",
           }}
         >
-          <Link style={{color : "inherit"}} to={""}><FacebookRoundedIcon /></Link>
-          <Link style={{color : "inherit"}} to={""}><InstagramIcon /></Link>
-          <Link style={{color : "inherit"}} to={""}><TwitterIcon /></Link>
+          <Link style={{ color: "inherit" }} to={""}>
+            <FacebookRoundedIcon />
+          </Link>
+          <Link style={{ color: "inherit" }} to={""}>
+            <InstagramIcon />
+          </Link>
+          <Link style={{ color: "inherit" }} to={""}>
+            <TwitterIcon />
+          </Link>
         </Stack>
       </Stack>
     </Stack>

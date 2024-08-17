@@ -1,15 +1,9 @@
-import {
-  Stack,
-  IconButton,
-  Typography,
-  Container,
-  useTheme,
-  Divider,
-} from "@mui/material";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import PaymentIcon from "@mui/icons-material/Payment";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import { motion } from "framer-motion";
+import { useTheme } from "@mui/material";
 
 const IconsSectionsBox = [
   {
@@ -31,62 +25,34 @@ const IconsSectionsBox = [
 ];
 
 function IconsSeaction() {
-  const theme = useTheme();
+  const theme = useTheme().palette.mode;
+
   return (
-    <Container
-      maxWidth="lg"
-      sx={{
-        display: "grid",
-        gridTemplateColumns: { sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" },
-        gap: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        p: 1,
-        mt: 2,
-        bgcolor: theme.palette.mode === "dark" ? "#0006" : "#fff",
-        width: "100%",
-        borderRadius: "5px",
-      }}
+    <div
+      className={`container mx-auto p-4 mt-8 ${
+        theme === "dark" ? "bg-zinc-800" : "bg-white"
+      }   rounded-lg grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4`}
     >
       {IconsSectionsBox.map((item) => (
-        <Stack
-          direction={"row"}
+        <motion.div
           key={item.Description}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            width: 250,
-            gap: "5px",
-            p: 1,
-            justifyContent: "center",
-            borderRight: {
-              sm: "none",
-              md: "1px solid #64748b",
-              ":last-child": { borderRight: "none" },
-            },
-          }}
-          divider={<Divider orientation="vertical" flexItem />}
+          whileHover={{ scale: 1.05, y: -5 }}
+          className={`flex items-center gap-2 p-2 justify-center ${
+            theme === "dark"
+              ? "bg-zinc-800 text-white"
+              : "bg-white text-black"
+          }  cursor-pointer transition-all duration-300`}
         >
-          <IconButton aria-label="">{item.Icon}</IconButton>
-          <Stack divider={<Divider orientation="vertical" flexItem />}>
-            <Typography variant="body1" color="inherit" sx={{ ml: 1 }}>
-              {item.Name}
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                color:
-                  // @ts-ignore
-                  theme.palette.neutral.main,
-                ml: 1,
-              }}
-            >
-              {item.Description}
-            </Typography>
-          </Stack>
-        </Stack>
+          <button aria-label="" className="p-2 ">
+            {item.Icon}
+          </button>
+          <div className="flex flex-col gap-2">
+            <p className="text-base ml-2">{item.Name}</p>
+            <p className="text-sm ml-2">{item.Description}</p>
+          </div>
+        </motion.div>
       ))}
-    </Container>
+    </div>
   );
 }
 

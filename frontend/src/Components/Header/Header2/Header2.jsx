@@ -1,6 +1,5 @@
 import {
   Badge,
-
   Container,
   IconButton,
   InputBase,
@@ -19,8 +18,10 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useEffect, useState } from "react";
-import { ExpandMore } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { ExpandMore, Logout } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../../Redux/userSlice";
 
 const Search = styled("div")(({ theme }) => ({
   flexGrow: 1,
@@ -59,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "81ch",
     },
   },
 }));
@@ -77,7 +78,7 @@ function Header2() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const open = Boolean(anchorEl);
-
+  const navigate = useNavigate();
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -106,6 +107,10 @@ function Header2() {
     localStorage.setItem("selectedTabIndex", selectedIndex.toString()); // Convert the value to a string
   }, [selectedIndex]);
 
+  const user = useSelector((state) => state.UserStore);
+  const dispatch = useDispatch();
+
+  console.log(user);
   return (
     <Container sx={{ py: 3 }}>
       <Stack
@@ -118,10 +123,7 @@ function Header2() {
       >
         <Stack sx={{ alignItems: "center" }}>
           <ShoppingCartIcon />
-          <Typography variant="body1" color="inherit">
-            {" "}
-            Khaled's E-Commerce
-          </Typography>
+          <Link to={"/"}> Khaled's E-Commerce</Link>
         </Stack>
 
         {/* Search */}
@@ -200,18 +202,43 @@ function Header2() {
               justifyContent: "space-between",
             }}
           >
-            <IconButton aria-label="cart" sx={{ color: "inherit" }}>
-              <StyledBadge badgeContent={4} color="primary">
-                <Link style={{ color: "inherit" }} to={"/Cart"}>
-                  {" "}
-                  <ShoppingBagIcon />
-                </Link>
-              </StyledBadge>
-            </IconButton>
+            {user.currentUser !== null ? (
+              <IconButton aria-label="cart" sx={{ color: "inherit" }}>
+                <StyledBadge badgeContent={4} color="primary">
+                  <Link style={{ color: "inherit" }} to={"/cart"}>
+                    {" "}
+                    <ShoppingBagIcon />
+                  </Link>
+                </StyledBadge>
+              </IconButton>
+            ) : null}
 
-            <IconButton sx={{ ml: 1, color: "inherit" }}>
-              <PersonIcon />
-            </IconButton>
+            {user.currentUser !== null ? (
+              <Link to={"/Profile"}>
+                <IconButton sx={{ ml: 1, color: "inherit" }}>
+                  <PersonIcon />
+                </IconButton>
+              </Link>
+            ) : (
+              <Link to={"/login"}>
+                <IconButton sx={{ ml: 1, color: "inherit" }}>
+                  <PersonIcon />
+                </IconButton>
+              </Link>
+            )}
+
+            {user.currentUser !== null ? (
+              <div
+                onClick={() => {
+                  dispatch(signOut());
+                  navigate("/login");
+                }}
+              >
+                <IconButton sx={{ ml: 1, color: "inherit" }}>
+                  <Logout />
+                </IconButton>
+              </div>
+            ) : null}
           </Stack>
         </Stack>
       </Stack>

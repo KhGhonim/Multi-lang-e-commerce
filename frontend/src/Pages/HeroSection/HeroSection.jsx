@@ -1,13 +1,9 @@
-import { Box, Stack, Typography, Button, useTheme } from "@mui/material";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 import "./styles.css";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-const SliderArray = [
+import HeroSectionSlider from "./HeroSectionSlider/HeroSectionSlider";
+
+const SliderArray1 = [
   {
     Photo: "https://i.insider.com/5ed95c393f7370198527eea3?width=700",
     alt: "Frist Photo",
@@ -29,169 +25,115 @@ const SliderArray = [
   },
   {
     Photo:
-      "https://www.wedoact.com/static/e6b6ba53b50d74a2fac30dbd167d114d/42837/Tittle%20page_LEAVE_IN_desktop_0.jpg",
+      "https://people.com/thmb/4zkSBc0FajrSu-1OLxSxFBgGNqU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(2999x0:3001x2)/the-best-beauty-products-people-editors-tried-tout-2-3ee7650afc2a430e8884e79850fca4ae.jpg",
+    alt: "Fifth Photo",
+  },
+];
+
+const SliderArray2 = [
+  {
+    Photo: "https://media.glamour.com/photos/639d05c7d0d74927483ca574/3:2/w_3000,h_2000,c_limit/12-16-editors-picks.jpg",
+    alt: "Frist Photo",
+  },
+  {
+    Photo:
+      "https://lh3.googleusercontent.com/Z5LKF4h_1_uix2KJ5f1tLXcLLLkN_P7gCHSPiSbYBfb8d8dIbt_DU05stfGOJkhd0-Khgnhawvy_QlLpZW8WUip_7NY_fftLMI6w5ZE",
+    alt: "Second Photo",
+  },
+  {
+    Photo:
+      "https://cdn.logojoy.com/wp-content/uploads/20191023114758/AdobeStock_224061283-min-1024x683.jpeg",
+    alt: "Thrid Photo",
+  },
+  {
+    Photo:
+      "https://c02.purpledshub.com/uploads/sites/41/2024/06/cosmetics.jpg?w=1029&webp=1",
+    alt: "Foruth Photo",
+  },
+  {
+    Photo:
+      "https://lh3.googleusercontent.com/proxy/YutKBgX4Ov_3ST1t0euSzERSurAAfgk3ZH2P2ijZ2Kc-XqgbLlvpBv1PwsoJ2NOL2w5ReB7y-Ew9Ds6qzgYl8k7mUYCV6Xv6iKHfudi8IE-Y4OjX",
+    alt: "Fifth Photo",
+  },
+];
+
+const SliderArray3 = [
+  {
+    Photo: "https://images-us.nivea.com/-/media/nivea/local/in/product-banners/nivea-men-products_banner_revised.png?rx=1454&ry=0&rw=1452&rh=806",
+    alt: "Frist Photo",
+  },
+  {
+    Photo:
+      "https://cdn.shopify.com/s/files/1/0513/2409/files/naturalskincare.jpg?v=1693253946",
+    alt: "Second Photo",
+  },
+  {
+    Photo:
+      "https://www.packagingstrategies.com/ext/resources/ISSUES/2019/07-July/34-wahl.jpg",
+    alt: "Thrid Photo",
+  },
+  {
+    Photo:
+      "https://www.insidehook.com/wp-content/uploads/2019/04/The-Ordinary-.jpg?fit=1200%2C675",
+    alt: "Foruth Photo",
+  },
+  {
+    Photo:
+      "https://menshealth.com.au/wp-content/uploads/2023/01/37083457.png",
+    alt: "Fifth Photo",
+  },
+];
+const SliderArray4 = [
+  {
+    Photo: "https://blogscdn.thehut.net/wp-content/uploads/sites/32/2018/04/17133037/1200x672_217775857-MC-MK-April-photography-batching-Shot14_1200x672_acf_cropped_1200x672_acf_cropped.jpg",
+    alt: "Frist Photo",
+  },
+  {
+    Photo:
+      "https://www.mensjournal.com/.image/t_share/MTk5Mjk3MzIzMzAwNDk3MzU4/mens-grooming-deals-prime-day-2023.jpg",
+    alt: "Second Photo",
+  },
+  {
+    Photo:
+      "https://stylestandard.com/cdn/shop/articles/StyleStandard_20200319_009_copy_1024x.jpg?v=1689062004",
+    alt: "Thrid Photo",
+  },
+  {
+    Photo:
+      "https://media.gq-magazine.co.uk/photos/65e9cf40ad37d1f2a0f745a0/master/pass/Affordable-skincare-b.jpg",
+    alt: "Foruth Photo",
+  },
+  {
+    Photo:
+      "https://www.businessoutreach.in/wp-content/uploads/2023/09/The-market-size-of-mens-grooming-brands-in-India.jpg",
     alt: "Fifth Photo",
   },
 ];
 function HeroSection() {
-  const theme = useTheme();
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
-  };
   return (
-    <Box sx={{ display: "flex", alignItems: "center", mt: 3 }}>
-      {/* Slider */}
-      <>
-        <Swiper
-          pagination={pagination}
-          modules={[Pagination]}
-          loop={true}
-          className="mySwiper"
-          style={{
-            borderRadius: "15px",
-            aspectRatio: "1/1",
-            position: "relative",
-            [theme.breakpoints.up("sm")]: {
-              display: "none",
-            },
-          }}
-        >
-          {SliderArray.map((item) => (
-            <SwiperSlide key={item.alt}>
-              <img src={item.Photo} alt={item.alt} width={"100%"} />
-            </SwiperSlide>
-          ))}
-          <Box
-            sx={{
-              [theme.breakpoints.down("xl")]: {
-                position: "absolute",
-                bgcolor: "transparent",
-                top: "40%",
-                left: "20px",
-                zIndex: 99,
-                p: 2,
-                color:
-                  theme.palette.mode === "dark"
-                    ? "chocolate"
-                    : theme.palette.text.primary,
-              },
-            }}
-          >
-            <Typography variant="h5" color="inherit" fontWeight={"900"}>
-              All You Want for your{" "}
-              <span
-                style={{ color: "red", fontSize: "25px", fontWeight: "bolder" }}
-              >
-                Lady
-              </span>
-            </Typography>
-            <Typography variant="h6" color="inherit" fontWeight={"650"}>
-              SALE UP TO{" "}
-              <span
-                style={{ color: "red", fontSize: "25px", fontWeight: "bolder" }}
-              >
-                30%
-              </span>
-            </Typography>
+    <div className="w-full h-full mt-3 overflow-hidden">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full px-4">
+        <div className="hidden lg:grid grid-cols-1 gap-4">
+          <div className="relative h-80 md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
+        <HeroSectionSlider SliderArray={SliderArray1} title={"Summer's Sale Collection For Women"}/>
+          </div>
 
-            <Typography variant="caption" color="inherit" fontWeight={"800"}>
-              Get Free Shipping on orders over{" "}
-              <span
-                style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
-              >
-                $99.00
-              </span>
-            </Typography>
-            <Box sx={{ width: "100%" }}>
-              <Button
-                sx={{
-                  bgcolor: "#222",
-                  color: "white",
-                  mt: 1,
-                  width: "50%",
-                  ml: 8,
-                  "&:hover": { bgcolor: "#151555" },
-                }}
-                endIcon={<ShoppingCartIcon sx={{ color: "white" }} />}
-                aria-label=""
-              >
-                Shop Now
-              </Button>
-            </Box>
-          </Box>
-        </Swiper>
-      </>
+          <div className="relative h-80 md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
+          <HeroSectionSlider SliderArray={SliderArray3} title={"Summer's Sale Collection For Men"}/>
+          </div>
+        </div>
 
-      {/* 2 Images with bigger screen sizes */}
-      <Box
-        sx={{
-          display: { xs: "none", sm: "none", md: "block", width: "50%" },
-          mr: 1,
-          width: "50%",
-        }}
-      >
-        <Stack>
-          <Box sx={{ position: "relative" }}>
-            <img
-              width={"100%"}
-              src="https://www.dropee.com/pages/wp-content/uploads/2023/02/pexels-karolina-grabowska-4202926-1024x683.jpg"
-              alt=""
-              style={{ borderRadius: "15px", aspectRatio: "1/1" }}
-            />
-            <Box sx={{ position: "absolute", top: 0, left: "10%", mt: 3.5 }}>
-              <Typography variant="h6" color="inherit" fontWeight={"700"}>
-                New Arrivals for the Summer
-              </Typography>
-              <Link
-                to={""}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Stack
-                  sx={{ ":hover": { color: "Red" } }}
-                  direction={"row"}
-                  alignItems={"center"}
-                  gap={1}
-                >
-                  <Typography color="inherit">Shop now</Typography>
-                  <ArrowForwardIcon fontSize="small" />
-                </Stack>
-              </Link>
-            </Box>
-          </Box>
+        <div className="grid grid-cols-1 gap-4">
 
-          <Box sx={{ position: "relative" }}>
-            <img
-              width={"100%"}
-              src=" https://www.glossy.co/wp-content/uploads/sites/4/2019/10/pasted-image-0-2.png"
-              alt=""
-              style={{ borderRadius: "15px", aspectRatio: "1/1" }}
-            />
-            <Box sx={{ position: "absolute", bottom: "3%", left: "10%" }}>
-              <Typography variant="h6" color="inherit" fontWeight={"700"}>
-                New Arrivals for the Winter
-              </Typography>
-              <Link
-                to={""}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Stack
-                  sx={{ ":hover": { color: "Red" } }}
-                  direction={"row"}
-                  alignItems={"center"}
-                  gap={1}
-                >
-                  <Typography color="inherit">Shop now</Typography>
-                  <ArrowForwardIcon fontSize="small" />
-                </Stack>
-              </Link>
-            </Box>
-          </Box>
-        </Stack>
-      </Box>
-    </Box>
+        <div className="relative  h-full md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
+          <HeroSectionSlider SliderArray={SliderArray2} title={"Winter's Sale Collection For Women"}/>
+          </div>
+          <div className="relative  h-full md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
+          <HeroSectionSlider SliderArray={SliderArray4} title={"Winter's Sale Collection For Men"}/>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

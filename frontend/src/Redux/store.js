@@ -1,19 +1,30 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
-import { setupListeners } from '@reduxjs/toolkit/query'
-import { lodaApi } from './product'
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import userReducer from "./userSlice.js";
+
+const rootReducer = combineReducers({
+  UserStore: userReducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+  version: 1,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    // Add the generated reducer as a specific top-level slice
-    [lodaApi.reducerPath]: lodaApi.reducer,
-  },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(lodaApi.middleware),
-})
+    getDefaultMiddleware({ serializableCheck: false }),
+});
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
+
+export const persistor = persistStore(store);

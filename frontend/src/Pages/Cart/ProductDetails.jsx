@@ -47,7 +47,7 @@ function ProductDetails({ MiniCart }) {
           },
         }}
       >
-        <Typography variant="h4" color="inherit" sx={{my: 1}}>
+        <Typography variant="h4" color="inherit" sx={{ my: 1 }}>
           {MiniCart.attributes.title}
         </Typography>
         <Typography variant="subtitle1" color="red">
