@@ -4,13 +4,20 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import award from "../../Assets/award-svgrepo-com.svg";
 import { Navigation } from "swiper/modules";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+  ArrowBack,
+  ArrowForward,
+  FavoriteBorderOutlined,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addToMyFavorites } from "../../Redux/userSlice";
+import { toast } from "react-toastify";
 
 export default function Slider({ Sliders, Headline }) {
   const theme = useTheme().palette.mode;
-
+  const dispatch = useDispatch();
   return (
     <div className="w-full h-full p-8">
       <h1
@@ -48,14 +55,25 @@ export default function Slider({ Sliders, Headline }) {
         className={`${
           theme === "dark"
             ? `mySwiper  z-50 `
-            : `mySwiper bg-gradient-to-t from-zinc-50 to-zinc-200 z-50 `
+            : `mySwiper bg-gradient-to-t from-zinc-50 to-zinc-200 z-40 `
         }`}
       >
         {Sliders.map((Slider, index) => (
           <SwiperSlide
             key={index}
-            className="w-full h-full shadow-lg rounded-lg "
+            className="w-full h-full shadow-lg rounded-lg relative "
           >
+            <div
+              onClick={() => {
+                dispatch(addToMyFavorites(Slider));
+                toast.success("Added to my favorites");
+              }}
+              className="absolute top-0 right-0 p-3 z-50"
+            >
+              <span className="text-xs hover:scale-110 hover:text-red-500 duration-200 transition-all p-1 cursor-pointer">
+                <FavoriteBorderOutlined />
+              </span>
+            </div>
             <Link
               className="w-full h-full rounded-lg  overflow-hidden flex flex-col relative "
               to={`${`ProductDetails/${Slider.id}`}`}
@@ -95,9 +113,9 @@ export default function Slider({ Sliders, Headline }) {
                   Lowest Price in {Slider.lowestPriceInDays} Days!
                 </p>
                 <p className="text-lg font-bold mt-1">
-                  {Slider.price} ${" "}
+                  {Slider.price}{" "}
                   <span className="line-through text-muted">
-                    {Slider.fakePrice} $
+                    {Slider.fakePrice}
                   </span>
                 </p>
                 <button className="bg-[#FFF6EE] font-semibold  mt-4 py-2 px-4 rounded-lg">

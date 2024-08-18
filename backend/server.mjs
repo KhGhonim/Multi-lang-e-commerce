@@ -2,6 +2,7 @@ import express from "express";
 import MongoDB from "./Config/MongoDB/MongoDB.js";
 import cors from "cors";
 import authregister from "./Api/Routes/authregister.js";
+import ProductRoute from "./Api/Routes/ProductRoute.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(
 
 // Routes
 app.use("/api", authregister);
+app.use("/api", ProductRoute);
 
 // Connection
 const startServer = async () => {

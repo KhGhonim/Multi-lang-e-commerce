@@ -4,7 +4,6 @@ import {
   IconButton,
   InputBase,
   Stack,
-  Typography,
   styled,
   useTheme,
 } from "@mui/material";
@@ -107,10 +106,9 @@ function Header2() {
     localStorage.setItem("selectedTabIndex", selectedIndex.toString()); // Convert the value to a string
   }, [selectedIndex]);
 
+  // @ts-ignore
   const user = useSelector((state) => state.UserStore);
   const dispatch = useDispatch();
-
-  console.log(user);
   return (
     <Container sx={{ py: 3 }}>
       <Stack
@@ -121,10 +119,12 @@ function Header2() {
           justifyContent: "space-between",
         }}
       >
-        <Stack sx={{ alignItems: "center" }}>
-          <ShoppingCartIcon />
-          <Link to={"/"}> Khaled's E-Commerce</Link>
-        </Stack>
+        <div className="logo">
+          <Link className="flex flex-col justify-center items-center" to={"/"}>
+            <ShoppingCartIcon />
+            Khaled's E-Commerce
+          </Link>
+        </div>
 
         {/* Search */}
         <Search
@@ -204,7 +204,10 @@ function Header2() {
           >
             {user.currentUser !== null ? (
               <IconButton aria-label="cart" sx={{ color: "inherit" }}>
-                <StyledBadge badgeContent={4} color="primary">
+                <StyledBadge
+                  badgeContent={user.cartItems.length}
+                  color="primary"
+                >
                   <Link style={{ color: "inherit" }} to={"/cart"}>
                     {" "}
                     <ShoppingBagIcon />

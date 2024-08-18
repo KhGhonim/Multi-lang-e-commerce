@@ -98,11 +98,20 @@ export default function Login() {
               />
             </div>
           </div>
-          <div className="w-full text-end hover:text-blue-500 transition-all duration-300">
-            <div className="text-sm">
+          <div className="w-full flex flex-col md:flex-row space-y-2 justify-between items-center ">
+            <div className="text-xs">
+              <Link
+                to="/register"
+                className="font-medium hover:text-blue-500 transition-all duration-300"
+              >
+                Don't Have an Account? Sign Up here
+              </Link>
+            </div>
+
+            <div className="text-xs">
               <Link
                 to="/ForgotPassword"
-                className="font-medium text-primary hover:text-primary-foreground"
+                className="font-medium hover:text-blue-500 transition-all duration-300"
               >
                 Forgot your password?
               </Link>

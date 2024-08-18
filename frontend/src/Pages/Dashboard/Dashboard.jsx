@@ -1,11 +1,9 @@
 import { Box, useTheme } from "@mui/material";
 import Header2 from "../../Components/Header/Header2/Header2";
-import Header3 from "../../Components/Header/Header3/Header3";
 import ScrollUp from "../../Components/ScrollFixedButton/ScrollUp";
 import SelectYourProduct from "../../Components/Selection/SelectYourProduct";
-import Cart from "../../Pages/Cart/Cart";
-import HeroSection from "../../Pages/HeroSection/HeroSection";
-import IconsSeaction from "../../Pages/Icons/IconsSeaction";
+import HeroSection from "../../Components/HeroSection/HeroSection";
+import IconsSeaction from "../../Components/Icons/IconsSeaction";
 import ProductsBanners from "../../Components/ProductsBanners/ProductsBanners";
 import addidas from "../../Assets/adidas.webp";
 import armania from "../../Assets/armania.webp";
@@ -15,6 +13,9 @@ import mavi from "../../Assets/mavi.webp";
 import phones from "../../Assets/phones.webp";
 import pijama from "../../Assets/pijama.webp";
 import Slider from "../../Components/Sliders/Slider";
+import BigBanner from "Components/BigBanner/BigBanner";
+import CallToAction from "../../Components/CallToAction/CallToAction";
+import TotalCustomers from "../../Components/TotalCustomers/TotalCustomers";
 
 const firstBanner = [
   {
@@ -396,7 +397,6 @@ function Dashboard() {
   return (
     <div>
       <Header2 />
-      <Header3 />
       <Box
         sx={{
           bgcolor:
@@ -416,7 +416,16 @@ function Dashboard() {
         <ProductsBanners banner={fourthBanner} />
         <ProductsBanners banner={fifthBanner} />
         <Slider Sliders={slider2} Headline={"Top Selling Products"} />
-        <Cart />
+        <BigBanner />
+        <ProductsBanners banner={thirdBanner} />
+        <ProductsBanners banner={fourthBanner} />
+        <CallToAction />
+        <ProductsBanners banner={firstBanner} />
+        <ProductsBanners banner={secondBanner} />
+
+        <TotalCustomers />
+
+        {/* <Cart /> */}
         <ScrollUp />
       </Box>
     </div>
