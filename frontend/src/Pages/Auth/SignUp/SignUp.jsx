@@ -15,6 +15,8 @@ export default function SignUp() {
   const [password, setpassword] = useState(null);
   const [loading, setloading] = useState(false);
 
+  const API = process.env.REACT_APP_BASE_URL;
+
   const nevigate = useNavigate();
   const handlesubmit = async (eo) => {
     eo.preventDefault();
@@ -38,7 +40,7 @@ export default function SignUp() {
     }
 
     const IsUserExists = await fetch(
-      "http://localhost:5000/api/auth/userExist",
+      `${API}/api/auth/userExist`,
       {
         method: "POST",
         headers: {
@@ -57,7 +59,7 @@ export default function SignUp() {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/api/auth/register", {
+    const response = await fetch(`${API}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

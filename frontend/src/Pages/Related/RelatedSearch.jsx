@@ -6,12 +6,13 @@ export default function RelatedSearch() {
   const [searchParams] = useSearchParams();
   const SearchValue = searchParams.get("q");
   const [FetchedSearchData, setFetchedSearchData] = useState([]);
+  const API = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/search/toolbar?q=${SearchValue}`
+          `${API}/api/search/toolbar?q=${SearchValue}`
         );
         const data = await response.json();
         setFetchedSearchData(data.SearchData);

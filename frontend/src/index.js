@@ -18,6 +18,7 @@ import ShoppingCart from "../src/Pages/ShoppingCart/ShoppingCart";
 import ProductDetails from "../src/Pages/ProductDetails/ProductDetails";
 import Search from "../src/Pages/Search/Search";
 import RelatedSearch from "../src/Pages/Related/RelatedSearch";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,8 @@ const router = createBrowserRouter(
       <Route path="/search" element={<Search />} />,
       <Route path="/RelatedSearch" element={<RelatedSearch />} />,
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
+      <Route path="*" element={<ErrorPage />} />
+
     </Route>
   )
 );

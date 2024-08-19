@@ -145,9 +145,11 @@ function Dashboard() {
   const [slider4, setslider4] = useState([]);
   const theme = useTheme();
 
+  const API = process.env.REACT_APP_BASE_URL;
+
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("http://localhost:5000/api/products");
+      const response = await fetch(`${API}/api/products`);
       const data = await response.json();
       setslider1(data.products.slice(0, 10));
       setslider2(data.products.slice(10, 20));

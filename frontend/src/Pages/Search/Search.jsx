@@ -55,6 +55,7 @@ export default function Search() {
   const [Price, setPrice] = useState(null);
   const [FetchData, setFetchData] = useState([]);
   const [currentPage, setcurrentPage] = useState(1);
+  const API = process.env.REACT_APP_BASE_URL;
 
   let itemsPerPage = 9;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -75,7 +76,7 @@ export default function Search() {
   };
   useEffect(() => {
     const FetchAllData = async () => {
-      const res = await fetch(`http://localhost:5000/api/search`, {
+      const res = await fetch(`${API}/api/search`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
