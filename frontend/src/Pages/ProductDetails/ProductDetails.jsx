@@ -1,12 +1,13 @@
 import Header2 from "Components/Header/Header2/Header2";
 import { useEffect, useState } from "react";
-import ReactImageMagnify from "react-image-magnify";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import Comments from "../../Components/Comments/Comments";
 import { useTheme } from "@mui/material";
+
+
 
 export default function ProductDetails() {
   const [comments, setcomments] = useState(false);
@@ -29,13 +30,6 @@ export default function ProductDetails() {
 
   // @ts-ignore
   const dispatch = useDispatch();
-  const smallImageWidth = 250;
-  const smallImageHeight = 250;
-
-  // Calculate the largeImage dimensions while maintaining the aspect ratio
-  const largeImageWidth = smallImageWidth * 3; // 3 times zoom
-  const largeImageHeight =
-    smallImageWidth * 3 * (smallImageHeight / smallImageWidth);
 
   return (
     <div className="relative">
@@ -47,27 +41,8 @@ export default function ProductDetails() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="relative">
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: Product?.description,
-                  isFluidWidth: true,
-                  src: Product?.img,
-                },
-                largeImage: {
-                  src: Product?.img,
-                  width: largeImageWidth,
-                  height: largeImageHeight,
-                },
-                enlargedImageStyle: {
-                  objectFit: "cover",
-                },
 
-                isHintEnabled: true,
-                enlargedImageContainerStyle: { background: "#fff" },
-                overflow: "hidden",
-              }}
-            />
+
             <div className="absolute bottom-0 left-0 right-0 opacity-75 rounded-lg px-4 mt-4 text-center font-bold ">
               {Product?.name}
             </div>
