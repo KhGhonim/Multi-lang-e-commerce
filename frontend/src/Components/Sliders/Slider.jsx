@@ -66,7 +66,9 @@ export default function Slider({ Sliders, Headline }) {
             <div
               onClick={() => {
                 dispatch(addToMyFavorites(Slider));
-                toast.success("Added to my favorites");
+                toast.success(
+                  "Added to my favorites, check your Profile in favorites section"
+                );
               }}
               className="absolute top-0 right-0 p-3 z-50"
             >

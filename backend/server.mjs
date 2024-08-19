@@ -4,6 +4,7 @@ import cors from "cors";
 import authregister from "./Api/Routes/authregister.js";
 import ProductRoute from "./Api/Routes/ProductRoute.js";
 import cookieParser from "cookie-parser";
+import SearchEngineRoute from "./Api/Routes/SearchEngineRoute.js";
 
 const app = express();
 const port = 5000;
@@ -21,6 +22,7 @@ app.use(
 // Routes
 app.use("/api", authregister);
 app.use("/api", ProductRoute);
+app.use("/api", SearchEngineRoute);
 
 // Connection
 const startServer = async () => {

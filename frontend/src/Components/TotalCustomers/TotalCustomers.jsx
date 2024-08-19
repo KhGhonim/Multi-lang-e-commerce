@@ -32,7 +32,7 @@ export default function TotalCustomers() {
   const Total = useRef(null);
   const IsInView = useInView(Total);
   return (
-    <section className="p-6 my-6 bg-gray-100 text-gray-800">
+    <section className="p-6 my-6 text-gray-800 z-50">
       <AnimatePresence mode="wait">
         <motion.div
           ref={Total}

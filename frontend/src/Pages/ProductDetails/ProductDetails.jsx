@@ -38,9 +38,11 @@ export default function ProductDetails() {
   return (
     <div className="relative">
       <Header2 />
-      <div className={`container mx-auto my-10 p-5 ${
+      <div
+        className={`container mx-auto my-10 p-5 ${
           theme === "dark" ? "text-white" : "text-black"
-        }`}>
+        }`}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="relative">
             <ReactImageMagnify
@@ -65,13 +67,11 @@ export default function ProductDetails() {
               }}
             />
             <div className="absolute bottom-0 left-0 right-0 opacity-75 rounded-lg px-4 mt-4 text-center font-bold ">
-              {Product?.feature}
+              {Product?.name}
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold mb-4">
-              {Product?.description}
-            </h1>
+            <h1 className="text-2xl font-bold mb-4">{Product?.description}</h1>
             <div className="flex items-center mb-4">
               <div className="flex items-center">
                 <svg
@@ -90,9 +90,7 @@ export default function ProductDetails() {
                 </svg>
                 <span className="ml-2">{Product?.rating}</span>
               </div>
-              <span className="ml-4 ">
-                {Product?.ratingCount} Review
-              </span>
+              <span className="ml-4 ">{Product?.ratingCount} Review</span>
               <span className="ml-4 ">
                 | {Product?.ratingCount} Question & Answer
               </span>
@@ -117,9 +115,7 @@ export default function ProductDetails() {
                 27.5B in people's carts, get it while it lasts!
               </span>
             </div>
-            <p className="text-4xl font-bold  mb-4">
-              $ {Product?.price}
-            </p>
+            <p className="text-4xl font-bold  mb-4">$ {Product?.price}</p>
             <button
               type="button"
               onClick={() => {
@@ -131,11 +127,11 @@ export default function ProductDetails() {
               Add to Basket
             </button>
 
-            <div className="bg-gray-200 rounded-lg px-4 py-2 mb-4">
+            <div className="bg-slate-400 rounded-lg px-4 py-2 mb-4">
               <h3 className="text-lg font-bold  mb-2">
                 Estimated Shipping: Within 3 days
               </h3>
-              <p className="text-gray-600">See some of customers reviews!</p>
+              <p className="text-gray-900">See some of customers reviews!</p>
               <button
                 onClick={HandleComments}
                 className="text-blue-500 font-bold"
@@ -149,9 +145,7 @@ export default function ProductDetails() {
           <h2 className="text-lg font-bold  mb-4">Highlights:</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <h3 className=" font-bold mb-2">
-                Additional Feature
-              </h3>
+              <h3 className=" font-bold mb-2">Additional name</h3>
               <p className="">Organik</p>
             </div>
             <div>
@@ -165,7 +159,7 @@ export default function ProductDetails() {
           </div>
         </div>
         <div className="mt-10">
-          <h3 className="text-gray-800 font-bold mb-4">
+          <h3 className="font-bold mb-4">
             This product will be sent by HC CARE.
           </h3>
           <ul className="list-disc pl-6 ">
@@ -187,7 +181,7 @@ export default function ProductDetails() {
         <Comments
           comments={comments}
           HandleComments={HandleComments}
-          title={Product?.feature}
+          title={Product?.name}
         />
       </div>
     </div>

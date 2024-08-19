@@ -32,7 +32,8 @@ const SliderArray1 = [
 
 const SliderArray2 = [
   {
-    Photo: "https://media.glamour.com/photos/639d05c7d0d74927483ca574/3:2/w_3000,h_2000,c_limit/12-16-editors-picks.jpg",
+    Photo:
+      "https://media.glamour.com/photos/639d05c7d0d74927483ca574/3:2/w_3000,h_2000,c_limit/12-16-editors-picks.jpg",
     alt: "Frist Photo",
   },
   {
@@ -52,14 +53,15 @@ const SliderArray2 = [
   },
   {
     Photo:
-      "https://lh3.googleusercontent.com/proxy/YutKBgX4Ov_3ST1t0euSzERSurAAfgk3ZH2P2ijZ2Kc-XqgbLlvpBv1PwsoJ2NOL2w5ReB7y-Ew9Ds6qzgYl8k7mUYCV6Xv6iKHfudi8IE-Y4OjX",
+      "https://us.123rf.com/450wm/peshkovaolga/peshkovaolga2012/peshkovaolga201200019/160544643-zero-waste-concept-flat-lay-eco-friendly-set-brushes-bags-bottles-and-jar-on-beige-background-top.jpg?ver=6",
     alt: "Fifth Photo",
   },
 ];
 
 const SliderArray3 = [
   {
-    Photo: "https://images-us.nivea.com/-/media/nivea/local/in/product-banners/nivea-men-products_banner_revised.png?rx=1454&ry=0&rw=1452&rh=806",
+    Photo:
+      "https://images-us.nivea.com/-/media/nivea/local/in/product-banners/nivea-men-products_banner_revised.png?rx=1454&ry=0&rw=1452&rh=806",
     alt: "Frist Photo",
   },
   {
@@ -78,14 +80,14 @@ const SliderArray3 = [
     alt: "Foruth Photo",
   },
   {
-    Photo:
-      "https://menshealth.com.au/wp-content/uploads/2023/01/37083457.png",
+    Photo: "https://menshealth.com.au/wp-content/uploads/2023/01/37083457.png",
     alt: "Fifth Photo",
   },
 ];
 const SliderArray4 = [
   {
-    Photo: "https://blogscdn.thehut.net/wp-content/uploads/sites/32/2018/04/17133037/1200x672_217775857-MC-MK-April-photography-batching-Shot14_1200x672_acf_cropped_1200x672_acf_cropped.jpg",
+    Photo:
+      "https://blogscdn.thehut.net/wp-content/uploads/sites/32/2018/04/17133037/1200x672_217775857-MC-MK-April-photography-batching-Shot14_1200x672_acf_cropped_1200x672_acf_cropped.jpg",
     alt: "Frist Photo",
   },
   {
@@ -115,21 +117,32 @@ function HeroSection() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full px-4">
         <div className="hidden lg:grid grid-cols-1 gap-4">
           <div className="relative h-80 md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
-        <HeroSectionSlider SliderArray={SliderArray1} title={"Summer's Sale Collection For Women"}/>
+            <HeroSectionSlider
+              SliderArray={SliderArray1}
+              title={"Summer's Sale Collection For Women"}
+            />
           </div>
 
           <div className="relative h-80 md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
-          <HeroSectionSlider SliderArray={SliderArray3} title={"Summer's Sale Collection For Men"}/>
+            <HeroSectionSlider
+              SliderArray={SliderArray3}
+              title={"Summer's Sale Collection For Men"}
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4">
-
-        <div className="relative  h-full md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
-          <HeroSectionSlider SliderArray={SliderArray2} title={"Winter's Sale Collection For Women"}/>
+          <div className="relative  h-full md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
+            <HeroSectionSlider
+              SliderArray={SliderArray2}
+              title={"Winter's Sale Collection For Women"}
+            />
           </div>
           <div className="relative  h-full md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
-          <HeroSectionSlider SliderArray={SliderArray4} title={"Winter's Sale Collection For Men"}/>
+            <HeroSectionSlider
+              SliderArray={SliderArray4}
+              title={"Winter's Sale Collection For Men"}
+            />
           </div>
         </div>
       </section>

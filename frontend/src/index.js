@@ -16,6 +16,8 @@ import Login from "../src/Pages/Auth/Login/Login";
 import Profile from "../src/Pages/Profile/Profile";
 import ShoppingCart from "../src/Pages/ShoppingCart/ShoppingCart";
 import ProductDetails from "../src/Pages/ProductDetails/ProductDetails";
+import Search from "../src/Pages/Search/Search";
+import RelatedSearch from "../src/Pages/Related/RelatedSearch";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +27,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />,
       <Route path="/profile" element={<Profile />} />,
       <Route path="/cart" element={<ShoppingCart />} />,
+      <Route path="/search" element={<Search />} />,
+      <Route path="/RelatedSearch" element={<RelatedSearch />} />,
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
     </Route>
   )

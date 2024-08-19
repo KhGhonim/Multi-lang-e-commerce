@@ -1,4 +1,7 @@
+import { useTheme } from "@mui/material";
+
 export default function BigBanner() {
+  const theme = useTheme().palette.mode;
   return (
     <div className="w-full h-dvh relative overflow-hidden">
       <img
@@ -7,7 +10,11 @@ export default function BigBanner() {
         className="w-full h-full object-cover"
       />
       <div className="w-full absolute inset-0 bg-gradient-to-b from-transparent to-black">
-        <div className="absolute bottom-1/3 left-0  transform  md:left-1/2 md:-translate-x-full  text-text bg-white/80 p-10 md:p-20 rounded-xl z-20">
+        <div
+          className={`absolute bottom-1/3 left-0  transform  md:left-1/2 md:-translate-x-full  text-text bg-white/80 p-10 md:p-20 rounded-xl z-20 ${
+            theme === "dark" ? "text-black" : "text-black"
+          }`}
+        >
           <h1>What is Lorem Ipsum?</h1>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting

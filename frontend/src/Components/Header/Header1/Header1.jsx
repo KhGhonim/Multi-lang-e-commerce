@@ -50,8 +50,8 @@ const Header1 = ({ setMode }) => {
     >
       {/* The Logo and LogoName */}
       <Box
-        sx={{ display: "flex", alignItems: "center", gap: "15px", ml: "16px" }}
       >
+        <Link style={{display: "flex", alignItems: "center", gap: "15px", marginLeft: "16px"}} to={"/"}>
         <Typography
           sx={{
             bgcolor: "red",
@@ -69,6 +69,7 @@ const Header1 = ({ setMode }) => {
           {" "}
           Free Express Shipping
         </p>
+        </Link>
       </Box>
 
       {/* The Dark and Light mode */}
