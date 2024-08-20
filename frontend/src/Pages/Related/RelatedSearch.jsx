@@ -31,14 +31,15 @@ export default function RelatedSearch() {
     fetchData();
   }, [SearchValue]);
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10  p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Search Results</h1>
-        <div className="relative w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center">Search Results</h1>
+        {/* <div className="relative w-full max-w-md">
           <input
             className="flex h-10 w-full pl-10 pr-4 py-2 text-black bg-white text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
             placeholder="Search products..."
             type="text"
+
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +56,7 @@ export default function RelatedSearch() {
             <circle cx="11" cy="11" r="8"></circle>
             <path d="M21 21l-4.3-4.3"></path>
           </svg>
-        </div>
+        </div> */}
       </div>
       {Isloading ? (
         <div className="w-full h-dvh flex justify-center items-center">
