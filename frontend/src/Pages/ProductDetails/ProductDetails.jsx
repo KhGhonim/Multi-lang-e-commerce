@@ -1,7 +1,7 @@
 import Header2 from "Components/Header/Header2/Header2";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import Comments from "../../Components/Comments/Comments";
@@ -35,8 +35,20 @@ export default function ProductDetails() {
     fetchProduct();
   }, [id]);
 
-  // @ts-ignore
   const dispatch = useDispatch();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+  const nevigate = useNavigate();
+
+  const BasketHandler = (P) => {
+    if (user.currentUser === null) {
+      toast.warning("Please login to add to cart");
+      nevigate("/login");
+    } else {
+      dispatch(addToBasket(P));
+      toast.success("Added to basket");
+    }
+  };
 
   return (
     <div className="relative">
@@ -113,8 +125,7 @@ export default function ProductDetails() {
               <button
                 type="button"
                 onClick={() => {
-                  dispatch(addToBasket(Product));
-                  toast.success("Added to basket");
+                  BasketHandler(Product);
                 }}
                 className="bg-orange-500 hover:bg-orange-600  transition-all duration-300 font-bold py-2 px-4 rounded-lg w-full mb-4"
               >

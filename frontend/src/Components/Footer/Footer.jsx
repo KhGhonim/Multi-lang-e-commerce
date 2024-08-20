@@ -1,7 +1,22 @@
+import { useForm } from "@formspree/react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Lottie from "lottie-react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import groovyWalkAnimation from "../loading/Email Recieved.json";
 function Footer() {
+  const [state, handleSubmit] = useForm("mvgpbyob");
+  const [showForm, setShowForm] = useState(true);
+
+  useEffect(() => {
+    if (state.succeeded) {
+      setShowForm(false);
+      const timer = setTimeout(() => {
+        setShowForm(true);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded]);
   return (
     <footer className="bg-[#283445] text-white">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8">
@@ -31,7 +46,8 @@ function Footer() {
             <ul className="mt-8 space-y-4 text-sm">
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   Company History
                 </Link>
@@ -39,7 +55,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Meet the Team{" "}
@@ -48,13 +65,15 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   Employee Handbook
                 </Link>
               </li>
               <Link
-                className="text-white transition hover:text-white/75" to={""}              
+                className="text-white transition hover:text-white/75"
+                to={""}
               >
                 Product Warranty
               </Link>
@@ -67,7 +86,8 @@ function Footer() {
             <ul className="mt-8 space-y-4 text-sm">
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   Customer Support{" "}
                 </Link>
@@ -75,7 +95,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Shipping Information{" "}
@@ -84,7 +105,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Returns & Exchanges{" "}
@@ -93,7 +115,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Order Tracking{" "}
@@ -108,7 +131,8 @@ function Footer() {
             <ul className="mt-8 space-y-4 text-sm">
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Online Guides{" "}
@@ -117,7 +141,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   Product Care
                 </Link>
@@ -125,7 +150,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Sitemap{" "}
@@ -134,7 +160,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   Terms & Conditions{" "}
@@ -143,7 +170,8 @@ function Footer() {
 
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   Privacy Policy
                 </Link>
@@ -157,7 +185,8 @@ function Footer() {
             <ul className="mt-8 space-y-4 text-sm">
               <li>
                 <Link
-                  className="text-white transition hover:text-white/75" to={""}                
+                  className="text-white transition hover:text-white/75"
+                  to={""}
                 >
                   {" "}
                   FAQs{" "}
@@ -165,7 +194,8 @@ function Footer() {
               </li>
 
               <li>
-                <Link to="/"
+                <Link
+                  to="/"
                   className="text-white transition hover:text-white/75"
                 >
                   {" "}
@@ -184,26 +214,38 @@ function Footer() {
                 id, iure consectetur et error hic!
               </p>
 
-              <form className="mt-4">
-                <div className="flex flex-col gap-4 sm:flex-row lg:flex-col lg:items-start">
-                  <label htmlFor="email" className="sr-only">
-                    Email
-                  </label>
+              {showForm ? (
+                <form onSubmit={handleSubmit} className="mt-4">
+                  <div className="flex flex-col gap-4 sm:flex-row lg:flex-col lg:items-start">
+                    <label htmlFor="email" className="sr-only">
+                      Email
+                    </label>
 
-                  <input
-                    className="w-full rounded-full border-gray-200 px-6 py-3 shadow-sm"
-                    type="email"
-                    placeholder="Enter your email"
-                  />
+                    <input
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full rounded-full border-gray-200 px-6 py-3 shadow-sm"
+                      type="email"
+                      placeholder="Enter your email"
+                    />
 
-                  <button
-                    className="block rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
-                    type="submit"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
+                    <button
+                      disabled={state.submitting}
+                      className="block rounded-full bg-indigo-500 px-8 py-3 font-medium text-white transition hover:bg-indigo-600"
+                      type="submit"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <Lottie
+                  animationData={groovyWalkAnimation}
+                  loop={false}
+                  className="mt-4"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -217,10 +259,11 @@ function Footer() {
           <ul className="mt-4 flex justify-center gap-6 sm:mt-0 sm:justify-start">
             <li>
               <Link
-              
                 rel="noreferrer"
                 target="_blank"
-                className="text-orange-700 transition hover:text-orange-700/75" to={""}              >
+                className="text-orange-700 transition hover:text-orange-700/75"
+                to={""}
+              >
                 <span className="sr-only">Facebook</span>
                 <svg
                   className="size-6"
@@ -239,10 +282,11 @@ function Footer() {
 
             <li>
               <Link
-              
                 rel="noreferrer"
                 target="_blank"
-                className="text-orange-700 transition hover:text-orange-700/75" to={""}              >
+                className="text-orange-700 transition hover:text-orange-700/75"
+                to={""}
+              >
                 <span className="sr-only">Instagram</span>
                 <svg
                   className="size-6"
@@ -261,10 +305,11 @@ function Footer() {
 
             <li>
               <Link
-              
                 rel="noreferrer"
                 target="_blank"
-                className="text-orange-700 transition hover:text-orange-700/75" to={""}              >
+                className="text-orange-700 transition hover:text-orange-700/75"
+                to={""}
+              >
                 <span className="sr-only">Twitter</span>
                 <svg
                   className="size-6"
@@ -279,10 +324,11 @@ function Footer() {
 
             <li>
               <Link
-              
                 rel="noreferrer"
                 target="_blank"
-                className="text-orange-700 transition hover:text-orange-700/75" to={""}              >
+                className="text-orange-700 transition hover:text-orange-700/75"
+                to={""}
+              >
                 <span className="sr-only">GitHub</span>
                 <svg
                   className="size-6"
@@ -301,10 +347,11 @@ function Footer() {
 
             <li>
               <Link
-              
                 rel="noreferrer"
                 target="_blank"
-                className="text-orange-700 transition hover:text-orange-700/75" to={""}              >
+                className="text-orange-700 transition hover:text-orange-700/75"
+                to={""}
+              >
                 <span className="sr-only">Dribbble</span>
                 <svg
                   className="size-6"
