@@ -65,13 +65,14 @@ export default function RelatedSearch() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {FetchedSearchData.map((product) => (
             <ProductCard
-              key={product.name}
+              key={Math.random()}
               name={product.name}
               description={product.description}
               price={product.price}
               img={product.img}
               alt={product.alt}
               id={product.id}
+              quantity={product.quantity}
             />
           ))}
         </div>
