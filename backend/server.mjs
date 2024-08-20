@@ -14,7 +14,7 @@ app.use(express.json());
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://e-commerce-awybbr674-khaled-ghonims-projects.vercel.app",
+    origin: "https://e-commerce-kg.vercel.app",
     credentials: true,
   })
 );
