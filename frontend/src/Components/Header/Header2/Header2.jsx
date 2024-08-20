@@ -86,9 +86,7 @@ function Header2() {
       setIsloading(true);
 
       const res = async () => {
-        const res = await fetch(
-          `${API}/api/search/toolbar?q=${SearchValue}`
-        );
+        const res = await fetch(`${API}/api/search/toolbar?q=${SearchValue}`);
         const data = await res.json();
 
         setFetchedSearchData(data.SearchData);
@@ -100,8 +98,6 @@ function Header2() {
       setSearchBox(false);
     }
   }, [SearchValue]);
-
-  console.log(FetchedSearchData);
 
   return (
     <Container sx={{ py: 3 }}>
