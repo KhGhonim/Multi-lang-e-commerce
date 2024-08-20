@@ -1,7 +1,7 @@
 import { FilterAlt } from "@mui/icons-material";
-import { useTheme } from "@mui/material";
+import { CircularProgress, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import SearchTemplate from "./SearchTemplate";
 import SearchFinalProducts from "./SearchFinalProducts";
 
@@ -56,6 +56,11 @@ export default function Search() {
   const [FetchData, setFetchData] = useState([]);
   const [currentPage, setcurrentPage] = useState(1);
   const API = process.env.REACT_APP_BASE_URL;
+  const [Isloading, setIsloading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   let itemsPerPage = 9;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -76,6 +81,7 @@ export default function Search() {
   };
   useEffect(() => {
     const FetchAllData = async () => {
+      setIsloading(true);
       const res = await fetch(`${API}/api/search`, {
         method: "GET",
         headers: {
@@ -86,6 +92,7 @@ export default function Search() {
 
       const data = await res.json();
       setFetchData(data.SearchData);
+      setIsloading(false);
     };
 
     FetchAllData();
@@ -318,7 +325,14 @@ export default function Search() {
         </div>
 
         {/* {Search Result} */}
-        <SearchFinalProducts result={result} />
+
+        {Isloading ? (
+          <div className="w-full h-dvh flex justify-center items-center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <SearchFinalProducts result={result} />
+        )}
       </div>
 
       {/* pagination */}

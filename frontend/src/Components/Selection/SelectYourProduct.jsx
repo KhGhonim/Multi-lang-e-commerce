@@ -8,70 +8,70 @@ const items = [
     alt: "Samsung!",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/27/Samsung_202301271715.jpg",
     classes: "rounded-full border-2 border-orange-500 w-12 h-12 object-cover",
-    link: "/search?category=samsung",
+    link: "/RelatedSearch?q=samsung",
   },
   {
     name: "Xiamoi",
     alt: "Xiamoi",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/28/Xiaomi_202301280236.jpg",
     classes: "rounded-full border-2 border-orange-500 w-12 h-12 object-cover",
-    link: "/search?category=xiaomi",
+    link: "/RelatedSearch?q=xiaomi",
   },
   {
     name: "Karaca",
     alt: "Karaca",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/2/13/Karaca_202302131917.jpg",
     classes: "rounded-full border-2 border-black w-12 h-12 object-cover",
-    link: "/search?category=karaca",
+    link: "/RelatedSearch?q=karaca",
   },
   {
     name: "Adidas",
     alt: "Adidas",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/26/Adidas_202301262144.png",
     classes: "rounded-full border-2 border-gray-500 w-12 h-12 object-cover",
-    link: "/search?category=adidas",
+    link: "/RelatedSearch?q=adidas",
   },
   {
     name: "Bosch",
     alt: "Bosch",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/26/Bosch_202301262207.png",
     classes: "rounded-full border-2 border-blue-500 w-12 h-12 object-cover",
-    link: "/search?category=bosch",
+    link: "/RelatedSearch?q=bosch",
   },
   {
     name: "Dyson",
     alt: "Dyson",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/27/Dyson_202301270049.jpg",
     classes: "rounded-full border-2 border-orange-500 w-12 h-12 object-cover",
-    link: "/search?category=dyson",
+    link: "/RelatedSearch?q=dyson",
   },
   {
     name: "Sony",
     alt: "Sony",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/27/Sony_202301271715.jpg",
     classes: "rounded-full border-2 border-orange-500 w-12 h-12 object-cover",
-    link: "/search?category=sony",
+    link: "/RelatedSearch?q=sony",
   },
   {
     name: "Apple",
     alt: "Apple",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/26/Apple_202301262111.jpg",
     classes: "rounded-full border-2 border-gray-500 w-12 h-12 object-cover",
-    link: "/search?category=apple",
+    link: "/RelatedSearch?q=apple",
   },
   {
     name: "Philips",
     alt: "Philips",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/27/Philips_202301271558.jpg",
     classes: "rounded-full border-2 border-blue-500 w-12 h-12 object-cover",
-    link: "/search?category=philips",
+    link: "/RelatedSearch?q=philips",
   },
   {
     name: "Vestel",
     alt: "Vestel",
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/28/Vestel_202301280121.jpg",
     classes: "rounded-full border-2 border-gray-500 w-12 h-12 object-cover",
-    link: "/search?category=vestel",
+    link: "/RelatedSearch?q=vestel",
   },
 ];
 
@@ -136,7 +136,7 @@ export default function SelectYourProduct() {
           <motion.div variants={childVariants}>
             <Link
               className="bg-green-100 text-green-700 px-1 md:px-4 py-2 rounded-md"
-              to={""}
+              to={"/search"}
             >
               Most Added to Cart
             </Link>
@@ -144,7 +144,7 @@ export default function SelectYourProduct() {
           <motion.div variants={childVariants}>
             <Link
               className="bg-orange-100 text-orange-400 px-1 md:px-4 py-2 rounded-md"
-              to={""}
+              to={"/search"}
             >
               Most Highlighted
             </Link>
@@ -152,7 +152,7 @@ export default function SelectYourProduct() {
           <motion.div variants={childVariants}>
             <Link
               className="bg-orange-100 text-red-700 px-1 md:px-4 py-2 rounded-md"
-              to={""}
+              to={"/search"}
             >
               Most Featured
             </Link>

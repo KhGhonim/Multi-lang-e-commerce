@@ -11,13 +11,26 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToMyFavorites } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 
 export default function Slider({ Sliders, Headline }) {
   const theme = useTheme().palette.mode;
   const dispatch = useDispatch();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+
+  const FavHandler = (Slider) => {
+    if (user.currentUser === null) {
+      toast.warning("Please login to add product to favorites");
+    } else {
+      dispatch(addToMyFavorites(Slider));
+      toast.success(
+        "Added to my favorites, check your Profile in favorites section"
+      );
+    }
+  };
   return (
     <div className="w-full h-full p-8">
       <h1
@@ -65,10 +78,7 @@ export default function Slider({ Sliders, Headline }) {
           >
             <div
               onClick={() => {
-                dispatch(addToMyFavorites(Slider));
-                toast.success(
-                  "Added to my favorites, check your Profile in favorites section"
-                );
+                FavHandler(Slider);
               }}
               className="absolute top-0 right-0 p-3 z-50"
             >

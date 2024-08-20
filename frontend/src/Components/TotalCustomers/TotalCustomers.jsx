@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import CountUp from "react-countup";
+import CountUp, { useCountUp } from "react-countup";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -29,6 +29,13 @@ const childVariants = {
 };
 
 export default function TotalCustomers() {
+  useCountUp({
+    ref: "counter",
+    end: 100,
+    enableScrollSpy: true,
+    scrollSpyDelay: 1000,
+  });
+
   const Total = useRef(null);
   const IsInView = useInView(Total);
   return (
@@ -60,14 +67,7 @@ export default function TotalCustomers() {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <div className="text-3xl font-semibold leading-none">
-                <CountUp start={0} end={200} duration={5}>
-                  {({ countUpRef, start }) => (
-                    <div>
-                      <span ref={countUpRef} />
-                      <button onClick={start}></button>
-                    </div>
-                  )}
-                </CountUp>
+                <CountUp end={100} enableScrollSpy />
               </div>
               <p className="capitalize">Orders</p>
             </div>
@@ -91,14 +91,7 @@ export default function TotalCustomers() {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <div className="text-3xl font-semibold leading-none">
-                <CountUp start={0} end={7500} duration={5}>
-                  {({ countUpRef, start }) => (
-                    <div>
-                      <span ref={countUpRef} />
-                      <button onClick={start}></button>
-                    </div>
-                  )}
-                </CountUp>
+                <CountUp end={7600} enableScrollSpy />
               </div>
               <p className="capitalize">New customers</p>
             </div>
@@ -124,14 +117,7 @@ export default function TotalCustomers() {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <div className="text-3xl font-semibold leading-none">
-                <CountUp start={0} end={175} duration={5}>
-                  {({ countUpRef, start }) => (
-                    <div>
-                      <span ref={countUpRef} />
-                      <button onClick={start}>%</button>
-                    </div>
-                  )}
-                </CountUp>
+                <CountUp end={175} enableScrollSpy />
               </div>
               <p className="capitalize">Growth</p>
             </div>
@@ -152,14 +138,7 @@ export default function TotalCustomers() {
             </div>
             <div className="flex flex-col justify-center align-middle">
               <div className="text-3xl font-semibold leading-none">
-                <CountUp start={0} end={17} duration={5}>
-                  {({ countUpRef, start }) => (
-                    <div>
-                      <span ref={countUpRef} />
-                      <button onClick={start}>%</button>
-                    </div>
-                  )}
-                </CountUp>
+                <CountUp end={17} enableScrollSpy />
               </div>
               <p className="capitalize">Bounce rate</p>
             </div>
