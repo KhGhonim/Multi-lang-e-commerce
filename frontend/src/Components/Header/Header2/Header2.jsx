@@ -79,6 +79,7 @@ function Header2() {
   const user = useSelector((state) => state.UserStore);
   const dispatch = useDispatch();
 
+  const API = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     if (SearchValue.length >= 3) {
       setSearchBox(true);
@@ -86,7 +87,7 @@ function Header2() {
 
       const res = async () => {
         const res = await fetch(
-          `http://localhost:5000/api/search/toolbar?q=${SearchValue}`
+          `${API}/api/search/toolbar?q=${SearchValue}`
         );
         const data = await res.json();
 
