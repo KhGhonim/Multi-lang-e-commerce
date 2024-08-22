@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./i18n";
+import "./index.css";
 import App from "./App";
 import {
   createBrowserRouter,
@@ -9,7 +11,7 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
-import "./index.css";
+
 import Dashboard from "../src/Pages/Dashboard/Dashboard";
 import SignUp from "../src/Pages/Auth/SignUp/SignUp";
 import Login from "../src/Pages/Auth/Login/Login";

@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import groovyWalkAnimation from "../loading/Email Recieved.json";
+import { useTranslation } from "react-i18next";
 function Footer() {
   const [state, handleSubmit] = useForm("mvgpbyob");
   const [showForm, setShowForm] = useState(true);
@@ -17,6 +18,8 @@ function Footer() {
       return () => clearTimeout(timer);
     }
   }, [state.succeeded]);
+
+  const {t} = useTranslation()
   return (
     <footer className="bg-[#283445] text-white">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8">
@@ -28,7 +31,7 @@ function Footer() {
                 to={"/"}
               >
                 <ShoppingCartIcon />
-                Khaled's E-Commerce
+              {t("Khaled's E-Commerce")}
               </Link>
             </div>
           </div>

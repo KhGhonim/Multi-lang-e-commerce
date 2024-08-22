@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "@formspree/react";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "../loading/Email Recieved.json";
+import { useTranslation } from "react-i18next";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -35,7 +36,7 @@ export default function CallToAction() {
   const isInViewH1 = useInView(refH1);
   const [state, handleSubmit] = useForm("mvgpbyob");
   const [showForm, setShowForm] = useState(true);
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (state.succeeded) {
       setShowForm(false);
@@ -66,10 +67,10 @@ export default function CallToAction() {
             >
               {" "}
               <h1 className="text-5xl antialiased font-semibold leading-none text-center text-gray-200">
-                Get Our Updates
+                {t("Get Our Updates")}
               </h1>
               <p className="pt-2 pb-8 text-xl antialiased text-center text-gray-200">
-                Find out about products and other news
+                {t("Find out about products and other news")}
               </p>
             </motion.div>
             <motion.div variants={childVariants} className="flex flex-row">
@@ -85,9 +86,9 @@ export default function CallToAction() {
                 <button
                   type="submit"
                   disabled={state.submitting}
-                  className="w-2/5 p-3 font-semibold rounded-r-lg sm:w-1/3 bg-orange-600 text-gray-50"
+                  className="w-2/5 p-3 text-sm font-semibold rounded-r-lg sm:w-1/3 bg-orange-600 text-gray-50"
                 >
-                  Subscribe
+                  {t("Subscribe")}
                 </button>
               </form>
             </motion.div>

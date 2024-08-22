@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import CountUp, { useCountUp } from "react-countup";
+import { useTranslation } from "react-i18next";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -38,6 +39,7 @@ export default function TotalCustomers() {
 
   const Total = useRef(null);
   const IsInView = useInView(Total);
+  const {t } = useTranslation()
   return (
     <section className="p-6 my-6 text-gray-800 z-50">
       <AnimatePresence mode="wait">
@@ -69,7 +71,9 @@ export default function TotalCustomers() {
               <div className="text-3xl font-semibold leading-none">
                 <CountUp end={100} enableScrollSpy />
               </div>
-              <p className="capitalize">Orders</p>
+              <p className="capitalize">
+                {t("Orders")}
+              </p>
             </div>
           </motion.div>
           <motion.div
@@ -93,7 +97,7 @@ export default function TotalCustomers() {
               <div className="text-3xl font-semibold leading-none">
                 <CountUp end={7600} enableScrollSpy />
               </div>
-              <p className="capitalize">New customers</p>
+              <p className="capitalize">{t("New customers")}</p>
             </div>
           </motion.div>
           <motion.div
@@ -119,7 +123,7 @@ export default function TotalCustomers() {
               <div className="text-3xl font-semibold leading-none">
                 <CountUp end={175} enableScrollSpy />
               </div>
-              <p className="capitalize">Growth</p>
+              <p className="capitalize">{t("Growth")}</p>
             </div>
           </motion.div>
           <motion.div
@@ -140,7 +144,7 @@ export default function TotalCustomers() {
               <div className="text-3xl font-semibold leading-none">
                 <CountUp end={17} enableScrollSpy />
               </div>
-              <p className="capitalize">Bounce rate</p>
+              <p className="capitalize">{t("Bounce rate")}</p>
             </div>
           </motion.div>
         </motion.div>

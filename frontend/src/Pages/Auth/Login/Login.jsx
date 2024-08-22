@@ -8,6 +8,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../../../Redux/userSlice";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const theme = useTheme().palette.mode;
@@ -47,6 +48,7 @@ export default function Login() {
 
     setloading(false);
   };
+  const {t} = useTranslation()
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -57,14 +59,8 @@ export default function Login() {
       >
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold">
-            Sign in to your account
+          {t("Sign in to your account")}
           </h2>
-          <p className="mt-2  text-sm ">
-            Or
-            <Link to="#" className="font-medium ml-1 text-red-500 ">
-              start your 14-day free trial
-            </Link>
-          </p>
         </div>
         <form onSubmit={handlesubmit} className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm space-y-4 text-black">
@@ -80,7 +76,7 @@ export default function Login() {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t("Email address")}
               />
             </div>
             <div>
@@ -95,7 +91,7 @@ export default function Login() {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder={t("Password")}
               />
             </div>
           </div>
@@ -105,7 +101,7 @@ export default function Login() {
                 to="/register"
                 className="font-medium hover:text-blue-500 transition-all duration-300"
               >
-                Don't Have an Account? Sign Up here
+                {t("Don't hava an account")} {t("Sign up")} {t("here")}
               </Link>
             </div>
 
@@ -114,7 +110,7 @@ export default function Login() {
                 to="/ForgotPassword"
                 className="font-medium hover:text-blue-500 transition-all duration-300"
               >
-                Forgot your password?
+              {t("Forgot your password?")}
               </Link>
             </div>
           </div>
@@ -124,7 +120,7 @@ export default function Login() {
               type="submit"
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary`}
             >
-              {loading ? "Loading..." : "Sign In"}
+              {loading ? (t("loading")) : (t("Sign in"))}
             </button>
           </div>
         </form>

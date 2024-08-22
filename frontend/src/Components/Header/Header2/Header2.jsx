@@ -17,6 +17,7 @@ import { Logout, SavedSearch } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../../Redux/userSlice";
+import { useTranslation } from "react-i18next";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -98,6 +99,7 @@ function Header2() {
       setSearchBox(false);
     }
   }, [SearchValue]);
+  const { t  } = useTranslation();
 
   return (
     <Container sx={{ py: 3 }}>
@@ -112,7 +114,7 @@ function Header2() {
         <div className="logo">
           <Link className="flex flex-col justify-center items-center" to={"/"}>
             <ShoppingCartIcon />
-            Khaled's E-Commerce
+            {t("Khaled's E-Commerce")}
           </Link>
         </div>
 

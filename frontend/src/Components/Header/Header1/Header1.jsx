@@ -7,28 +7,41 @@ import {
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const options = ["English", "اللغة العربية"];
+const options = ["English", "Arabic", "Türkçe"];
 
 const Header1 = ({ setMode }) => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const open = Boolean(anchorEl);
-  const handleClickListItem = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem("lang") || "en";
+    const index = options.indexOf(savedLang);
+    setSelectedIndex(index !== -1 ? index : 0);
+    i18n.changeLanguage(savedLang);
+  }, []);
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    const selectedLang = options[index];
+    i18n.changeLanguage(selectedLang);
+    localStorage.setItem("lang", selectedLang);
+  };
+
+  const handleClickListItem = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -49,26 +62,33 @@ const Header1 = ({ setMode }) => {
       }}
     >
       {/* The Logo and LogoName */}
-      <Box
-      >
-        <Link style={{display: "flex", alignItems: "center", gap: "15px", marginLeft: "16px"}} to={"/"}>
-        <Typography
-          sx={{
-            bgcolor: "red",
-            p: "4px 10px",
-            borderRadius: "14px",
-            fontWeight: "bolder",
+      <Box>
+        <Link
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            marginLeft: "16px",
           }}
-          variant="body2"
-          color={"#fff"}
-          onClick={() => {}}
+          to={"/"}
         >
-          Hot{" "}
-        </Typography>
-        <p className="text-white font-bold text-xs md:text-base">
-          {" "}
-          Free Express Shipping
-        </p>
+          <Typography
+            sx={{
+              bgcolor: "red",
+              p: "4px 10px",
+              borderRadius: "14px",
+              fontWeight: "bolder",
+            }}
+            variant="body2"
+            color={"#fff"}
+            onClick={() => {}}
+          >
+            {t("Hot")}
+          </Typography>
+          <p className="text-white font-bold text-xs md:text-base">
+            {" "}
+            {t("Free Express Shipping")}
+          </p>
         </Link>
       </Box>
 
@@ -143,7 +163,7 @@ const Header1 = ({ setMode }) => {
               selected={index === selectedIndex}
               onClick={(event) => handleMenuItemClick(event, index)}
             >
-              {option}
+              {t(option)}
             </MenuItem>
           ))}
         </Menu>

@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
@@ -12,10 +12,16 @@ export default function SearchTemplate({
   price,
 }) {
   const dispatch = useDispatch();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
 
   const CartHandler = () => {
-    dispatch(addToBasket({ id, img, name, description, price }));
-    toast.success("Added to cart");
+    if (user.currentUser === null) {
+      toast.warning("Please login to add product to favorites");
+    } else {
+      dispatch(addToBasket({ id, img, name, description, price }));
+      toast.success("Added to cart");
+    }
   };
   return (
     <div

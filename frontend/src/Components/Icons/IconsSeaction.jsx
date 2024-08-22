@@ -4,6 +4,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { motion } from "framer-motion";
 import { useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const IconsSectionsBox = [
   {
@@ -26,7 +27,7 @@ const IconsSectionsBox = [
 
 function IconsSeaction() {
   const theme = useTheme().palette.mode;
-
+  const {t} = useTranslation()
   return (
     <div
       className={`container mx-auto p-4 mt-8 ${
@@ -47,8 +48,8 @@ function IconsSeaction() {
             {item.Icon}
           </button>
           <div className="flex flex-col gap-2">
-            <p className="text-base ml-2">{item.Name}</p>
-            <p className="text-sm ml-2">{item.Description}</p>
+            <p className="text-base ml-2">{t(item.Name)}</p>
+            <p className="text-sm ml-2">{t(item.Description)}</p>
           </div>
         </motion.div>
       ))}

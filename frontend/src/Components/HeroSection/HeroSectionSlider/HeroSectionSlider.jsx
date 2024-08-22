@@ -2,8 +2,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function HeroSectionSlider({ SliderArray, title }) {
+  const { t } = useTranslation();
   return (
     <div>
       <Swiper
@@ -31,7 +33,7 @@ export default function HeroSectionSlider({ SliderArray, title }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center">
                   <div className="text-white text-base md:text-2xl font-bold transition-transform duration-300 ease-in-out group-hover:scale-110">
-                    {title}
+                    {t(title)}
                   </div>
                 </div>
               </motion.div>

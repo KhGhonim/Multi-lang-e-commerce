@@ -1,6 +1,7 @@
 import { useTheme } from "@mui/material";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const parentVariants = {
@@ -32,6 +33,8 @@ export default function BigBanner() {
   const theme = useTheme().palette.mode;
   const BannerHook = useRef(null);
   const IsInView = useInView(BannerHook);
+
+  const { t } = useTranslation();
   return (
     <div className="w-full h-dvh relative overflow-hidden">
       <img
@@ -70,7 +73,7 @@ export default function BigBanner() {
                 className=" bg-gray-600 text-white rounded-lg px-4 py-2 mt-4  w-32"
                 to={"/search"}
               >
-                Read More
+              {t("Read More")}
               </Link>
             </motion.div>
           </motion.div>

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Comments from "../../Components/Comments/Comments";
 import { CircularProgress, useTheme } from "@mui/material";
 import Magnifier from "react18-image-magnifier";
+import { useTranslation } from "react-i18next";
 
 export default function ProductDetails() {
   const [comments, setcomments] = useState(false);
@@ -49,7 +50,7 @@ export default function ProductDetails() {
       toast.success("Added to basket");
     }
   };
-
+const {t} = useTranslation()
   return (
     <div className="relative">
       <Header2 />
@@ -129,7 +130,7 @@ export default function ProductDetails() {
                 }}
                 className="bg-orange-500 hover:bg-orange-600  transition-all duration-300 font-bold py-2 px-4 rounded-lg w-full mb-4"
               >
-                Add to Basket
+              {t("Add to basket")}
               </button>
 
               <div className="bg-slate-400 rounded-lg px-4 py-2 mb-4">

@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const items = [
@@ -104,6 +105,7 @@ const childVariants = {
 export default function SelectYourProduct() {
   const refH1 = useRef(null);
   const isInViewH1 = useInView(refH1);
+  const {t} = useTranslation();
   return (
     <AnimatePresence mode="wait">
       <motion.div className="space-y-8 my-10 ">
@@ -138,7 +140,7 @@ export default function SelectYourProduct() {
               className="bg-green-100 text-green-700 px-1 md:px-4 py-2 rounded-md"
               to={"/search"}
             >
-              Most Added to Cart
+              {t("Most Added to Cart")}
             </Link>
           </motion.div>
           <motion.div variants={childVariants}>
@@ -146,7 +148,7 @@ export default function SelectYourProduct() {
               className="bg-orange-100 text-orange-400 px-1 md:px-4 py-2 rounded-md"
               to={"/search"}
             >
-              Most Highlighted
+              {t("Most Highlighted")}
             </Link>
           </motion.div>
           <motion.div variants={childVariants}>
@@ -154,7 +156,7 @@ export default function SelectYourProduct() {
               className="bg-orange-100 text-red-700 px-1 md:px-4 py-2 rounded-md"
               to={"/search"}
             >
-              Most Featured
+              {t("Most Featured")}
             </Link>
           </motion.div>
         </motion.div>

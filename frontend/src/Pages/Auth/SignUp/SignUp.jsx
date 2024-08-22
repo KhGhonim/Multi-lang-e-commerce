@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -14,7 +15,7 @@ export default function SignUp() {
   const [email, setemail] = useState(null);
   const [password, setpassword] = useState(null);
   const [loading, setloading] = useState(false);
-
+  const { t } = useTranslation();
   const API = process.env.REACT_APP_BASE_URL;
 
   const nevigate = useNavigate();
@@ -39,16 +40,13 @@ export default function SignUp() {
       return;
     }
 
-    const IsUserExists = await fetch(
-      `${API}/api/auth/userExist`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      }
-    );
+    const IsUserExists = await fetch(`${API}/api/auth/userExist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
 
     const data = await IsUserExists.json();
 
@@ -88,9 +86,9 @@ export default function SignUp() {
         }`}
       >
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold">Sign Up</h2>
+          <h2 className="mt-6 text-3xl font-extrabold">{t("Sign up")}</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Create your account
+            {t("Create a new account")}
           </p>
         </div>
         <form onSubmit={handlesubmit} className="mt-8 space-y-6 text-black">
@@ -107,7 +105,7 @@ export default function SignUp() {
                 onChange={(eo) => setfirstname(eo.target.value)}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="First Name"
+                placeholder={t("First Name")}
               />
             </div>
 
@@ -123,7 +121,7 @@ export default function SignUp() {
                 autoComplete="lastname"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="Last Name"
+                placeholder={t("Last Name")}
               />
             </div>
 
@@ -139,7 +137,7 @@ export default function SignUp() {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t("Email address")}
               />
             </div>
             <div>
@@ -154,7 +152,7 @@ export default function SignUp() {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder={t("Password")}
               />
             </div>
           </div>
@@ -166,7 +164,7 @@ export default function SignUp() {
                   theme === "dark" ? "text-white" : "text-black"
                 } `}
               >
-                Forgot your password?
+                {t("Forgot your password?")}
               </Link>
             </div>
           </div>
@@ -176,17 +174,17 @@ export default function SignUp() {
               type="submit"
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary`}
             >
-              {loading ? "Loading..." : "Sign Up"}
+              {loading ? t("loading") : t("Sign up")}
             </button>
           </div>
         </form>
         <div className="text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
+          {t("Already have an account?")}
           <Link
             to="/login"
-            className="font-medium text-blue-400 hover:text-blue-500 transition-all duration-200"
+            className="font-medium text-blue-400 hover:text-blue-500 transition-all duration-200 m-1"
           >
-            Sign In
+            {t("Sign in")}
           </Link>
         </div>
       </div>
