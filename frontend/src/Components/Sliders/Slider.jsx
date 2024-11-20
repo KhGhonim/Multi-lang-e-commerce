@@ -21,6 +21,11 @@ export default function Slider({ Sliders, Headline }) {
   const dispatch = useDispatch();
   // @ts-ignore
   const user = useSelector((state) => state.UserStore);
+/**
+ * Handles adding a product to favorites.
+ * 
+ * @param {Object} Slider - The product to be added to favorites.
+ */
   const FavHandler = (Slider) => {
     if (user.currentUser === null) {
       toast.warning("Please login to add product to favorites");
