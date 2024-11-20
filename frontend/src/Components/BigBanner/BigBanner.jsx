@@ -52,7 +52,7 @@ export default function BigBanner() {
             initial="hidden"
             exit="exit"
             animate={IsInView ? "visible" : "hidden"}
-            className={`absolute max-md:top-1/3 max-md:w-auto top-1/2 left-0 right-0 -translate-y-1/2   p-8 w-1/2     text-text bg-white/80  rounded-xl z-50 ${
+            className={`absolute max-md:top-1/3 max-md:w-auto top-1/2 left-0 right-0 -translate-y-1/2   p-8 w-1/2     text-text bg-white/80  rounded-xl z-40 ${
               theme === "dark" ? "text-black" : "text-black"
             }`}
           >
