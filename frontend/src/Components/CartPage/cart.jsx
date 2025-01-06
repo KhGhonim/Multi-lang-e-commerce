@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RemoveItem } from "../../Redux/userSlice";
+import { DecrementItemsToRemoval } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material";
 
@@ -122,7 +122,7 @@ export default function Cart() {
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() => {
-                          dispatch(RemoveItem(item));
+                          dispatch(DecrementItemsToRemoval(item));
                           toast.success("Item removed/decremented from cart");
                         }}
                       >

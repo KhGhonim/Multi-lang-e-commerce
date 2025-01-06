@@ -28,21 +28,18 @@ export default function ProductCard({
     }
   };
   return (
-    <div
-      key={key}
-      className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out p-4"
-    >
+    <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out hover:shadow-xl">
       <Link to={`/ProductDetails/${id}`}>
         <img
           className="w-full h-72 object-cover object-center"
           src={img}
-          alt="Product"
+          alt={alt}
         />
       </Link>
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
-        <p className="mt-2 text-gray-600 line-clamp-3">{description}</p>
-        <div className="mt-4 flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-gray-800 mb-2">{name}</h2>
+        <p className="text-gray-600 line-clamp-3 mb-4">{description}</p>
+        <div className="flex justify-between items-center">
           <span className="text-xl font-bold text-gray-900">${price}</span>
           <button
             onClick={CartHandler}

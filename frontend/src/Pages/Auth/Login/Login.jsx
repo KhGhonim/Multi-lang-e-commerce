@@ -1,54 +1,13 @@
 import { useTheme } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import {
-  signInFailed,
-  signInStart,
-  signInSuccess,
-} from "../../../Redux/userSlice";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useLogIn from "Hooks/useLogIn";
+import { FaSpinner } from "react-icons/fa6";
 
 export default function Login() {
   const theme = useTheme().palette.mode;
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
-  const [loading, setloading] = useState(false);
-  const nevigate = useNavigate();
-  const dispatch = useDispatch();
-  const handlesubmit = async (eo) => {
-    eo.preventDefault();
-    dispatch(signInStart());
-
-    if (!email || !password) {
-      setloading(false);
-      return;
-    }
-    const API = process.env.REACT_APP_BASE_URL;
-
-    const response = await fetch(`${API}/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-
-    if (!response.ok) {
-      toast.warning("Account is not successfully signed in, try again later");
-      dispatch(signInFailed(data.message));
-    } else {
-      toast.success("Successfully signed in");
-      dispatch(signInSuccess(data));
-      nevigate("/");
-    }
-
-    setloading(false);
-  };
-  const {t} = useTranslation()
+  const { handlesubmit, setemail, setpassword, loading } = useLogIn();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -59,7 +18,7 @@ export default function Login() {
       >
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold">
-          {t("Sign in to your account")}
+            {t("Sign in to your account")}
           </h2>
         </div>
         <form onSubmit={handlesubmit} className="mt-8 space-y-6">
@@ -110,7 +69,7 @@ export default function Login() {
                 to="/ForgotPassword"
                 className="font-medium hover:text-blue-500 transition-all duration-300"
               >
-              {t("Forgot your password?")}
+                {t("Forgot your password?")}
               </Link>
             </div>
           </div>
@@ -120,7 +79,13 @@ export default function Login() {
               type="submit"
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary`}
             >
-              {loading ? (t("loading")) : (t("Sign in"))}
+              {loading ? (
+                <div className="flex w-full h-full items-center justify-center">
+                  <FaSpinner className="animate-spin" />
+                </div>
+              ) : (
+                t("Sign in")
+              )}
             </button>
           </div>
         </form>

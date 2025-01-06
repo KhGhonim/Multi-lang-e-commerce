@@ -5,6 +5,8 @@ import authregister from "./Api/Routes/authregister.js";
 import ProductRoute from "./Api/Routes/ProductRoute.js";
 import cookieParser from "cookie-parser";
 import SearchEngineRoute from "./Api/Routes/SearchEngineRoute.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = 5000;
@@ -14,7 +16,7 @@ app.use(express.json());
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://e-commerce-kg.vercel.app",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );

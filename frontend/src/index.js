@@ -21,6 +21,7 @@ import ProductDetails from "../src/Pages/ProductDetails/ProductDetails";
 import Search from "../src/Pages/Search/Search";
 import RelatedSearch from "../src/Pages/Related/RelatedSearch";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import WhishList from "Pages/WhishList/WhishList";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<Profile />} />,
       <Route path="/cart" element={<ShoppingCart />} />,
       <Route path="/search" element={<Search />} />,
+      <Route path="/whishlist" element={<WhishList />} />,
       <Route path="/RelatedSearch" element={<RelatedSearch />} />,
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
       <Route path="*" element={<ErrorPage />} />

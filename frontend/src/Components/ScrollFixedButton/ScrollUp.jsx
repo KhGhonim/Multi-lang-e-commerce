@@ -15,7 +15,7 @@ function ScrollUp() {
         // Place the button in the bottom right corner.
         sx={{
           position: "fixed",
-          bottom: 32,
+          bottom: 62,
           right: 32,
           zIndex: 1,
         }}

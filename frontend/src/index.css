@@ -17,5 +17,30 @@ body {
   display: none;
 }
  
+.oswald-EC {
+  font-family: "Oswald", serif;
+  font-optical-sizing: auto;
+  font-weight: 200, 300, 400, 500, 600, 700;
+  font-style: normal;
+}
 
+
+.raleway-EC {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 200, 300, 400, 500, 600, 700, 800, 900;
+  font-style: normal;
+}
  
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

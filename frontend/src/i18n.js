@@ -7,13 +7,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 
 const resources = {
-  English: {
+  en: {
     translation: EN
   },
-  Arabic: {
+  ar: {
     translation: AR
   },
-  Türkçe: {
+  tr: {
     translation: TR
   },
 };
@@ -25,6 +25,7 @@ i18n.use(LanguageDetector)
     interpolation: {
       escapeValue: false // react already safes from xss
     },
+    fallbackLng: 'en',
     detection: {
       order: ['localStorage', 'sessionStorage', 'htmlTag'],
       caches: ['localStorage'],

@@ -1,7 +1,7 @@
-import Header2 from "Components/Header/Header2/Header2";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToBasket } from "../../Redux/userSlice";
+import Logo from "Components/Logo/Logo";
 
 export default function Profile() {
   // @ts-ignore
@@ -10,7 +10,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen">
-      <Header2 />
+      <Logo />
       <div className="max-w-6xl mx-auto my-10">
         <div className="flex justify-between items-center space-x-4 p-4 bg-card rounded-lg shadow-md">
           <div className="flex space-x-4">

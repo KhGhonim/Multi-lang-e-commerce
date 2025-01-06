@@ -1,83 +1,21 @@
 import { useTheme } from "@mui/material";
-import { useState } from "react";
+import useRegister from "Hooks/useRegister";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+import { FaSpinner } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const theme = useTheme().palette.mode;
-  const [firstname, setfirstname] = useState(null);
-  const [lastname, setlastname] = useState(null);
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
-  const [loading, setloading] = useState(false);
   const { t } = useTranslation();
-  const API = process.env.REACT_APP_BASE_URL;
 
-  const nevigate = useNavigate();
-  const handlesubmit = async (eo) => {
-    eo.preventDefault();
-    setloading(true);
-    if (!firstname || !lastname || !email || !password) {
-      setloading(false);
-      toast.warning("Please fill all the fields");
-    }
-    if (!emailRegex.test(email)) {
-      setloading(false);
-      toast.warning("Please enter a valid email address");
-      return;
-    }
-
-    if (!passwordRegex.test(password)) {
-      setloading(false);
-      toast.warning(
-        "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character"
-      );
-      return;
-    }
-
-    const IsUserExists = await fetch(`${API}/api/auth/userExist`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await IsUserExists.json();
-
-    if (data.IsUserExist) {
-      toast.warning("Account already exists");
-      setloading(false);
-      eo.target.reset();
-      return;
-    }
-
-    const response = await fetch(`${API}/api/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ firstname, lastname, email, password }),
-    });
-    console.log(response);
-
-    if (response.ok) {
-      toast.success("Account created");
-      setloading(false);
-      nevigate("/login");
-    } else {
-      toast.warning("Account is not created, try again later");
-      setloading(false);
-    }
-
-    setloading(false);
-  };
-
+  const {
+    RegisterHandler,
+    setfirstname,
+    setlastname,
+    setemail,
+    setpassword,
+    loading,
+  } = useRegister();
   return (
     <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
       <div
@@ -91,7 +29,7 @@ export default function SignUp() {
             {t("Create a new account")}
           </p>
         </div>
-        <form onSubmit={handlesubmit} className="mt-8 space-y-6 text-black">
+        <form onSubmit={RegisterHandler} className="mt-8 space-y-6 text-black">
           <div className="rounded-md shadow-sm space-y-5">
             <div>
               <label htmlFor="firstname" className="sr-only">
@@ -174,7 +112,13 @@ export default function SignUp() {
               type="submit"
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary`}
             >
-              {loading ? t("loading") : t("Sign up")}
+              {loading ? (
+                <div className="flex w-full h-full items-center justify-center">
+                  <FaSpinner className="animate-spin" />
+                </div>
+              ) : (
+                t("Sign up")
+              )}
             </button>
           </div>
         </form>

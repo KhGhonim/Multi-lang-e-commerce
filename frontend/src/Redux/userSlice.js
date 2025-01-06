@@ -4,8 +4,10 @@ const initialState = {
   currentUser: null,
   loading: null,
   error: null,
-  FavoirteProducts: [],
+  direction: "ltr",
   cartItems: [],
+  FavoirteProducts: [],
+  CompareProducts: [],
 };
 
 export const userSlice = createSlice({
@@ -29,14 +31,16 @@ export const userSlice = createSlice({
       state.currentUser = null;
       state.loading = false;
       state.error = null;
-      state.FavoirteProducts = [];
-      state.cartItems = [];
+    },
+
+    SetDirection: (state, action) => {
+      state.direction = action.payload;
     },
 
     addToMyFavorites: (state, action) => {
       const ProductWithQuantity = { ...action.payload };
       const IstheProductInFav = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       if (IstheProductInFav === -1) {
@@ -46,7 +50,7 @@ export const userSlice = createSlice({
     addToBasket: (state, action) => {
       const ProductWithQuantity = { ...action.payload, quantity: 1 };
       const IstheProductInCart = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       if (IstheProductInCart !== -1) {
@@ -55,18 +59,25 @@ export const userSlice = createSlice({
         state.cartItems.push(ProductWithQuantity);
       }
     },
-    RemoveItem: (state, action) => {
+    DecrementItemsToRemoval: (state, action) => {
       const decreasedProduct = state.cartItems.find((item) => {
-        return item.id === action.payload.id;
+        return item._id === action.payload._id;
       });
       decreasedProduct.quantity -= 1;
 
       if (decreasedProduct.quantity === 0) {
         const NewArray = state.cartItems.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item._id !== action.payload._id
         );
         state.cartItems = NewArray;
       }
+    },
+
+    RemoveItemFromCart: (state, action) => {
+      const NewArray = state.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.cartItems = NewArray;
     },
   },
 });
@@ -78,7 +89,9 @@ export const {
   signOut,
   addToMyFavorites,
   addToBasket,
-  RemoveItem,
+  DecrementItemsToRemoval,
+  SetDirection,
+  RemoveItemFromCart,
 } = userSlice.actions;
 
 export default userSlice.reducer;

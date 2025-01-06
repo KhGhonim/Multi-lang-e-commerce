@@ -15,24 +15,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToMyFavorites } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { GoEye } from "react-icons/go";
 
-export default function Slider({ Sliders, Headline }) {
+export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
   const theme = useTheme().palette.mode;
   const dispatch = useDispatch();
   // @ts-ignore
   const user = useSelector((state) => state.UserStore);
-/**
- * Handles adding a product to favorites.
- * 
- * @param {Object} Slider - The product to be added to favorites.
- */
+  /**
+   * Handles adding a product to favorites.
+   *
+   * @param {Object} Slider - The product to be added to favorites.
+   */
   const FavHandler = (Slider) => {
     if (user.currentUser === null) {
       toast.warning("Please login to add product to favorites");
     } else {
       dispatch(addToMyFavorites(Slider));
       toast.success(
-        "Added to my favorites, check your Profile in favorites section"
+        "Added to my favorites, check your whishlist to see your favorites"
       );
     }
   };
@@ -45,7 +46,7 @@ export default function Slider({ Sliders, Headline }) {
           theme === "dark" ? "text-white" : "text-black"
         }`}
       >
-      {t(Headline)}
+        {t(Headline)}
       </h1>
       {Sliders.length > 0 ? (
         <Swiper
@@ -94,6 +95,17 @@ export default function Slider({ Sliders, Headline }) {
                   <FavoriteBorderOutlined />
                 </span>
               </div>
+
+              <div
+                onClick={() => {
+                  setQuickViewProduct(Slider);
+                }}
+                className="absolute -top-7 left-0 p-3 z-50"
+              >
+                <span className="text-2xl hover:scale-110 hover:text-red-500 duration-200 transition-all p-1 cursor-pointer">
+                  <GoEye />
+                </span>
+              </div>
               <Link
                 className="w-full h-full rounded-lg  overflow-hidden flex flex-col relative "
                 to={`${`ProductDetails/${Slider.id}`}`}
@@ -130,7 +142,8 @@ export default function Slider({ Sliders, Headline }) {
                     </span>
                   </div>
                   <p className="text-red-600 font-bold mt-2">
-                    {t("Lowest Price In")} {Slider.lowestPriceInDays} {t("Days")}!
+                    {t("Lowest Price In")} {Slider.lowestPriceInDays}{" "}
+                    {t("Days")}!
                   </p>
                   <p className="text-lg font-bold mt-1">
                     {Slider.price}{" "}
@@ -139,7 +152,7 @@ export default function Slider({ Sliders, Headline }) {
                     </span>
                   </p>
                   <button className="bg-[#FFF6EE] font-semibold  mt-4 py-2 px-4 rounded-lg">
-                  {t("Buy More Pay Less")}
+                    {t("Buy More Pay Less")}
                   </button>
                 </div>
               </Link>

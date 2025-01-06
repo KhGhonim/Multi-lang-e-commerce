@@ -29,9 +29,9 @@ export const Userlog = async (req, res, next) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res.cookie("jwt", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Ensures secure cookie transmission
-        sameSite: "None", // Allows cross-site cookie sendingm
-        maxAge: 3600000,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
       });
       res.status(200).send({ user });
     }

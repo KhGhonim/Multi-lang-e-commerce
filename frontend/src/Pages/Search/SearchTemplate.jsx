@@ -25,7 +25,7 @@ export default function SearchTemplate({
   };
   return (
     <div
-      key={key}
+      key={`${key}-${id}`}
       className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow"
     >
       <div className="block">

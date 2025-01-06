@@ -1,25 +1,10 @@
 import { FilterAlt } from "@mui/icons-material";
 import { CircularProgress, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchTemplate from "./SearchTemplate";
 import SearchFinalProducts from "./SearchFinalProducts";
-
-const categories = [
-  { id: 1, name: "Electronic" },
-  { id: 2, name: "Accessories" },
-  { id: 3, name: "Home" },
-  { id: 4, name: "Bags" },
-  { id: 5, name: "Sports" },
-  { id: 6, name: "Clothing" },
-];
-const priceRanges = [
-  { id: 1, min: 0, max: 50 },
-  { id: 2, min: 51, max: 100 },
-  { id: 3, min: 101, max: 200 },
-  { id: 4, min: 201, max: 500 },
-  { id: 5, min: 501, max: 1000 },
-];
+import { categories, priceRanges } from "DB/db";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -55,7 +40,6 @@ export default function Search() {
   const [Price, setPrice] = useState(null);
   const [FetchData, setFetchData] = useState([]);
   const [currentPage, setcurrentPage] = useState(1);
-  const API = process.env.REACT_APP_BASE_URL;
   const [Isloading, setIsloading] = useState(false);
 
   useEffect(() => {
@@ -82,7 +66,7 @@ export default function Search() {
   useEffect(() => {
     const FetchAllData = async () => {
       setIsloading(true);
-      const res = await fetch(`${API}/api/search`, {
+      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/api/search`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -157,7 +141,7 @@ export default function Search() {
   return (
     <div
       className={`flex flex-col min-h-screen  ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+        theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
       }`}
     >
       <header
@@ -165,7 +149,7 @@ export default function Search() {
           theme === "dark"
             ? "bg-gray-900"
             : "bg-gradient-to-l from-orange-400 to-orange-700"
-        } text-white py-4 px-6`}
+        } text-white max-lg:mt-16 py-4 px-6`}
       >
         <div className="container mx-auto flex items-center relative ">
           <div
