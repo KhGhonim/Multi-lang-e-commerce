@@ -144,6 +144,7 @@ export default function Search() {
         theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
       }`}
     >
+      
       <header
         className={`${
           theme === "dark"
