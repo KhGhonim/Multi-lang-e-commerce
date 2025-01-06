@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import SearchEngineRoute from "./Api/Routes/SearchEngineRoute.js";
 import dotenv from "dotenv";
 dotenv.config();
-
 const app = express();
 const port = 5000;
 app.use(cookieParser());

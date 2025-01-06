@@ -94,6 +94,7 @@ export default function CallToAction() {
             </motion.div>
           </motion.div>
         </AnimatePresence>
+        
       ) : (
         <Lottie
           animationData={groovyWalkAnimation}
