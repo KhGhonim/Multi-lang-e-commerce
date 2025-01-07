@@ -7,15 +7,18 @@ import { Navigation } from "swiper/modules";
 import {
   ArrowBack,
   ArrowForward,
+  CompareArrows,
   FavoriteBorderOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { CircularProgress, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addToMyFavorites } from "../../Redux/userSlice";
+import { AddToCompare, addToMyFavorites } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { GoEye } from "react-icons/go";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
   const theme = useTheme().palette.mode;
@@ -38,7 +41,20 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
     }
   };
 
+  const AddToCompareHandler = (Slider) => {
+    if (user.currentUser === null) {
+      toast.warning("Please login to add product to favorites");
+    } else {
+      dispatch(AddToCompare(Slider));
+      toast.success("Added to compare list");
+    }
+  };
+
   const { t } = useTranslation();
+  const [hoveredItem, setHoveredItem] = useState(null);
+
+  const handleMouseEnter = (index) => setHoveredItem(index);
+  const handleMouseLeave = () => setHoveredItem(null);
   return (
     <div className="w-full h-full p-8">
       <h1
@@ -83,49 +99,99 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
           {Sliders.map((Slider, index) => (
             <SwiperSlide
               key={index}
-              className="w-full h-full shadow-lg rounded-lg relative "
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              className="w-full h-full shadow-lg rounded-lg relative group"
             >
-              <div
-                onClick={() => {
-                  FavHandler(Slider);
-                }}
-                className="absolute top-0 right-0 p-3 z-50"
-              >
-                <span className="text-xs hover:scale-110 hover:text-red-500 duration-200 transition-all p-1 cursor-pointer">
-                  <FavoriteBorderOutlined />
-                </span>
-              </div>
+              <AnimatePresence>
+                {hoveredItem === index && (
+                  <motion.div
+                    onClick={() => FavHandler(Slider)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute top-0 right-0 p-3 z-50"
+                  >
+                    <motion.span
+                      className="text-xs cursor-pointer group-hover:block"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FavoriteBorderOutlined className="w-5 h-5 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              <div
-                onClick={() => {
-                  setQuickViewProduct(Slider);
-                }}
-                className="absolute -top-7 left-0 p-3 z-50"
-              >
-                <span className="text-2xl hover:scale-110 hover:text-red-500 duration-200 transition-all p-1 cursor-pointer">
-                  <GoEye />
-                </span>
-              </div>
+              <AnimatePresence>
+                {hoveredItem === index && (
+                  <motion.div
+                    onClick={() => setQuickViewProduct(Slider)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute top-0 left-0 p-3 z-50"
+                  >
+                    <motion.span
+                      className="text-xs cursor-pointer group-hover:block"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <GoEye className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {hoveredItem === index && (
+                  <motion.div
+                    onClick={() => AddToCompareHandler(Slider)}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute top-0 transform -translate-x-1/2  p-3 z-50"
+                  >
+                    <motion.span
+                      className="text-xs cursor-pointer group-hover:block"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <CompareArrows className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <Link
-                className="w-full h-full rounded-lg  overflow-hidden flex flex-col relative "
-                to={`${`ProductDetails/${Slider.id}`}`}
+                className="w-full h-full rounded-lg overflow-hidden flex flex-col relative"
+                to={`ProductDetails/${Slider.id}`}
               >
-                <div className="w-full h-80 md:h-full   ">
+                <div className="w-full h-80 md:h-full">
                   <img
-                    className="w-full h-full md:!h-60  object-fill"
+                    className="w-full h-full md:!h-60 object-fill"
                     src={Slider.img}
                     alt="Bioxin Keratin Argan Oil"
                   />
                 </div>
 
-                <div className="cursor-pointer  h-6 bg-gradient-to-l from-orange-500 to-orange-200 text-white flex justify-center items-center text-center text-xs relative">
-                  <img className="!w-8 !h-8 " src={award} alt="award" />
-                  <span> {t("3rd best-selling product")} </span>
+                <div className="cursor-pointer h-6 bg-gradient-to-l from-orange-500 to-orange-200 text-white flex justify-center items-center text-center text-xs relative">
+                  <img className="!w-8 !h-8" src={award} alt="award" />
+                  <span>{t("3rd best-selling product")}</span>
                 </div>
 
-                <div className={` text-black    p-4 text-xs h-full`}>
+                <div className={`text-black p-4 text-xs h-full`}>
                   <div className="flex justify-between items-center">
-                    <span className="bg-green-500 text-white  px-2 py-1 text-xs font-bold uppercase">
+                    <span className="bg-green-500 text-white px-2 py-1 text-xs font-bold uppercase">
                       {t("Fast Delivery")}
                     </span>
                     <span className="bg-gray-600 text-white px-2 py-1 text-xs font-bold uppercase">
@@ -146,18 +212,19 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
                     {t("Days")}!
                   </p>
                   <p className="text-lg font-bold mt-1">
-                    {Slider.price}{" "}
+                    {Slider.price}
                     <span className="line-through text-muted">
                       {Slider.fakePrice}
                     </span>
                   </p>
-                  <button className="bg-[#FFF6EE] font-semibold  mt-4 py-2 px-4 rounded-lg">
+                  <button className="bg-[#FFF6EE] font-semibold mt-4 py-2 px-4 rounded-lg">
                     {t("Buy More Pay Less")}
                   </button>
                 </div>
               </Link>
             </SwiperSlide>
           ))}
+
           <div className="swiper-button-next-baby absolute right-0 top-1/2 z-50 bg-gray-50 text-black rounded-full border-2 w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 hover:bg-[#F48118] hover:text-white transition-all duration-500 cursor-pointer">
             <ArrowForward />
           </div>

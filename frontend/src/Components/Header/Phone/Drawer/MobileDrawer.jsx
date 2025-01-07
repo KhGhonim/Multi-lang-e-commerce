@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import DrawerHeader from "./DrawerHeader";
-import { CategoriesDrawer, items, menuItems } from "DB/db";
+import { items, menuItems } from "DB/db";
 import MenuItem from "./MenuItem";
 import CategoryItem from "./CategoryItem";
 import { useTheme } from "@mui/material";
@@ -14,8 +14,9 @@ import {
   CiUser,
 } from "react-icons/ci";
 import { RiEnglishInput } from "react-icons/ri";
-import { TbAlphabetArabic } from "react-icons/tb";
+import { TbAlphabetArabic, TbLogs } from "react-icons/tb";
 import { FaTurkishLiraSign } from "react-icons/fa6";
+import { GiEgyptianProfile } from "react-icons/gi";
 
 export default function MobileDrawer({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState("menu");
@@ -71,6 +72,20 @@ export default function MobileDrawer({ isOpen, onClose }) {
               <div className=" pt-2">
                 <Link
                   className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                  to={"/blog"}
+                >
+                  <TbLogs className="w-5 h-5" />
+                  <span>Blog</span>
+                </Link>
+                <Link
+                  className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                  to={"/profile"}
+                >
+                  <GiEgyptianProfile className="w-5 h-5" />
+                  <span>Profile</span>
+                </Link>
+                <Link
+                  className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
                   to={"/whishlist"}
                 >
                   <CiHeart className="w-5 h-5" />
@@ -113,9 +128,21 @@ export default function MobileDrawer({ isOpen, onClose }) {
                     title: "Language",
                     Icon: <CiGlobe />,
                     subItems: [
-                      { title: "English", Icon: <RiEnglishInput />, value : "en" },
-                      { title: "Arabic", Icon: <TbAlphabetArabic />, value : "ar" },
-                      { title: "Turkish", Icon: <FaTurkishLiraSign />, value : "tr" },
+                      {
+                        title: "English",
+                        Icon: <RiEnglishInput />,
+                        value: "en",
+                      },
+                      {
+                        title: "Arabic",
+                        Icon: <TbAlphabetArabic />,
+                        value: "ar",
+                      },
+                      {
+                        title: "Turkish",
+                        Icon: <FaTurkishLiraSign />,
+                        value: "tr",
+                      },
                     ],
                   },
                 ].map((item, index) => (

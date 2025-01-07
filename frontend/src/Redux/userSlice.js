@@ -38,15 +38,26 @@ export const userSlice = createSlice({
     },
 
     addToMyFavorites: (state, action) => {
-      const ProductWithQuantity = { ...action.payload };
-      const IstheProductInFav = state.cartItems.findIndex(
+      const IstheProductInFav = state.FavoirteProducts.findIndex(
         (item) => item._id === action.payload._id
       );
 
-      if (IstheProductInFav === -1) {
-        state.FavoirteProducts.push(ProductWithQuantity);
+      if (IstheProductInFav !== -1) {
+        state.FavoirteProducts[IstheProductInFav].quantity += 1;
+      } else {
+        state.FavoirteProducts.push(action.payload);
       }
+
+
     },
+
+    RemoveItemFromFav: (state, action) => {
+      const NewArray = state.FavoirteProducts.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.FavoirteProducts = NewArray;
+    },
+
     addToBasket: (state, action) => {
       const ProductWithQuantity = { ...action.payload, quantity: 1 };
       const IstheProductInCart = state.cartItems.findIndex(
@@ -58,6 +69,26 @@ export const userSlice = createSlice({
       } else {
         state.cartItems.push(ProductWithQuantity);
       }
+    },
+
+    AddToCompare: (state, action) => {
+
+      const IstheProductInCompare = state.CompareProducts.findIndex(p => p._id === action.payload._id)
+      if (IstheProductInCompare !== -1) {
+        state.CompareProducts[IstheProductInCompare].quantity += 1
+      } else {
+        const ProductWithQuantity = { ...action.payload, quantity: 1 };
+        state.CompareProducts.push(ProductWithQuantity)
+        if (state.CompareProducts.length > 3) {
+          state.CompareProducts.shift()
+        }
+      }
+    },
+
+    RemoveFromCompare: (state, action) => {
+      console.log(action.payload)
+      const NewArray = state.CompareProducts.filter((item) => item._id !== action.payload.id);
+      state.CompareProducts = NewArray;
     },
     DecrementItemsToRemoval: (state, action) => {
       const decreasedProduct = state.cartItems.find((item) => {
@@ -88,9 +119,12 @@ export const {
   signInSuccess,
   signOut,
   addToMyFavorites,
+  RemoveItemFromFav,
   addToBasket,
   DecrementItemsToRemoval,
   SetDirection,
+  AddToCompare,
+  RemoveFromCompare,
   RemoveItemFromCart,
 } = userSlice.actions;
 

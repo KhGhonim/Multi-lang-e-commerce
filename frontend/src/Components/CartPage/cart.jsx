@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { DecrementItemsToRemoval } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material";
+import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 
 export default function Cart() {
   // @ts-ignore
   const user = useSelector((state) => state.UserStore);
   const dispatch = useDispatch();
   const theme = useTheme().palette.mode;
+  const pathname = useLocation().pathname;
 
   return (
     <div className="container mx-auto mt-10 h-dvh">
@@ -144,6 +146,10 @@ export default function Cart() {
             </button>
           </div>
         </div>
+      )}
+
+{pathname === "/login" || pathname === "/register" ? null : (
+        <PhoneNavbar />
       )}
     </div>
   );

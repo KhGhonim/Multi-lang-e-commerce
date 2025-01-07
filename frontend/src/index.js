@@ -22,6 +22,9 @@ import Search from "../src/Pages/Search/Search";
 import RelatedSearch from "../src/Pages/Related/RelatedSearch";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import WhishList from "Pages/WhishList/WhishList";
+import Compare from "Pages/Compare/Compare";
+import BlogPage from "Pages/BlogPage/BlogPage";
+import Article from "Pages/Article/Article";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +37,9 @@ const router = createBrowserRouter(
       <Route path="/search" element={<Search />} />,
       <Route path="/whishlist" element={<WhishList />} />,
       <Route path="/RelatedSearch" element={<RelatedSearch />} />,
+      <Route path="/compare" element={<Compare />} />,
+      <Route path="/blog" element={<BlogPage />} />,
+      <Route path="/article/:id" element={<Article />} />,
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
       <Route path="*" element={<ErrorPage />} />
 

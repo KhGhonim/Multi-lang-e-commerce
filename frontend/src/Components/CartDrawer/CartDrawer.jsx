@@ -6,6 +6,7 @@ import RecommendedProducts from "./RecommendedProducts";
 import { IoClose } from "react-icons/io5";
 import { useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
+import { FaRegFaceSadTear } from "react-icons/fa6";
 
 export default function CartDrawer({ setIsCartOpen, IsCartOpen }) {
   // @ts-ignore
@@ -84,9 +85,26 @@ export default function CartDrawer({ setIsCartOpen, IsCartOpen }) {
           <ShippingNotification />
 
           <div className="space-y-4">
-            {user?.cartItems?.map((item) => (
-              <CartItem key={item.id} item={item} />
-            ))}
+            {user.cartItems.length > 0 ? (
+              user?.cartItems?.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))
+            ) : (
+              <div className="space-y-4 flex flex-col items-center">
+                <p className="text-gray-500 flex items-center gap-1">
+                  Your cart is empty.{" "}
+                  <span>
+                    <FaRegFaceSadTear className="h-5 w-5 " />
+                  </span>{" "}
+                </p>
+                <button
+                  className="w-full bg-black text-white py-3 rounded-md hover:bg-primary-dark transition-colors"
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  CONTINUE SHOPPING
+                </button>
+              </div>
+            )}
           </div>
 
           <CartActions />

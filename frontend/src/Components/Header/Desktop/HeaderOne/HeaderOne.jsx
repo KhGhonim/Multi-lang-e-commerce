@@ -13,6 +13,7 @@ import { GoArrowSwitch } from "react-icons/go";
 import { useTheme } from "@mui/material";
 import CartDrawer from "Components/CartDrawer/CartDrawer";
 import { useState } from "react";
+import { FaUserCog } from "react-icons/fa";
 
 export default function HeaderOne({ setMode }) {
   // @ts-ignore
@@ -42,6 +43,13 @@ export default function HeaderOne({ setMode }) {
           <Link to="/login" className="text-lg font-semibold">
             <motion.div whileHover={{ y: -3, transition: { duration: 0.2 } }}>
               <MdOutlinePersonOutline className="text-2xl cursor-pointer" />
+            </motion.div>
+          </Link>
+        )}
+        {user.currentUser && (
+          <Link to="/profile" className="text-lg font-semibold">
+            <motion.div whileHover={{ y: -3, transition: { duration: 0.2 } }}>
+              <FaUserCog className="text-3xl cursor-pointer" />
             </motion.div>
           </Link>
         )}

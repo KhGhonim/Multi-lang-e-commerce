@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
 import { CiShoppingBasket, CiTrash } from "react-icons/ci";
 import { FaEye } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../../Redux/userSlice";
-import { toast } from "react-toastify";
 
-export default function ProductCard({ id, item, onDelete }) {
-  const dispatch = useDispatch();
-
-  const handleAddToCart = (product) => {
-    dispatch(addToBasket(product));
-    toast.success("Added to cart");
-  };
-
+export default function ProductCard({
+  id,
+  item,
+  handleDeleteProduct,
+  handleAddToCart,
+  setQuickViewProduct,
+}) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="relative">
@@ -23,8 +19,8 @@ export default function ProductCard({ id, item, onDelete }) {
           className="w-full h-[300px] object-cover"
         />
         <button
-          onClick={() => onDelete(id)}
-          className="absolute top-2 right-2 p-2 bg-orange-500 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity duration-200 hover:bg-red-600"
+          onClick={() => handleDeleteProduct(item)}
+          className="absolute z-50 top-2 right-2 p-2 bg-orange-500 text-white rounded-full opacity-100 transition-opacity duration-200 hover:bg-red-600"
           aria-label="Remove from wishlist"
         >
           <CiTrash className="w-5 h-5" />
@@ -35,7 +31,7 @@ export default function ProductCard({ id, item, onDelete }) {
           transition={{ duration: 0.5 }}
           className="w-full absolute inset-0 flex flex-col items-center justify-center gap-4"
         >
-          <div className="relative">
+          <div onClick={() => setQuickViewProduct(item)} className="relative">
             <button className="w-56 bg-white hover:bg-gray-950 text-gray-900 hover:text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-all duration-300">
               <span>Quick view</span>
               <FaEye className="w-4 h-4" />

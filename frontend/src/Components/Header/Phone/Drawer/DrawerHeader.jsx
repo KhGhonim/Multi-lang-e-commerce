@@ -32,7 +32,7 @@ export default function DrawerHeader({
           className={`flex-1 py-5 text-sm font-medium border-b transition-all duration-300 ease-in-out ${
             activeTab === "menu"
               ? "border-black text-black bg-[#F0F0F0]"
-              : "border-transparent text-gray-500 hover:text-black"
+              : "border-transparent text-gray-500 hover:text-white "
           }`}
         >
           MENU
@@ -42,7 +42,7 @@ export default function DrawerHeader({
           className={`flex-1 py-5 text-sm font-medium border-b transition-colors ${
             activeTab === "categories"
               ? "border-black text-black bg-[#F0F0F0]"
-              : "border-transparent text-gray-500 hover:text-black"
+              : "border-transparent text-gray-500 hover:text-white "
           }`}
         >
           CATEGORIES

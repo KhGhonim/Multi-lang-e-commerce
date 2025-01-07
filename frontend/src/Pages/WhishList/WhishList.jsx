@@ -2,21 +2,34 @@ import { useTheme } from "@mui/material";
 import GridControls from "Components/WhishListPage/GridControls";
 import HeroSection from "Components/WhishListPage/HeroSection";
 import ProductCard from "Components/WhishListPage/ProductCard";
-import { initialProducts } from "DB/db";
 import { useState } from "react";
 import { MdOutlineHeartBroken } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addToBasket, RemoveItemFromFav } from "../../Redux/userSlice";
+import QuickView from "Components/QuickView/QuickView";
 
 export default function WhishList() {
   const [gridColumns, setGridColumns] = useState(3);
-  const [products, setProducts] = useState(initialProducts);
-
-  const handleDeleteProduct = (id) => {
-    setProducts(products.filter((product) => product._id !== id));
-  };
-  const theme = useTheme().palette.mode;
   // @ts-ignore
   const user = useSelector((state) => state.UserStore);
+  const dispatch = useDispatch();
+  const [products, setProducts] = useState(user?.FavoirteProducts);
+  const theme = useTheme().palette.mode;
+  const [QuickViewProduct, setQuickViewProduct] = useState([]);
+  const handleDeleteProduct = (id) => {
+    dispatch(RemoveItemFromFav(id));
+    toast.success("Product removed from wishlist");
+    setProducts(products.filter((product) => product._id !== id._id));
+  };
+  const handleAddToCart = (product) => {
+    dispatch(addToBasket(product));
+    toast.success("Added to cart");
+  };
+
+  const OnClose = () => {
+    setQuickViewProduct([]);
+  };
 
   return (
     <div className={`min-h-screen ${theme === "dark" ? "bg-[#121212]" : ""}`}>
@@ -37,7 +50,9 @@ export default function WhishList() {
               key={index}
               id={product._id}
               item={product}
-              onDelete={handleDeleteProduct}
+              handleDeleteProduct={handleDeleteProduct}
+              handleAddToCart={handleAddToCart}
+              setQuickViewProduct={setQuickViewProduct}
             />
           ))}
         </div>
@@ -48,6 +63,8 @@ export default function WhishList() {
           </div>
         )}
       </div>
+
+      <QuickView product={QuickViewProduct} onClose={OnClose} />
     </div>
   );
 }

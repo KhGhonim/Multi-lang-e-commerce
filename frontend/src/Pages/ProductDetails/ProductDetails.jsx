@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import Comments from "../../Components/Comments/Comments";
 import { CircularProgress, useTheme } from "@mui/material";
 import Magnifier from "react18-image-magnifier";
 import { useTranslation } from "react-i18next";
+import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 
 export default function ProductDetails() {
   const [comments, setcomments] = useState(false);
@@ -50,6 +51,8 @@ export default function ProductDetails() {
       toast.success("Added to basket");
     }
   };
+  const pathname = useLocation().pathname;
+
   const { t } = useTranslation();
   return (
     <div
@@ -67,7 +70,7 @@ export default function ProductDetails() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
             {/* Image Section */}
-            <div className="relative">
+            <div className="relative rounded-lg">
               <Magnifier
                 src={Product?.img}
                 className="rounded-lg w-full h-auto object-cover"
@@ -175,6 +178,10 @@ export default function ProductDetails() {
           title={Product?.name}
         />
       </div>
+
+      {pathname === "/login" || pathname === "/register" ? null : (
+        <PhoneNavbar />
+      )}
     </div>
   );
 }

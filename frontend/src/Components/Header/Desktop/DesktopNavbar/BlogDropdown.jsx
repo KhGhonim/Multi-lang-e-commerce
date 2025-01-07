@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-
-
 export default function BlogDropdown() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -35,7 +33,11 @@ export default function BlogDropdown() {
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {blogPosts.map((post) => (
-                  <div key={post.id} className="w-full flex-shrink-0 px-4">
+                  <Link
+                    to={`/blog`}
+                    key={post.id}
+                    className="w-full flex-shrink-0 px-4"
+                  >
                     <div className="grid grid-cols-2 gap-8">
                       <div className="relative overflow-hidden rounded-lg">
                         <img
@@ -54,13 +56,17 @@ export default function BlogDropdown() {
                         <p className="text-gray-600 mt-2">{post.excerpt}</p>
                         <Link
                           to="#"
-                          className={`${theme === "dark" ? "text-orange-600" : "text-blue-600"} mt-4 hover:underline`}
+                          className={`${
+                            theme === "dark"
+                              ? "text-orange-600"
+                              : "text-blue-600"
+                          } mt-4 hover:underline`}
                         >
                           Read more
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -79,7 +85,7 @@ export default function BlogDropdown() {
               onClick={nextSlide}
               className={`absolute right-0 top-1/2 border -translate-y-1/2 p-2 ${
                 theme === "dark"
-              ? "bg-gray-700 hover:bg-gray-800 text-white border-orange-500"
+                  ? "bg-gray-700 hover:bg-gray-800 text-white border-orange-500"
                   : "bg-white/80 hover:bg-white text-black border-gray-50"
               } rounded-full shadow-lg `}
             >

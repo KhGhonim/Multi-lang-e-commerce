@@ -34,9 +34,7 @@ function App() {
           setMode={setMode}
         />
       )}
-      {pathname === "/login" || pathname === "/register" ? null : (
-        <PhoneNavbar />
-      )}
+
       <Outlet />
       <ToastContainer />
       <Footer />

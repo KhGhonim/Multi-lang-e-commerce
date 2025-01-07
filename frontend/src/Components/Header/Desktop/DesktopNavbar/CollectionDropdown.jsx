@@ -64,7 +64,7 @@ export default function CollectionDropdown() {
                 }`}
               >
                 <Link
-                  to="#"
+                  to="/blog"
                   className="relative w-full h-80 overflow-hidden transition-all duration-300 ease-in-out rounded-lg group hover:opacity-75"
                 >
                   <img

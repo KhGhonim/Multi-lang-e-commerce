@@ -12,15 +12,14 @@ export default function QuickView({ product, onClose }) {
     dispatch(addToBasket(product2));
     toast.success("Added to cart");
   };
-
   if (product?.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden relative">
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 ">
+      <div className="bg-white rounded-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto relative">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 rounded-full p-2 hover:bg-gray-100"
+          className="absolute right-4 top-4 z-10 rounded-full p-2 bg-black text-white hover:bg-gray-600 transition-all ease-in-out duration-300"
         >
           <IoClose className="h-5 w-5" />
         </button>
@@ -31,12 +30,13 @@ export default function QuickView({ product, onClose }) {
             <img
               src={product.img}
               alt={product.name}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
 
           {/* Content Section */}
-          <div className="p-6 space-y-6">
+          <div className={`p-6 space-y-6 text-black`}>
             <div>
               <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
               <p className="text-2xl">${product.price}</p>
@@ -67,7 +67,7 @@ export default function QuickView({ product, onClose }) {
 
               <button
                 onClick={() => handleAddToCart(product)}
-                className="flex-1 py-2 font-bold rounded-full bg-[#7fd4d4] hover:bg-[#6bc1c1]"
+                className="flex-1 py-2 font-bold rounded-full bg-[#7fd4d4] hover:bg-[#6bc1c1]  transition-all ease-in-out duration-300"
               >
                 ADD TO CART
               </button>
@@ -81,7 +81,7 @@ export default function QuickView({ product, onClose }) {
                 }}
                 className="rounded-full"
               >
-                <FaHeart className="h-5 w-5 hover:text-red-500 " />
+                <FaHeart className="h-5 w-5 hover:text-red-500  transition-all ease-in-out duration-300" />
               </button>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { useTheme } from "@mui/material";
+import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -42,7 +43,10 @@ export default function ProductDropdown() {
         <div className="col-span-1">
           <h3 className="font-semibold mb-4">Categories</h3>
           <ul className="space-y-2">
-            <li className="w-full relative group">
+            <motion.li
+              whileHover={{ x: 3, transition: { duration: 0.2 } }}
+              className="w-full relative "
+            >
               <Link
                 to="#"
                 className="hover:text-orange-500 flex items-center justify-between "
@@ -53,8 +57,11 @@ export default function ProductDropdown() {
                   size={16}
                 />
               </Link>
-            </li>
-            <li className="w-full relative">
+            </motion.li>
+            <motion.li
+              whileHover={{ x: 3, transition: { duration: 0.2 } }}
+              className="w-full relative"
+            >
               <Link
                 to="#"
                 className="hover:text-orange-500 flex items-center justify-between group"
@@ -65,8 +72,11 @@ export default function ProductDropdown() {
                   size={16}
                 />
               </Link>
-            </li>
-            <li className="w-full relative">
+            </motion.li>
+            <motion.li
+              whileHover={{ x: 3, transition: { duration: 0.2 } }}
+              className="w-full relative"
+            >
               <Link
                 to="#"
                 className="hover:text-orange-500 flex items-center justify-between group"
@@ -77,7 +87,7 @@ export default function ProductDropdown() {
                   size={16}
                 />
               </Link>
-            </li>
+            </motion.li>
           </ul>
         </div>
 
@@ -88,13 +98,14 @@ export default function ProductDropdown() {
             {featuredProducts.map((product) => (
               <Link
                 key={product.id}
-                to="#"
-                className="group relative overflow-hidden rounded-lg"
+                to="/search"
+                className=" relative overflow-hidden rounded-lg"
               >
-                <img
+                <motion.img
+                  whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-48 object-cover transform  transition-transform duration-300"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-5">
                   <p className="text-white font-medium">{product.name}</p>

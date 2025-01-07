@@ -54,7 +54,7 @@ export default function CategoryDropdown() {
                   (c) => c.id === selectedCategory
                 )?.subcategories.map((sub) => (
                   <li key={sub}>
-                    <Link to="#" className="hover:text-orange-600">
+                    <Link to={`/search`} className="hover:text-orange-600">
                       {sub}
                     </Link>
                   </li>

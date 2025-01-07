@@ -190,21 +190,21 @@ export const collections = [
       },
       {
         id: 4,
-        name: 'Denim Jacket',
+        name: 'Bloused oversized',
         price: '$129.99',
-        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80',
+        image: 'https://images.unsplash.com/photo-1581497396202-5645e76a3a8e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         id: 5,
-        name: 'Tweed Pants',
+        name: 'Striped Sweater',
         price: '$79.99',
-        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80',
+        image: 'https://images.unsplash.com/photo-1541629007334-1f6c44705182?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         id: 6,
-        name: 'Denim Jacket',
+        name: 'Autumn Coat',
         price: '$129.99',
-        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80',
+        image: 'https://images.unsplash.com/photo-1700733862656-77e8a84c3129?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
     ],
   },
@@ -228,19 +228,19 @@ export const collections = [
         id: 9,
         name: 'Leather Boots',
         price: '$149.99',
-        image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80',
+        image: 'https://images.unsplash.com/photo-1494955464529-790512c65305?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         id: 10,
         name: 'Tweed Pants',
         price: '$79.99',
-        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80',
+        image: 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         id: 11,
         name: 'Denim Jacket',
         price: '$129.99',
-        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80',
+        image: 'https://plus.unsplash.com/premium_photo-1698260795012-99a7785109d4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
     ],
   },
@@ -409,22 +409,6 @@ export const menuItems = [
       { title: 'Digital Product', href: '/product/digital' },
     ],
   },
-  {
-    title: 'Portfolio',
-    subItems: [
-      { title: 'Grid Layout', href: '/portfolio/grid' },
-      { title: 'Masonry Layout', href: '/portfolio/masonry' },
-      { title: 'Gallery', href: '/portfolio/gallery' },
-    ],
-  },
-  {
-    title: 'Blog',
-    subItems: [
-      { title: 'Blog Grid', href: '/blog/grid' },
-      { title: 'Blog List', href: '/blog/list' },
-      { title: 'Blog Single', href: '/blog/single' },
-    ],
-  },
 ];
 
 export const CategoriesDrawer = [
@@ -554,5 +538,138 @@ export const items = [
     src: "https://cdn.dsmcdn.com/mnresize/200/200/marketing/datascience/automation/2023/1/28/Vestel_202301280121.jpg",
     classes: "rounded-full border-2 border-gray-500 w-12 h-12 object-cover",
     link: "/RelatedSearch?q=vestel",
+  },
+];
+
+export const mockArticles = [
+  {
+    id: 1,
+    title: "The Rise of Sustainable Fashion: A New Era of Conscious Style",
+    excerpt: "Discover how sustainable fashion is reshaping the industry and influencing consumer choices in 2024.",
+    author: "Khaled Ghonim",
+    date: "March 15, 2024",
+    category: "Sustainable Fashion",
+    image: "https://plus.unsplash.com/premium_photo-1713483623332-c82063245261?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    id: 2,
+    title: "Vintage Revival: How Classic Styles Are Making a Modern Comeback",
+    excerpt: "Explore the resurgence of vintage fashion and learn how to incorporate timeless pieces into your wardrobe.",
+    author: "Mohamed Elsayed",
+    date: "March 14, 2024",
+    category: "Vintage Fashion",
+    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800"
+  },
+  {
+    id: 3,
+    title: "Street Style: The Urban Fashion Revolution",
+    excerpt: "From Tokyo to New York, street style is evolving. See how urban fashion is changing the game.",
+    author: "Shahd Azziza",
+    date: "March 13, 2024",
+    category: "Street Style",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800"
+  }
+];
+
+
+export const influencers = [
+  {
+    id: 1,
+    name: "Azziza Ali",
+    handle: "@sarahstyle",
+    followers: "500K",
+    image: "https://images.unsplash.com/photo-1615453261246-4b32e335a4a0?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    instagramPosts: [
+      "https://images.unsplash.com/photo-1615453262312-022a72d3842a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1612833833572-4f2709907bc4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1517090186835-e348b621c9ca?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ]
+  },
+  {
+    id: 2,
+    name: "Khaled Ghonim",
+    handle: "@LoDa",
+    followers: "320K",
+    image: "https://translator.khaledghonim.com/_next/image?url=%2FDIHAD_Exhibition-08.jpg&w=640&q=100",
+    instagramPosts: [
+      "https://images.unsplash.com/photo-1520975661595-6453be3f7070?w=200",
+      "https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=200",
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200"
+    ]
+  }
+];
+
+export const article = {
+  id: 1,
+  title: "The Evolution of Sustainable Fashion: From Trend to Necessity",
+  author: "Emma Thompson",
+  date: "March 15, 2024",
+  readTime: "8 min read",
+  category: "Sustainable Fashion",
+  image: "https://images.unsplash.com/flagged/photo-1570733117311-d990c3816c47?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  content: `
+    <h2>The Rise of Eco-Conscious Fashion</h2>
+    <p>The fashion industry is undergoing a revolutionary transformation, with sustainability at its core. This shift isn't just about using organic materials; it's about reimagining the entire fashion ecosystem.</p>
+    
+    <blockquote>
+      "Sustainable fashion isn't a trend; it's a fundamental shift in how we think about, produce, and consume clothing." - Emma Thompson
+    </blockquote>
+
+    <h2>Key Innovations in Sustainable Materials</h2>
+    <p>From recycled ocean plastics to bio-fabricated leather alternatives, innovative materials are reshaping the future of fashion. These advancements not only reduce environmental impact but also open new possibilities for design and functionality.</p>
+
+    <figure>
+      <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=800" alt="Sustainable fabric samples" />
+      <figcaption>New sustainable materials being developed in fashion labs</figcaption>
+    </figure>
+  `,
+  tags: ["sustainability", "eco-fashion", "innovation"],
+  likes: 245,
+  comments: 28,
+  relatedArticles: [
+    {
+      id: 2,
+      title: "Circular Fashion: The Future of Clothing",
+      excerpt: "Exploring how circular economy principles are transforming the fashion industry",
+      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400"
+    },
+    {
+      id: 3,
+      title: "Sustainable Materials Revolution",
+      excerpt: "New eco-friendly materials changing the fashion landscape",
+      image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400"
+    }
+  ]
+};
+
+
+export   const mockOrders = [
+  {
+    id: "ORD-001",
+    date: "2024-03-15",
+    status: "Delivered",
+    items: [
+      {
+        name: "Wireless Headphones",
+        price: 129.99,
+        image:
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200",
+      },
+    ],
+    total: 129.99,
+  },
+  {
+    id: "ORD-002",
+    date: "2024-03-10",
+    status: "In Transit",
+    items: [
+      {
+        name: "Smart Watch",
+        price: 299.99,
+        image:
+          "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200",
+      },
+    ],
+    total: 299.99,
   },
 ];

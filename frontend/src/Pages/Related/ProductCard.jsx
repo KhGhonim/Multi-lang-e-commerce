@@ -33,6 +33,7 @@ export default function ProductCard({
         <img
           className="w-full h-72 object-cover object-center"
           src={img}
+          loading="lazy"
           alt={alt}
         />
       </Link>

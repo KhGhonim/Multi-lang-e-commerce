@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, useTheme } from "@mui/material";
+import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 
 export default function RelatedSearch() {
   const [searchParams] = useSearchParams();
@@ -29,11 +30,17 @@ export default function RelatedSearch() {
     };
     fetchData();
   }, [SearchValue]);
+  const theme = useTheme().palette.mode;
+  const pathname = useLocation().pathname;
 
   return (
     <div className="container mx-auto py-10 p-4">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-medium text-gray-800">
+        <h1
+          className={`text-3xl font-medium ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+          }`}
+        >
           Search Results for{" "}
           <span className="font-bold capitalize">{SearchValue} </span>
         </h1>
@@ -57,6 +64,10 @@ export default function RelatedSearch() {
             />
           ))}
         </div>
+      )}
+
+{pathname === "/login" || pathname === "/register" ? null : (
+        <PhoneNavbar />
       )}
     </div>
   );

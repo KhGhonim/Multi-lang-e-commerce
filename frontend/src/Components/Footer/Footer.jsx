@@ -1,10 +1,9 @@
 import { useForm } from "@formspree/react";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Lottie from "lottie-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import groovyWalkAnimation from "../loading/Email Recieved.json";
-import { useTranslation } from "react-i18next";
+import Logo from "Components/Logo/Logo";
 function Footer() {
   const [state, handleSubmit] = useForm("mvgpbyob");
   const [showForm, setShowForm] = useState(true);
@@ -19,21 +18,12 @@ function Footer() {
     }
   }, [state.succeeded]);
 
-  const {t} = useTranslation()
   return (
     <footer className="bg-[#283445] text-white">
       <div className="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex justify-center text-white sm:justify-start">
-            <div className="logo">
-              <Link
-                className="flex flex-col justify-center items-center"
-                to={"/"}
-              >
-                <ShoppingCartIcon />
-              {t("Khaled's E-Commerce")}
-              </Link>
-            </div>
+            <Logo />
           </div>
 
           <p className="mt-4 max-w-md text-center leading-relaxed text-white sm:text-left lg:mt-0">

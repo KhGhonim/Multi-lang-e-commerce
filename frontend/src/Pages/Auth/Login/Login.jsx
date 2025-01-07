@@ -3,25 +3,26 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLogIn from "Hooks/useLogIn";
 import { FaSpinner } from "react-icons/fa6";
+import { useState } from "react";
 
 export default function Login() {
   const theme = useTheme().palette.mode;
+  const [IsItPw, setIsItPw] = useState("password");
   const { handlesubmit, setemail, setpassword, loading } = useLogIn();
   const { t } = useTranslation();
-
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-100">
       <div
-        className={`w-full max-w-md p-8 space-y-8 bg-card rounded-lg shadow-lg  ${
+        className={`w-full max-w-md p-8 space-y-8 bg-card rounded-lg shadow-lg bg-white  ${
           theme === "dark" ? "border-2 border-white" : "shadow-lg"
         }`}
       >
-        <div className="text-center">
+        <div className="text-center text-black">
           <h2 className="mt-6 text-3xl font-extrabold">
             {t("Sign in to your account")}
           </h2>
         </div>
-        <form onSubmit={handlesubmit} className="mt-8 space-y-6">
+        <form onSubmit={handlesubmit} className="mt-8 space-y-6 text-black">
           <div className="rounded-md shadow-sm space-y-4 text-black">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -38,7 +39,7 @@ export default function Login() {
                 placeholder={t("Email address")}
               />
             </div>
-            <div>
+            <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
@@ -46,12 +47,23 @@ export default function Login() {
                 id="password"
                 name="password"
                 onChange={(eo) => setpassword(eo.target.value)}
-                type="password"
+                type={IsItPw === "password" ? "password" : "text"}
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder={t("Password")}
               />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                <button
+                  onClick={() =>
+                    setIsItPw(IsItPw === "password" ? "text" : "password")
+                  }
+                  type="button"
+                  className="focus:outline-none"
+                >
+                  {IsItPw === "password" ? "Show" : "Hide"}
+                </button>
+              </div>
             </div>
           </div>
           <div className="w-full flex flex-col md:flex-row space-y-2 justify-between items-center ">

@@ -17,13 +17,13 @@ export default function SignUp() {
     loading,
   } = useRegister();
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+    <div className="min-h-screen flex items-center bg-gray-100 justify-center bg-background text-foreground">
       <div
-        className={`max-w-md w-full space-y-8 p-10  rounded-lg  ${
+        className={`max-w-md w-full space-y-8 p-10 bg-white rounded-lg  ${
           theme === "dark" ? "border-2 border-white" : "shadow-lg"
         }`}
       >
-        <div className="text-center">
+        <div className="text-center text-black">
           <h2 className="mt-6 text-3xl font-extrabold">{t("Sign up")}</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {t("Create a new account")}
@@ -96,12 +96,7 @@ export default function SignUp() {
           </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <Link
-                to="ForgetPassword"
-                className={`font-medium ${
-                  theme === "dark" ? "text-white" : "text-black"
-                } `}
-              >
+              <Link to="ForgetPassword" className={`font-medium text-black `}>
                 {t("Forgot your password?")}
               </Link>
             </div>
@@ -122,7 +117,7 @@ export default function SignUp() {
             </button>
           </div>
         </form>
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-center text-sm text-muted-foreground text-black">
           {t("Already have an account?")}
           <Link
             to="/login"
