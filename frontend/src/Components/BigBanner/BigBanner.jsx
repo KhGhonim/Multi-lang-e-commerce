@@ -32,19 +32,16 @@ const childVariants = {
 export default function BigBanner() {
   const theme = useTheme().palette.mode;
   const BannerHook = useRef(null);
-  const IsInView = useInView(BannerHook);
+  const IsInView = useInView(BannerHook, { once: true });
 
   const { t } = useTranslation();
   return (
-    <div className="w-full h-dvh relative overflow-hidden">
-      <img
-        src="https://images.news18.com/ibnlive/uploads/2021/06/1624945730_featured-image-2021-06-29t111724.512.jpg"
-        alt=""
-        className="w-full h-full object-cover"
-      />
+    <div className="relative w-full h-[32rem] bg-cover bg-fixed bg-center bg-[url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
+
       <div
         ref={BannerHook}
-        className="w-full absolute inset-0 bg-gradient-to-b from-transparent to-black "
+        className="absolute inset-0 flex flex-col justify-center items-center text-center p-10 z-40"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -52,28 +49,38 @@ export default function BigBanner() {
             initial="hidden"
             exit="exit"
             animate={IsInView ? "visible" : "hidden"}
-            className={`absolute max-md:top-1/3 max-md:w-auto top-1/2 left-0 right-0 -translate-y-1/2   p-8 w-1/2     text-text bg-white/80  rounded-xl z-40 ${
-              theme === "dark" ? "text-black" : "text-black"
+            className={`p-8 bg-white/70 rounded-3xl shadow-lg backdrop-blur-sm ${
+              theme === "dark" ? "text-gray-800" : "text-gray-900"
             }`}
           >
-            <motion.div variants={childVariants}>
-              <h1 className="text-3xl font-bold">What is Lorem Ipsum?</h1>
-              <p className="text-base">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </motion.div>
+            <motion.h1
+              variants={childVariants}
+              className="text-5xl font-extrabold leading-tight tracking-wide mb-4"
+            >
+              Discover the New Collection
+            </motion.h1>
+            <motion.p
+              variants={childVariants}
+              className="text-lg mb-6 text-gray-700"
+            >
+              Explore our latest designs for an exceptional shopping experience.
+              Stay trendy with exclusive offers!
+            </motion.p>
             <motion.div
               variants={childVariants}
-              className="flex justify-end items-center"
+              className="flex justify-center items-center space-x-4"
             >
               <Link
-                className=" bg-gray-600 text-white rounded-lg px-4 py-2 mt-4  w-32"
+                className="px-6 py-3 bg-orange-500 text-white rounded-full font-semibold shadow-lg hover:bg-orange-600 transition-all duration-300 ease-in-out"
+                to={"/shop"}
+              >
+                {t("Shop Now")}
+              </Link>
+              <Link
+                className="px-6 py-3 bg-gray-700 text-white rounded-full font-semibold shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out"
                 to={"/search"}
               >
-              {t("Read More")}
+                {t("Learn More")}
               </Link>
             </motion.div>
           </motion.div>

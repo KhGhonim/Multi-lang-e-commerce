@@ -9,7 +9,6 @@ import { useLocation } from "react-router-dom";
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [email, setEmail] = useState("");
 
   const filteredArticles = selectedCategory
     ? mockArticles.filter((article) => article.category === selectedCategory)
@@ -32,7 +31,7 @@ export default function BlogPage() {
       <Influencers />
 
       {/* Newsletter Section */}
-      <Newsletter email={email} setEmail={setEmail} />
+      <Newsletter  />
 
       {pathname === "/login" || pathname === "/register" ? null : (
         <PhoneNavbar />

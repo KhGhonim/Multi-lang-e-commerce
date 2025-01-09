@@ -385,20 +385,21 @@ export const SliderArray4 = [
 
 export const menuItems = [
   {
-    title: 'Demo',
+    title: 'Admin',
+    IsAdmin: true,
     subItems: [
-      { title: 'Home v1', href: '/demo/home-1' },
-      { title: 'Home v2', href: '/demo/home-2' },
-      { title: 'Home v3', href: '/demo/home-3' },
+      { title: 'Inventory', href: '/admin/inventory' },
+      { title: 'Add Product', href: '/admin/add-product' },
+      { title: 'Orders', href: '/admin/orders' },
     ],
   },
   {
-    title: 'Shop',
+    title: 'Collections',
     subItems: [
-      { title: 'All Products', href: '/shop' },
-      { title: 'New Arrivals', href: '/shop/new-arrivals' },
-      { title: 'Best Sellers', href: '/shop/best-sellers' },
-      { title: 'Sale', href: '/shop/sale' },
+      { title: 'Summer Collection', href: '/search' },
+      { title: 'Autumn Collection', href: '/search' },
+      { title: 'New Arrivals', href: '/search' },
+      { title: 'Best Sellers', href: '/search' },
     ],
   },
   {
@@ -643,7 +644,7 @@ export const article = {
 };
 
 
-export   const mockOrders = [
+export const mockOrders = [
   {
     id: "ORD-001",
     date: "2024-03-15",

@@ -5,12 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { SetDirection } from "../.././../../Redux/userSlice";
 
-export default function MenuItem({ Icon, subItems, title }) {
+export default function MenuItem({ Icon, subItems, title, onClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState(
     localStorage.getItem("kg-commerce") || "en"
   );
-
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -54,7 +53,12 @@ export default function MenuItem({ Icon, subItems, title }) {
           isOpen ? "max-h-[500px]" : "max-h-0"
         }`}
       >
-        <div className="bg-gray-50 py-1">
+        <div
+          onClick={(event) => {
+            onClick(event);
+          }}
+          className="bg-gray-50 py-1"
+        >
           {subItems.map((item, index) => (
             <Link
               key={index}

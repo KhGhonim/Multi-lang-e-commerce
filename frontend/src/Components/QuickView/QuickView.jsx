@@ -16,7 +16,7 @@ export default function QuickView({ product, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 ">
-      <div className="bg-white rounded-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto relative">
+      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[80vh] overflow-y-auto relative">
         <button
           onClick={onClose}
           className="absolute right-4 top-4 z-10 rounded-full p-2 bg-black text-white hover:bg-gray-600 transition-all ease-in-out duration-300"
@@ -26,7 +26,7 @@ export default function QuickView({ product, onClose }) {
 
         <div className="grid md:grid-cols-2 gap-0">
           {/* Image Section */}
-          <div className="relative aspect-square">
+          <div className="relative p-6">
             <img
               src={product.img}
               alt={product.name}

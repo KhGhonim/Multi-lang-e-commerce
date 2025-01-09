@@ -10,7 +10,6 @@ import {
   CompareArrows,
   FavoriteBorderOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { CircularProgress, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCompare, addToMyFavorites } from "../../Redux/userSlice";
@@ -55,6 +54,14 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
 
   const handleMouseEnter = (index) => setHoveredItem(index);
   const handleMouseLeave = () => setHoveredItem(null);
+
+  const handleCardClick = (index) => {
+    if (hoveredItem === index) {
+      setHoveredItem(null);
+    } else {
+      setHoveredItem(index);
+    }
+  };
   return (
     <div className="w-full h-full p-8">
       <h1
@@ -101,6 +108,7 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
               key={index}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
+              onClick={() => handleCardClick(index)}
               className="w-full h-full shadow-lg rounded-lg relative group"
             >
               <AnimatePresence>
@@ -172,10 +180,7 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
                 )}
               </AnimatePresence>
 
-              <Link
-                className="w-full h-full rounded-lg overflow-hidden flex flex-col relative"
-                to={`ProductDetails/${Slider.id}`}
-              >
+              <div className="w-full h-full rounded-lg overflow-hidden flex flex-col relative">
                 <div className="w-full h-80 md:h-full">
                   <img
                     className="w-full h-full md:!h-60 object-fill"
@@ -221,7 +226,7 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
                     {t("Buy More Pay Less")}
                   </button>
                 </div>
-              </Link>
+              </div>
             </SwiperSlide>
           ))}
 

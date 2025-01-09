@@ -17,6 +17,10 @@ import { RiEnglishInput } from "react-icons/ri";
 import { TbAlphabetArabic, TbLogs } from "react-icons/tb";
 import { FaTurkishLiraSign } from "react-icons/fa6";
 import { GiEgyptianProfile } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
+import { Logout } from "@mui/icons-material";
+import useLogOut from "../../../../Hooks/useLogOut";
+import { signOut } from "../../../../Redux/userSlice";
 
 export default function MobileDrawer({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState("menu");
@@ -27,6 +31,14 @@ export default function MobileDrawer({ isOpen, onClose }) {
       onClose();
     }
   };
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+  const dispatch = useDispatch();
+  const { HandleSignOut } = useLogOut();
+  const HandlerSignOut = () => {
+    HandleSignOut();
+    dispatch(signOut());
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -35,7 +47,6 @@ export default function MobileDrawer({ isOpen, onClose }) {
     };
   }, []);
   const theme = useTheme().palette.mode;
-
   return (
     <>
       {/* Overlay */}
@@ -66,9 +77,26 @@ export default function MobileDrawer({ isOpen, onClose }) {
         <div className="overflow-y-auto h-[calc(100%-7rem)]">
           {activeTab === "menu" ? (
             <div className="py-2">
-              {menuItems.map((item, index) => (
-                <MenuItem Icon={undefined} key={index} {...item} />
-              ))}
+              {menuItems
+                .filter((item) => {
+                  if (item.IsAdmin && user.currentUser?.user.isAdmin)
+                    return true;
+                  if (!item.IsAdmin && user.currentUser) {
+                    return true;
+                  }
+                  if (!item.IsAdmin && !user.currentUser) {
+                    return true;
+                  }
+                  return false;
+                })
+                .map((item, index) => (
+                  <MenuItem
+                    onClick={handleClickOutside}
+                    Icon={undefined}
+                    key={index}
+                    {...item}
+                  />
+                ))}
               <div className=" pt-2">
                 <Link
                   className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
@@ -77,13 +105,15 @@ export default function MobileDrawer({ isOpen, onClose }) {
                   <TbLogs className="w-5 h-5" />
                   <span>Blog</span>
                 </Link>
-                <Link
-                  className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
-                  to={"/profile"}
-                >
-                  <GiEgyptianProfile className="w-5 h-5" />
-                  <span>Profile</span>
-                </Link>
+                {user.currentUser && (
+                  <Link
+                    className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    to={"/profile"}
+                  >
+                    <GiEgyptianProfile className="w-5 h-5" />
+                    <span>Profile</span>
+                  </Link>
+                )}
                 <Link
                   className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
                   to={"/whishlist"}
@@ -98,24 +128,26 @@ export default function MobileDrawer({ isOpen, onClose }) {
                   <CiSearch className="w-5 h-5" />
                   <span>Search</span>
                 </Link>
-                <Link
-                  className="w-full px-4 py-3 font-light  border-b text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
-                  to={"/login"}
-                >
-                  <CiUser className="w-5 h-5" />
-                  <span>Login/ Register</span>
-                </Link>
-                <div className="flex flex-col pb-2">
+                {!user.currentUser && (
+                  <Link
+                    className="w-full px-4 py-3 font-light  border-b text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    to={"/login"}
+                  >
+                    <CiUser className="w-5 h-5" />
+                    <span>Login/ Register</span>
+                  </Link>
+                )}
+                <div className="flex flex-col py-3">
                   <h1 className="px-5 py-3 font-bold">Need help?</h1>
                   <Link
-                    className="w-full px-7 py-1 font-light  text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
+                    className="w-full px-7 py-1 font-light  text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
                     to={"callto:905116888908"}
                   >
                     <CiPhone className="w-5 h-5" />
                     <span>+90 5116888908</span>
                   </Link>
                   <Link
-                    className="w-full px-7 py-1 font-light text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
+                    className="w-full px-7 py-1 font-light text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
                     to={"mailto:kg@khaledghonim.com"}
                   >
                     <CiMail className="w-5 h-5" />
@@ -151,6 +183,7 @@ export default function MobileDrawer({ isOpen, onClose }) {
                     title={item.title}
                     subItems={item.subItems}
                     Icon={item.Icon}
+                    onClick={handleClickOutside}
                   />
                 ))}
               </div>
@@ -161,6 +194,16 @@ export default function MobileDrawer({ isOpen, onClose }) {
                 <CategoryItem key={index} item={category} />
               ))}
             </div>
+          )}
+          {user.currentUser && (
+            <Link
+              onClick={HandlerSignOut}
+              className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+              to={"/login"}
+            >
+              <Logout className="w-5 h-5" />
+              <span>Log out</span>
+            </Link>
           )}
         </div>
       </div>
