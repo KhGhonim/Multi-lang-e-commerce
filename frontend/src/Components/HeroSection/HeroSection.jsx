@@ -8,7 +8,7 @@ function HeroSection() {
   return (
     <div className="w-full h-full  pt-3 overflow-hidden">
       <section className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full px-4">
-        <div className="hidden lg:grid grid-cols-1 gap-4">
+        <div className="hidden md:grid grid-cols-1 gap-4">
           <div className="relative h-80 md:h-96  overflow-hidden rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out">
             <HeroSectionSlider
               SliderArray={SliderArray1}

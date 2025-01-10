@@ -24,34 +24,32 @@ export default function SearchTemplate({
     }
   };
   return (
-    <div
-      key={`${key}-${id}`}
-      className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow"
+<div
+  key={`${key}-${id}`}
+  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200"
+>
+  <Link to={`/ProductDetails/${id}`} className="block">
+    <img
+      src={img}
+      alt={name}
+      className="rounded-t-lg w-full h-64 object-cover"
+    />
+  </Link>
+  <div className="p-4">
+    <h3 className="text-xl font-bold text-gray-800 truncate">{name}</h3>
+    <p className="text-sm text-gray-500 mt-1 line-clamp-2">{description}</p>
+  </div>
+  <div className="p-4 flex justify-between items-center border-t border-gray-100">
+    <p className="text-lg font-semibold text-black">${price}</p>
+    <button
+      type="button"
+      onClick={CartHandler}
+      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-md shadow-sm transition-all duration-200"
     >
-      <div className="block">
-        <Link to={`/ProductDetails/${id}`}>
-          <img
-            src={img}
-            alt={name}
-            className="rounded-t-md w-full h-72 object-cover"
-          />
-        </Link>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2">{name}</h3>
-          <p className="text-sm text-gray-600">{description}</p>
-        </div>
-        <div className="p-4 flex justify-between items-center">
-          <p className="text-sm text-black font-bold">${price}</p>
+      Add to Cart
+    </button>
+  </div>
+</div>
 
-          <button
-            type="button"
-            onClick={CartHandler}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
-          >
-            Add to cart
-          </button>
-        </div>
-      </div>
-    </div>
   );
 }

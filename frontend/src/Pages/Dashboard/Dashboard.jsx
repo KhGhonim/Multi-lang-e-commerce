@@ -23,6 +23,7 @@ import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 import useGetAllProducts from "../../Hooks/useGetAllProducts";
 import { FaSpinner } from "react-icons/fa6";
 import { ToastContainer } from "react-toastify";
+import FirstHeroSection from "Components/FirstHeroSection/FirstHeroSection";
 
 function Dashboard() {
   const theme = useTheme();
@@ -49,7 +50,7 @@ function Dashboard() {
             theme.palette.backGround.main,
         }}
       >
-        <HeroSection />
+        <FirstHeroSection />
         {loading ? (
           <div className="flex w-full h-full items-center justify-center">
             <FaSpinner className="animate-spin" />
@@ -76,6 +77,7 @@ function Dashboard() {
             setQuickViewProduct={setQuickViewProduct}
           />
         )}
+        <HeroSection/>
         <IconsSeaction />
         <ProductsBanners banner={fourthBanner} />
         <ProductsBanners banner={fifthBanner} />
@@ -94,6 +96,7 @@ function Dashboard() {
           />
         )}
         <CallToAction />
+        
         <ProductsBanners banner={firstBanner} />
         <ProductsBanners banner={secondBanner} />
         {loading ? (

@@ -60,7 +60,7 @@ export default function MobileDrawer({ isOpen, onClose }) {
       {/* Drawer */}
       <div
         ref={ref}
-        className={`fixed top-0 left-0 h-full w-80 ${
+        className={`fixed top-0 h-full w-80 left-0 ${
           theme === "dark" ? "bg-[#121212] text-white" : "bg-white text-black"
         } shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -79,14 +79,9 @@ export default function MobileDrawer({ isOpen, onClose }) {
             <div className="py-2">
               {menuItems
                 .filter((item) => {
-                  if (item.IsAdmin && user.currentUser?.user.isAdmin)
-                    return true;
-                  if (!item.IsAdmin && user.currentUser) {
-                    return true;
-                  }
-                  if (!item.IsAdmin && !user.currentUser) {
-                    return true;
-                  }
+                  if (item.IsAdmin && user.currentUser?.user.isAdmin) return true;
+                  if (!item.IsAdmin && user.currentUser) return true;
+                  if (!item.IsAdmin && !user.currentUser) return true;
                   return false;
                 })
                 .map((item, index) => (
@@ -95,89 +90,83 @@ export default function MobileDrawer({ isOpen, onClose }) {
                     Icon={undefined}
                     key={index}
                     {...item}
+                    
                   />
                 ))}
-              <div className=" pt-2">
+
+              <div className="pt-2">
                 <Link
-                  className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                  className={`w-full px-4 font-light border-b py-3 text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                   to={"/blog"}
                 >
-                  <TbLogs className="w-5 h-5" />
-                  <span>Blog</span>
+                  <TbLogs className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                  <span>{user.direction === 'rtl' ? 'مدونة' : 'Blog'}</span>
                 </Link>
+
                 {user.currentUser && (
                   <Link
-                    className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    className={`w-full px-4 font-light border-b py-3 text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                     to={"/profile"}
                   >
-                    <GiEgyptianProfile className="w-5 h-5" />
-                    <span>Profile</span>
+                    <GiEgyptianProfile className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                    <span>{user.direction === 'rtl' ? 'الملف الشخصي' : 'Profile'}</span>
                   </Link>
                 )}
+
                 <Link
-                  className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                  className={`w-full px-4 font-light border-b py-3 text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                   to={"/whishlist"}
                 >
-                  <CiHeart className="w-5 h-5" />
-                  <span>Wishlist</span>
+                  <CiHeart className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                  <span>{user.direction === 'rtl' ? 'قائمة الرغبات' : 'Wishlist'}</span>
                 </Link>
+
                 <Link
-                  className="w-full px-4 py-3 font-light  border-b text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                  className={`w-full px-4 py-3 font-light border-b text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                   to={"/search"}
                 >
-                  <CiSearch className="w-5 h-5" />
-                  <span>Search</span>
+                  <CiSearch className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                  <span>{user.direction === 'rtl' ? 'بحث' : 'Search'}</span>
                 </Link>
+
                 {!user.currentUser && (
                   <Link
-                    className="w-full px-4 py-3 font-light  border-b text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    className={`w-full px-4 py-3 font-light border-b text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                     to={"/login"}
                   >
-                    <CiUser className="w-5 h-5" />
-                    <span>Login/ Register</span>
+                    <CiUser className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                    <span>{user.direction === 'rtl' ? 'تسجيل الدخول / التسجيل' : 'Login/ Register'}</span>
                   </Link>
                 )}
+
                 <div className="flex flex-col py-3">
-                  <h1 className="px-5 py-3 font-bold">Need help?</h1>
+                  <h1 className={`px-5 py-3 font-bold text-${user.direction === 'rtl' ? 'right' : 'left'}`}>{user.direction === 'rtl' ? 'محتاج مساعدة؟' : 'Need help?'}</h1>
                   <Link
-                    className="w-full px-7 py-1 font-light  text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    className={`w-full px-7 py-1 font-light text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                     to={"callto:905116888908"}
                   >
-                    <CiPhone className="w-5 h-5" />
-                    <span>+90 5116888908</span>
+                    <CiPhone className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                    <span>{user.direction === 'rtl' ? '+90 5116888908' : '+90 5116888908'}</span>
                   </Link>
+
                   <Link
-                    className="w-full px-7 py-1 font-light text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+                    className={`w-full px-7 py-1 font-light text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
                     to={"mailto:kg@khaledghonim.com"}
                   >
-                    <CiMail className="w-5 h-5" />
+                    <CiMail className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
                     <span>kg@khaledghonim.com</span>
                   </Link>
                 </div>
 
-                {[
-                  {
-                    title: "Language",
-                    Icon: <CiGlobe />,
-                    subItems: [
-                      {
-                        title: "English",
-                        Icon: <RiEnglishInput />,
-                        value: "en",
-                      },
-                      {
-                        title: "Arabic",
-                        Icon: <TbAlphabetArabic />,
-                        value: "ar",
-                      },
-                      {
-                        title: "Turkish",
-                        Icon: <FaTurkishLiraSign />,
-                        value: "tr",
-                      },
-                    ],
-                  },
-                ].map((item, index) => (
+                {[{
+                  title: "Language",
+                  Icon: <CiGlobe />,
+                  subItems: [
+                    { title: "English", Icon: <RiEnglishInput />, value: "en" },
+                    { title: "Arabic", Icon: <TbAlphabetArabic />, value: "ar" },
+                    { title: "Turkish", Icon: <FaTurkishLiraSign />, value: "tr" }
+                  ]
+                }].map((item, index) => (
                   <MenuItem
                     key={index}
                     title={item.title}
@@ -195,14 +184,15 @@ export default function MobileDrawer({ isOpen, onClose }) {
               ))}
             </div>
           )}
+
           {user.currentUser && (
             <Link
               onClick={HandlerSignOut}
-              className="w-full px-4 font-light  border-b py-3 text-left hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2"
+              className={`w-full px-4 font-light border-b py-3 text-${user.direction === 'rtl' ? 'right' : 'left'} hover:bg-gray-50 hover:text-black transition-colors flex items-center gap-2`}
               to={"/login"}
             >
-              <Logout className="w-5 h-5" />
-              <span>Log out</span>
+              <Logout className={`w-5 h-5 ${user.direction === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+              <span>{user.direction === 'rtl' ? 'تسجيل الخروج' : 'Log out'}</span>
             </Link>
           )}
         </div>
