@@ -39,7 +39,7 @@ export default function Suggestions() {
             spaceBetween: 30,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 30,
           },
         }}
@@ -47,7 +47,7 @@ export default function Suggestions() {
         className="mySwiper relative"
       >
         {loading ? (
-          <div className="flex w-full h-full items-center justify-center">
+          <div className="flex w-full h-96 items-center justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : (
@@ -64,7 +64,7 @@ export default function Suggestions() {
                 <h4 className="text-xl font-semibold text-gray-900 my-2">
                   {product.name}
                 </h4>
-                <div className="flex items-center mb-2">
+                <div className="flex justify-center items-center w-full mb-2">
                   <div className="text-yellow-400 flex">
                     {[...Array(5)].map((_, i) => (
                       <FaStar
@@ -87,13 +87,15 @@ export default function Suggestions() {
                 <p className="text-2xl font-bold text-blue-600 mb-4">
                   ${product.price}
                 </p>
-                <button
-                  onClick={() => AddToCartHandler(product)}
-                  className="w-56 flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-colors"
-                >
-                  <FaShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
-                </button>
+                <div className="flex justify-center w-full">
+                  <button
+                    onClick={() => AddToCartHandler(product)}
+                    className="w-56 flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 transition-colors"
+                  >
+                    <FaShoppingCart className="w-5 h-5 mr-2" />
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </SwiperSlide>
           ))

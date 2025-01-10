@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import CountUp, { useCountUp } from "react-countup";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -40,6 +41,9 @@ export default function TotalCustomers() {
   const Total = useRef(null);
   const IsInView = useInView(Total);
   const {t } = useTranslation()
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+
   return (
     <section className="p-6 my-6 text-gray-800 z-50">
       <AnimatePresence mode="wait">
@@ -55,7 +59,7 @@ export default function TotalCustomers() {
             variants={childVariants}
             className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-50 text-gray-800"
           >
-            <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600">
+            <div className={`flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600 ${user.direction === "rtl" ? "ml-4" : "mr-4"}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -80,7 +84,7 @@ export default function TotalCustomers() {
             variants={childVariants}
             className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-50 text-gray-800"
           >
-            <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600">
+            <div className={`flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600 ${user.direction === "rtl" ? "ml-4" : "mr-4"}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -104,7 +108,7 @@ export default function TotalCustomers() {
             variants={childVariants}
             className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-50 text-gray-800"
           >
-            <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600">
+            <div className={`flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600 ${user.direction === "rtl" ? "ml-4" : "mr-4"}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -130,7 +134,7 @@ export default function TotalCustomers() {
             variants={childVariants}
             className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-50 text-gray-800"
           >
-            <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600">
+            <div className={`flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-orange-600 ${user.direction === "rtl" ? "ml-4" : "mr-4"}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"

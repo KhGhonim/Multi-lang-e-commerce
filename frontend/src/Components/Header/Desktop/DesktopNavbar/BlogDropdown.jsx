@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material";
 import { blogPosts } from "DB/db";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function BlogDropdown() {
@@ -15,10 +16,12 @@ export default function BlogDropdown() {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + blogPosts.length) % blogPosts.length);
   };
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
 
   return (
     <div
-      className={`absolute z-50 top-full right-1/2 transform translate-x-1/3 w-[1200px] ${
+      className={`absolute z-50 top-full ${user.direction === "ltr" ? "right-1/2 transform translate-x-1/3" : "left-1/2 transform -translate-x-1/3"}  w-[1200px] ${
         theme === "dark" ? "bg-[#131313] text-white" : "bg-white text-black"
       } shadow-lg rounded-b-xl`}
     >

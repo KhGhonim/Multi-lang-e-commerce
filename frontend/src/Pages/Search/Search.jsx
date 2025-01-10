@@ -175,7 +175,7 @@ export default function Search() {
                 placeholder="Search..."
               />
               <button
-                className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-gray-400  rounded-lg"
+                className="absolute left-1 top-1/2 transform -translate-y-1/2 border border-transparent p-1 bg-blue-400  rounded-lg"
                 aria-label="Search"
               >
                 <svg

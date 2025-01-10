@@ -3,12 +3,17 @@ import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 export default function HeroSectionSlider({ SliderArray, title }) {
   const { t } = useTranslation();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+
   return (
     <div>
       <Swiper
+        dir={`${user.direction === "rtl" ? "rtl" : "ltr"}`}
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{

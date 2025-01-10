@@ -4,6 +4,7 @@ import { useForm } from "@formspree/react";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "../loading/Email Recieved.json";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -37,6 +38,9 @@ export default function CallToAction() {
   const [state, handleSubmit] = useForm("mvgpbyob");
   const [showForm, setShowForm] = useState(true);
   const { t } = useTranslation();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+
   useEffect(() => {
     if (state.succeeded) {
       setShowForm(false);
@@ -84,12 +88,16 @@ export default function CallToAction() {
                     id="email"
                     required
                     placeholder="example@email.com"
-                    className="w-96 p-4 pr-16 text-black rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-96 p-4 pr-16 text-black rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                   <button
                     type="submit"
                     disabled={state.submitting}
-                    className="absolute top-0 bottom-0 right-0 p-3 text-sm font-semibold rounded-r-lg sm:w-1/3 bg-orange-600 text-gray-50"
+                    className={`absolute top-0 bottom-0 ${
+                      user.direction === "ltr"
+                        ? "right-0 rounded-r-full"
+                        : "left-0 rounded-l-full"
+                    } p-3 text-sm font-semibold sm:w-1/3 bg-orange-600 text-gray-50`}
                   >
                     {t("Subscribe")}
                   </button>

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import useTheme from "@mui/material/styles/useTheme";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function SearchBar() {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,6 +11,9 @@ export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
   const [fetchedSearchData, setFetchedSearchData] = useState([]);
   const theme = useTheme().palette.mode;
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+  const { t } = useTranslation();
 
   const fetchSearchData = async () => {
     setIsLoading(true);
@@ -41,10 +46,10 @@ export default function SearchBar() {
             : "bg-gray-200 focus-within:ring-gray-500 "
         } `}
       >
-        <CiSearch />
+        <CiSearch className={`${user.direction === "rtl" ? "absolute left-2" : "absolute right-2"}`} />
         <input
           type="text"
-          placeholder="Search..."
+          placeholder={t("Search")}
           className="bg-transparent flex-1 outline-none text-sm ml-2"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}

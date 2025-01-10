@@ -10,10 +10,10 @@ cloudinary.config({
 });
 
 // Cloudinary upload function using streams
-export const uploadStream = async (buffer, folder) => {
+export const uploadStream = async (buffer, folder ) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
-      { folder: folder }, 
+      { folder: folder, resource_type: 'auto' }, 
       (error, result) => {
         if (error) return reject(error);
         resolve(result);

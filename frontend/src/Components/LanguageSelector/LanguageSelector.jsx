@@ -31,6 +31,7 @@ export default function LanguageSelector() {
     i18n.changeLanguage(selectedLang);
     localStorage.setItem("kg-commerce", selectedLang);
     document.documentElement.dir = selectedLang === "ar" ? "rtl" : "ltr";
+    dispatch(SetDirection(selectedLang === "ar" ? "rtl" : "ltr"));
     setIsOpened(false);
   };
 

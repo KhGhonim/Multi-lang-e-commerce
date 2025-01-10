@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToBasket, addToMyFavorites } from "../../Redux/userSlice";
 
 export default function QuickView({ product, onClose }) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
+
   const handleAddToCart = (product2) => {
-    dispatch(addToBasket(product2));
-    toast.success("Added to cart");
+    if (user.currentUser === null) {
+      toast.warning("Please login to add product to your Cart");
+    } else {
+      dispatch(addToBasket(product2));
+      toast.success("Added to cart");
+    }
   };
   if (product?.length === 0) return null;
 
@@ -52,7 +59,9 @@ export default function QuickView({ product, onClose }) {
               <div className="flex border rounded-md">
                 <button
                   className="px-3 py-1 border-r hover:bg-gray-100"
-                  onClick={() => setQuantity((prev) => prev - 1)}
+                  onClick={() =>
+                    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                  }
                 >
                   -
                 </button>

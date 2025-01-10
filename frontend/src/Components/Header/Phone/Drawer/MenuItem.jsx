@@ -29,6 +29,7 @@ export default function MenuItem({ Icon, subItems, title, onClick }) {
       i18n.changeLanguage(selectedLang);
       localStorage.setItem("kg-commerce", selectedLang);
       document.documentElement.dir = selectedLang === "ar" ? "rtl" : "ltr";
+      dispatch(SetDirection(selectedLang === "ar" ? "rtl" : "ltr"));
       setIsOpen(false);
     }
   };

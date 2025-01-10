@@ -1,40 +1,25 @@
 import { useTheme } from "@mui/material";
+import { featuredProducts } from "DB/db";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FaArrowRight } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function ProductDropdown() {
   const theme = useTheme().palette.mode;
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Summer Collection",
-      image:
-        "https://images.unsplash.com/photo-1596356453261-0d265ae2520a?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 2,
-      name: "New Arrivals",
-      image:
-        "https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 3,
-      name: "Best Sellers",
-      image:
-        "https://images.unsplash.com/photo-1477901492169-d59e6428fc90?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 4,
-      name: "Perfect For You",
-      image:
-        "https://plus.unsplash.com/premium_photo-1699973056972-499716bc0305?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  const { t } = useTranslation();
+
+  // @ts-ignore
+  const user = useSelector((state) => state.UserStore);
 
   return (
     <div
-      className={`absolute z-50 top-full left-1/2 transform -translate-x-1/3 w-[1200px] ${
+      className={`absolute z-50 top-full ${
+        user.direction === "rtl"
+          ? "right-1/2 transform translate-x-1/3"
+          : "left-1/2 transform -translate-x-1/3"
+      } w-[1200px] ${
         theme === "dark" ? "bg-[#131313] text-white" : "bg-white text-black"
       } shadow-lg rounded-b-xl`}
     >
@@ -42,52 +27,32 @@ export default function ProductDropdown() {
         {/* Categories */}
         <div className="col-span-1">
           <h3 className="font-semibold mb-4">Categories</h3>
-          <ul className="space-y-2">
-            <motion.li
-              whileHover={{ x: 3, transition: { duration: 0.2 } }}
-              className="w-full relative "
-            >
-              <Link
-                to="#"
-                className="hover:text-orange-500 flex items-center justify-between "
+          <ul className={`space-y-2 `}>
+            {["Women", "Men", "Accessories"].map((category, index) => (
+              <motion.li
+                key={index}
+                whileHover={{
+                  x: user.direction === "rtl" ? -3 : 3,
+                  transition: { duration: 0.2 },
+                }}
+                className="w-full relative"
               >
-                Women{" "}
-                <FaArrowRight
-                  className="absolute right-10  transition-all duration-200 ease-in-out"
-                  size={16}
-                />
-              </Link>
-            </motion.li>
-            <motion.li
-              whileHover={{ x: 3, transition: { duration: 0.2 } }}
-              className="w-full relative"
-            >
-              <Link
-                to="#"
-                className="hover:text-orange-500 flex items-center justify-between group"
-              >
-                Men{" "}
-                <FaArrowRight
-                  className="absolute right-10 transition-all duration-200 ease-in-out"
-                  size={16}
-                />
-              </Link>
-            </motion.li>
-            <motion.li
-              whileHover={{ x: 3, transition: { duration: 0.2 } }}
-              className="w-full relative"
-            >
-              <Link
-                to="#"
-                className="hover:text-orange-500 flex items-center justify-between group"
-              >
-                Accessories{" "}
-                <FaArrowRight
-                  className="absolute right-10 transition-all duration-200 ease-in-out"
-                  size={16}
-                />
-              </Link>
-            </motion.li>
+                <Link
+                  to="#"
+                  className="hover:text-orange-500 flex items-center justify-between group"
+                >
+                  {t(category)}
+                  <FaArrowRight
+                    className={`absolute ${
+                      user.direction === "rtl"
+                        ? "left-10 rotate-180"
+                        : "right-10"
+                    } transition-all duration-200 ease-in-out`}
+                    size={16}
+                  />
+                </Link>
+              </motion.li>
+            ))}
           </ul>
         </div>
 

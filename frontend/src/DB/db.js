@@ -700,3 +700,30 @@ export const AdminnavItems = [
   { path: '/admin/orders', icon: GiShoppingCart, label: 'Orders' },
   { path: '/admin/manage-orders', icon: FaClipboardList, label: 'Manage Orders' },
 ];
+
+export   const featuredProducts = [
+  {
+    id: 1,
+    name: "Summer Collection",
+    image:
+      "https://images.unsplash.com/photo-1596356453261-0d265ae2520a?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 2,
+    name: "New Arrivals",
+    image:
+      "https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 3,
+    name: "Best Sellers",
+    image:
+      "https://images.unsplash.com/photo-1477901492169-d59e6428fc90?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 4,
+    name: "Perfect For You",
+    image:
+      "https://plus.unsplash.com/premium_photo-1699973056972-499716bc0305?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
