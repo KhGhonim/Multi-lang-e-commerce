@@ -1,4 +1,5 @@
 
+import { LuLayoutDashboard } from "react-icons/lu";
 import addidas from "../Assets/adidas.webp";
 import armania from "../Assets/armania.webp";
 import defacto from "../Assets/defacto.webp";
@@ -6,6 +7,10 @@ import mango from "../Assets/mango.webp";
 import mavi from "../Assets/mavi.webp";
 import phones from "../Assets/phones.webp";
 import pijama from "../Assets/pijama.webp";
+import { FiPackage } from "react-icons/fi";
+import { BsPlusCircleFill } from "react-icons/bs";
+import { GiShoppingCart } from "react-icons/gi";
+import { FaClipboardList } from "react-icons/fa6";
 
 
 export const firstBanner = [
@@ -673,4 +678,25 @@ export const mockOrders = [
     ],
     total: 299.99,
   },
+];
+
+export const metrics = {
+  totalSales: '$24,567',
+  totalOrders: '156',
+  activeProducts: '89',
+  newCustomers: '34'
+};
+
+export const recentActivity = [
+  { id: 1, message: 'New order #1234 received', time: '2 minutes ago' },
+  { id: 2, message: 'Product "iPhone 13" stock updated', time: '15 minutes ago' },
+  { id: 3, message: 'Customer feedback received', time: '1 hour ago' },
+];
+
+export const AdminnavItems = [
+  { path: '/admin', icon: LuLayoutDashboard, label: 'Dashboard' },
+  { path: '/admin/inventory', icon: FiPackage, label: 'Inventory' },
+  { path: '/admin/add-product', icon: BsPlusCircleFill, label: 'Add Product' },
+  { path: '/admin/orders', icon: GiShoppingCart, label: 'Orders' },
+  { path: '/admin/manage-orders', icon: FaClipboardList, label: 'Manage Orders' },
 ];

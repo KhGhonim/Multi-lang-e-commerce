@@ -4,11 +4,7 @@ const { Schema, models } = mongoose;
 // Product Schema
 const ProductSchema = new Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
-    feature: {
+    name: {
       type: String,
       required: true,
     },
@@ -16,12 +12,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-
-    link: {
+    category: {
       type: String,
       required: true,
     },
-
     price: {
       type: String,
       required: true,

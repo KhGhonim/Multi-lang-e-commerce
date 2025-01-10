@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import SearchTemplate from "./SearchTemplate";
 import SearchFinalProducts from "./SearchFinalProducts";
 import { categories, priceRanges } from "DB/db";
-import { useLocation } from "react-router-dom";
 import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 
 const parentVariants = {
@@ -139,7 +138,6 @@ export default function Search() {
   }
 
   const result = Data();
-  const pathname = useLocation().pathname;
 
   return (
     <div
@@ -370,9 +368,7 @@ export default function Search() {
         </div>
       </div>
 
-      {pathname === "/login" || pathname === "/register" ? null : (
         <PhoneNavbar />
-      )}
     </div>
   );
 }

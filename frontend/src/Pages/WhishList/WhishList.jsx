@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToBasket, RemoveItemFromFav } from "../../Redux/userSlice";
 import QuickView from "Components/QuickView/QuickView";
+import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 
 export default function WhishList() {
   const [gridColumns, setGridColumns] = useState(3);
@@ -65,6 +66,8 @@ export default function WhishList() {
       </div>
 
       <QuickView product={QuickViewProduct} onClose={OnClose} />
+
+      <PhoneNavbar />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 import Comments from "../../Components/Comments/Comments";
@@ -51,7 +51,6 @@ export default function ProductDetails() {
       toast.success("Added to basket");
     }
   };
-  const pathname = useLocation().pathname;
 
   const { t } = useTranslation();
   return (
@@ -179,9 +178,7 @@ export default function ProductDetails() {
         />
       </div>
 
-      {pathname === "/login" || pathname === "/register" ? null : (
         <PhoneNavbar />
-      )}
     </div>
   );
 }

@@ -9,7 +9,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import ConsistOfDB from "../src/Components/ConsistOfDB/ConsistOfDB.jsx";
 import DesktopHeader from "Components/Header/Desktop/DesktopHeader";
 import PhoneHeader from "Components/Header/Phone/PhoneHeader";
-import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 function App() {
   const [mode, setMode] = useState(
     localStorage.getItem("currentTheme")
@@ -19,17 +18,16 @@ function App() {
 
   const pathname = useLocation().pathname;
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
   return (
     <ThemeProvider theme={theme}>
       <ConsistOfDB />
       <CssBaseline />
-      {pathname === "/login" || pathname === "/register" ? null : (
+      {pathname === "/login" || pathname === "/register" || pathname.includes("admin") ? null : (
         <DesktopHeader
           setMode={setMode}
         />
       )}
-      {pathname === "/login" || pathname === "/register" ? null : (
+      {pathname === "/login" || pathname === "/register" || pathname.includes("admin") ? null : (
         <PhoneHeader
           setMode={setMode}
         />
@@ -37,7 +35,10 @@ function App() {
 
       <Outlet />
       <ToastContainer />
-      <Footer />
+
+      {pathname.includes("admin") ? null : (
+        <Footer />
+      )}
     </ThemeProvider>
   );
 }

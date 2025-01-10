@@ -25,6 +25,12 @@ import WhishList from "Pages/WhishList/WhishList";
 import Compare from "Pages/Compare/Compare";
 import BlogPage from "Pages/BlogPage/BlogPage";
 import Article from "Pages/Article/Article";
+import AdminDashboard from "Pages/Admin/AdminDashboard/AdminDashboard";
+import Inventory from "Pages/Admin/Inventory/Inventory";
+import AddProduct from "Pages/Admin/AddProduct/AddProduct";
+import Orders from "Pages/Admin/Orders/Orders";
+import ManageOrders from "Pages/Admin/ManageOrders/ManageOrders";
+import AdminLayout from "Pages/Admin/AdminLayout/AdminLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +45,13 @@ const router = createBrowserRouter(
       <Route path="/RelatedSearch" element={<RelatedSearch />} />,
       <Route path="/compare" element={<Compare />} />,
       <Route path="/blog" element={<BlogPage />} />,
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="/admin/inventory" element={<Inventory />} />
+        <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/manage-orders" element={<ManageOrders />} />
+      </Route>
       <Route path="/article/:id" element={<Article />} />,
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
       <Route path="*" element={<ErrorPage />} />

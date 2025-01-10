@@ -13,7 +13,6 @@ import {
 } from "react-icons/fa6";
 import { FaShoppingBag } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
-import { useLocation } from "react-router-dom";
 import PhoneNavbar from "Components/Header/Phone/PhoneNavbar";
 import { mockOrders } from "DB/db";
 
@@ -37,7 +36,6 @@ export default function Profile() {
     { id: "settings", label: "Settings", icon: CiSettings },
   ];
 
-  const pathname = useLocation().pathname;
 
   return (
     <div className={`min-h-screen max-lg:py-12`}>
@@ -343,9 +341,7 @@ export default function Profile() {
           )}
         </div>
       </div>
-      {pathname === "/login" || pathname === "/register" ? null : (
         <PhoneNavbar />
-      )}
     </div>
   );
 }

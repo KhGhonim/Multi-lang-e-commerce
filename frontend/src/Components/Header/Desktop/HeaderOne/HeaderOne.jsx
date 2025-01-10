@@ -7,7 +7,7 @@ import { MdOutlinePersonOutline, MdOutlineShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RiLogoutCircleLine } from "react-icons/ri";
+import { RiAdminLine, RiLogoutCircleLine } from "react-icons/ri";
 import useLogOut from "Hooks/useLogOut";
 import { GoArrowSwitch } from "react-icons/go";
 import { useTheme } from "@mui/material";
@@ -26,7 +26,7 @@ export default function HeaderOne({ setMode }) {
     <div className="hidden lg:flex  py-4 w-full flex-row  items-center  px-6 relative">
       <SearchBar />
       <Logo />
-      <div className="flex flex-row w-1/5  items-center gap-4">
+      <div className="flex flex-row   items-center gap-4">
         <LanguageSelector />
         <DarkAndLightMode setMode={setMode} />
         {user.currentUser ? (
@@ -50,6 +50,13 @@ export default function HeaderOne({ setMode }) {
           <Link to="/profile" className="text-lg font-semibold">
             <motion.div whileHover={{ y: -3, transition: { duration: 0.2 } }}>
               <FaUserCog className="text-3xl cursor-pointer" />
+            </motion.div>
+          </Link>
+        )}
+        {user.currentUser?.user?.isAdmin && (
+          <Link to="/admin" className="text-lg font-semibold">
+            <motion.div whileHover={{ y: -3, transition: { duration: 0.2 } }}>
+              <RiAdminLine className="text-3xl cursor-pointer" />
             </motion.div>
           </Link>
         )}
