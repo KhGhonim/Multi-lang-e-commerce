@@ -66,7 +66,7 @@ export default function RelatedSearch() {
         </div>
       )}
 
-{pathname === "/login" || pathname === "/register" ? null : (
+      {pathname === "/login" || pathname === "/register" ? null : (
         <PhoneNavbar />
       )}
     </div>

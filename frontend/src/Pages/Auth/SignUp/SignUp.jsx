@@ -3,6 +3,7 @@ import useRegister from "Hooks/useRegister";
 import { useTranslation } from "react-i18next";
 import { FaSpinner } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export default function SignUp() {
   const theme = useTheme().palette.mode;
@@ -18,6 +19,7 @@ export default function SignUp() {
   } = useRegister();
   return (
     <div className="min-h-screen flex items-center bg-gray-100 justify-center bg-background text-foreground">
+      <ToastContainer />
       <div
         className={`max-w-md w-full space-y-8 p-10 bg-white rounded-lg  ${
           theme === "dark" ? "border-2 border-white" : "shadow-lg"

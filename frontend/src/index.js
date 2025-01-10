@@ -17,7 +17,6 @@ import SignUp from "../src/Pages/Auth/SignUp/SignUp";
 import Login from "../src/Pages/Auth/Login/Login";
 import Profile from "../src/Pages/Profile/Profile";
 import ShoppingCart from "../src/Pages/ShoppingCart/ShoppingCart";
-import ProductDetails from "../src/Pages/ProductDetails/ProductDetails";
 import Search from "../src/Pages/Search/Search";
 import RelatedSearch from "../src/Pages/Related/RelatedSearch";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
@@ -31,6 +30,7 @@ import AddProduct from "Pages/Admin/AddProduct/AddProduct";
 import Orders from "Pages/Admin/Orders/Orders";
 import ManageOrders from "Pages/Admin/ManageOrders/ManageOrders";
 import AdminLayout from "Pages/Admin/AdminLayout/AdminLayout";
+import NewProductDetails from "Pages/ProductDetails/NewProductDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,7 +53,7 @@ const router = createBrowserRouter(
         <Route path="/admin/manage-orders" element={<ManageOrders />} />
       </Route>
       <Route path="/article/:id" element={<Article />} />,
-      <Route path="/ProductDetails/:id" element={<ProductDetails />} />,
+      <Route path="/ProductDetails/:id" element={<NewProductDetails />} />,
       <Route path="*" element={<ErrorPage />} />
 
     </Route>

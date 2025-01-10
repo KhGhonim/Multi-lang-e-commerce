@@ -78,9 +78,9 @@ export default function Search() {
 
     const currentItems = PrdouctData.slice(indexOfFirstItem, indexOfLastItem);
 
-    return currentItems.map(({ img, name, description, price, id }) => (
+    return currentItems.map(({ img, name, description, price, _id }) => (
       <SearchTemplate
-        id={id}
+        id={_id}
         img={img}
         name={name}
         description={description}
@@ -171,7 +171,7 @@ export default function Search() {
                   className="form-radio accent-blue-500"
                   onChange={handlePriceChange}
                 />
-                <span>
+                <span className="text-gray-800">
                   {range.min === 0
                     ? `Under $${range.max}`
                     : `$${range.min} - $${range.max}`}

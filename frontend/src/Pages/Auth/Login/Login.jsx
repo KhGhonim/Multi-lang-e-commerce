@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import useLogIn from "Hooks/useLogIn";
 import { FaSpinner } from "react-icons/fa6";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 export default function Login() {
   const theme = useTheme().palette.mode;
@@ -12,6 +13,7 @@ export default function Login() {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-100">
+      <ToastContainer />
       <div
         className={`w-full max-w-md p-8 space-y-8 bg-card rounded-lg shadow-lg bg-white  ${
           theme === "dark" ? "border-2 border-white" : "shadow-lg"

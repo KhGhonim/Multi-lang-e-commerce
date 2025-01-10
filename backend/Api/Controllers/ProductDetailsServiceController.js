@@ -1,7 +1,7 @@
 import ProductModel from "../Models/ProductModel.js";
 
 export const ProductDetailsService = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.query;
 
   if (!id) {
     return res.status(400).json({
@@ -9,7 +9,7 @@ export const ProductDetailsService = async (req, res, next) => {
     });
   }
   try {
-    const product = await ProductModel.findOne({ id: id });
+    const product = await ProductModel.findById(id);
 
     if (!product) {
       return res.status(400).json({

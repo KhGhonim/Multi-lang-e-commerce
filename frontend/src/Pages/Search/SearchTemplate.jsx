@@ -4,7 +4,6 @@ import { addToBasket } from "../../Redux/userSlice";
 import { toast } from "react-toastify";
 
 export default function SearchTemplate({
-  key,
   id,
   img,
   name,
@@ -25,7 +24,6 @@ export default function SearchTemplate({
   };
   return (
 <div
-  key={`${key}-${id}`}
   className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200"
 >
   <Link to={`/ProductDetails/${id}`} className="block">

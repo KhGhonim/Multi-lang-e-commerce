@@ -6,7 +6,7 @@ import { uploadImage } from "../utils/Multer.js";
 import { deleteProductController } from "../Controllers/deleteProductController.js";
 const router = express.Router();
 
-router.get("/products/:id", ProductDetailsService);
+router.get("/product", ProductDetailsService);
 router.get("/products", ProductSlidersService);
 router.post("/addNewProduct", uploadImage, AddNewProductController);
 router.delete("/deleteProduct", deleteProductController);
