@@ -129,7 +129,6 @@ export default function NewProductDetails() {
                   <span className="text-sm text-gray-600">(128 reviews)</span>
                 </div>
               </div>
-
               <div className="space-y-4">
                 <div className="flex items-baseline gap-4">
                   <span className="text-3xl font-bold"> ${data?.price}</span>
@@ -236,13 +235,7 @@ export default function NewProductDetails() {
                   <h2 className="text-2xl font-semibold mb-4">
                     Product Description
                   </h2>
-                  <p className="text-gray-700 mb-4">
-                    The SmartWatch Pro X1 combines elegant design with
-                    cutting-edge technology. This premium smartwatch features a
-                    vibrant AMOLED display, advanced health monitoring
-                    capabilities, and seamless connectivity with your
-                    smartphone.
-                  </p>
+                  <p className="text-gray-700 mb-4">{data?.description}</p>
                   <h3 className="text-xl font-semibold mb-2">Key Features</h3>
                   <ul className="list-disc pl-6 space-y-2 text-gray-700">
                     <li>1.4" AMOLED Display with Always-On feature</li>
@@ -258,9 +251,6 @@ export default function NewProductDetails() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-semibold">Customer Reviews</h2>
-                    <button className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                      Write a Review
-                    </button>
                   </div>
                   {[1, 2, 3].map((review) => (
                     <div
@@ -297,9 +287,6 @@ export default function NewProductDetails() {
                     <h2 className="text-2xl font-semibold">
                       Questions & Answers
                     </h2>
-                    <button className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                      Ask a Question
-                    </button>
                   </div>
                   <div className="space-y-4">
                     <div className="bg-white border rounded-lg p-4">
