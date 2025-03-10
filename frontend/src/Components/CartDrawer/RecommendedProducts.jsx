@@ -4,7 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 
-export default function RecommendedProducts({ slider }) {
+export default function RecommendedProducts({ slider, setIsCartOpen }) {
   return (
     <div className="px-4 py-6">
       <h3 className="text-xl font-bold mb-4">You may also like</h3>
@@ -21,27 +21,30 @@ export default function RecommendedProducts({ slider }) {
           },
         }}
       >
-        {slider?.map((product) => (
-          <SwiperSlide className="py-4 cursor-pointer" key={product._id}>
-            <div className="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <Link
-                className="relative group block w-full h-64"
-                to={`/ProductDetails/${product.id}`}
-              >
-                <img
-                  src={product.img}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </Link>
-              {/* Product Details */}
-              <div className="p-4 bg-white">
-                <h4 className="font-semibold text-xs">{product.name}</h4>
-                <p className="text-gray-600">${product.price}</p>
+        {slider?.map((product) => {
+          return (
+            <SwiperSlide className="py-4 cursor-pointer" key={product._id}>
+              <div className="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <Link
+                  className="relative group block w-full h-64"
+                  to={`/ProductDetails/${product._id}`}
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
+                {/* Product Details */}
+                <div className="p-4 bg-white">
+                  <h4 className="font-semibold text-xs">{product.name}</h4>
+                  <p className="text-gray-600">${product.price}</p>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

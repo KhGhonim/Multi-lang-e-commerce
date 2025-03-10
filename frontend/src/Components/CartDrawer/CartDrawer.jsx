@@ -108,7 +108,7 @@ export default function CartDrawer({ setIsCartOpen, IsCartOpen }) {
           </div>
 
           <CartActions />
-          <RecommendedProducts slider={slider} />
+          <RecommendedProducts setIsCartOpen={setIsCartOpen} slider={slider} />
 
           <div className="space-y-4 pt-6 border-t">
             <div className="flex justify-between items-center">
