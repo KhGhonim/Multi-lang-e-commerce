@@ -18,6 +18,7 @@ import { addToBasket } from "../../Redux/userSlice";
 import TabButton from "Components/ProductDetails/TabButton";
 import ProductHighlights from "Components/ProductDetails/ProductHighlights";
 import Magnifier from "react18-image-magnifier";
+import { useTheme } from "@mui/material";
 
 export default function NewProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -31,6 +32,7 @@ export default function NewProductDetails() {
   const { id } = useParams();
   // @ts-ignore
   const user = useSelector((state) => state.UserStore);
+  const theme = useTheme().palette.mode;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,7 +77,11 @@ export default function NewProductDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 max-lg:py-12">
+    <div
+      className={`min-h-screen bg-gray-50 max-lg:py-12 ${
+        theme === "dark" && "bg-gray-900"
+      }`}
+    >
       <ToastContainer />
       {loading ? (
         <div className="flex w-full h-dvh items-center justify-center">
@@ -112,7 +118,14 @@ export default function NewProductDetails() {
                 <span className="inline-block px-3 py-1 text-sm font-medium text-gray-800 bg-gray-100 rounded-full mb-4">
                   New Arrival
                 </span>
-                <h1 className="text-4xl font-bold mb-2"> {data?.name}</h1>
+                <h1
+                  className={`text-4xl font-bold mb-2 ${
+                    theme === "dark" && "text-white"
+                  }`}
+                >
+                  {" "}
+                  {data?.name}
+                </h1>
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, starIndex) => (
@@ -126,13 +139,23 @@ export default function NewProductDetails() {
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">(128 reviews)</span>
+                  <span
+                    className={`text-sm  ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    (128 reviews)
+                  </span>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-baseline gap-4">
                   <span className="text-3xl font-bold"> ${data?.price}</span>
-                  <span className="text-xl text-gray-500 line-through">
+                  <span
+                    className={`text-xl ${
+                      theme === "dark" && "text-gray-500"
+                    } line-through`}
+                  >
                     ${data?.fakePrice}
                   </span>
                   <span className="px-2 py-1 text-sm font-medium text-red-800 bg-red-100 rounded-full">
@@ -144,14 +167,22 @@ export default function NewProductDetails() {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center border rounded-md">
                     <button
-                      className="p-2 hover:bg-gray-100"
+                      className={`p-2 ${
+                        theme === "dark"
+                          ? "text-white hover:text-gray-400"
+                          : "text-gray-600 hover:text-gray-800"
+                      }`}
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     >
                       <FaMinus className="h-4 w-4" />
                     </button>
                     <span className="w-12 text-center">{quantity}</span>
                     <button
-                      className="p-2 hover:bg-gray-100"
+                      className={`p-2 ${
+                        theme === "dark"
+                          ? "text-white hover:text-gray-400"
+                          : "text-gray-600 hover:text-gray-800"
+                      }`}
                       onClick={() => setQuantity(quantity + 1)}
                     >
                       <FaPlus className="h-4 w-4" />
@@ -167,33 +198,48 @@ export default function NewProductDetails() {
                 </div>
 
                 {/* Share Button */}
-                <button className="w-full border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                <button
+                  className={`w-full border border-gray-300 px-6 py-3 rounded-lg ${
+                    theme === "dark"
+                      ? "text-white hover:bg-gray-100 hover:text-gray-700"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                  } transition-colors flex items-center justify-center gap-2`}
+                >
                   <FaShareAlt className="h-5 w-5" />
                   Share Product
                 </button>
 
                 {/* Shipping Info */}
-                <div className="bg-white rounded-lg shadow-sm p-4 mt-6">
+                <div
+                  className={`${
+                    theme === "dark"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white border border-gray-200"
+                  } rounded-lg shadow-sm p-4 mt-6`}
+                >
                   <div className="flex items-start gap-4">
-                    <FaTruck className="w-6 h-6 text-gray-500 flex-shrink-0" />
+                    <FaTruck className="w-6 h-6 text-gray-400 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold">Free Shipping</h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-400">
                         Estimated Shipping: Within {data?.lowestPriceInDays}{" "}
                         days
                       </p>
                     </div>
                   </div>
                 </div>
+
+                <ProductHighlights />
               </div>
             </div>
           </div>
 
-          {/* Product Highlights */}
-          <ProductHighlights />
-
           {/* Product Tabs */}
-          <div className="bg-white rounded-lg shadow-sm">
+          <div
+            className={` rounded-lg shadow-sm ${
+              theme === "dark" && "bg-gray-800 text-white"
+            }`}
+          >
             <div className="border-b">
               <div className="flex overflow-x-auto">
                 <TabButton
@@ -229,15 +275,31 @@ export default function NewProductDetails() {
               </div>
             </div>
 
-            <div className="p-6">
+            <div
+              className={`p-6 ${
+                theme === "dark"
+                  ? "bg-gray-900 text-gray-200"
+                  : "bg-white text-gray-900"
+              }`}
+            >
               {activeTab === "description" && (
                 <div className="prose max-w-none">
                   <h2 className="text-2xl font-semibold mb-4">
                     Product Description
                   </h2>
-                  <p className="text-gray-700 mb-4">{data?.description}</p>
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-300" : "text-gray-700"
+                    } mb-4`}
+                  >
+                    {data?.description}
+                  </p>
                   <h3 className="text-xl font-semibold mb-2">Key Features</h3>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-700">
+                  <ul
+                    className={`list-disc pl-6 space-y-2 ${
+                      theme === "dark" ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     <li>1.4" AMOLED Display with Always-On feature</li>
                     <li>Advanced heart rate and SpO2 monitoring</li>
                     <li>Water-resistant up to 50m</li>
@@ -255,7 +317,11 @@ export default function NewProductDetails() {
                   {[1, 2, 3].map((review) => (
                     <div
                       key={review}
-                      className="bg-white border rounded-lg p-4"
+                      className={`border rounded-lg p-4 ${
+                        theme === "dark"
+                          ? "bg-gray-800 border-gray-700"
+                          : "bg-white border-gray-300"
+                      }`}
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <div className="flex items-center">
@@ -267,11 +333,19 @@ export default function NewProductDetails() {
                           ))}
                         </div>
                         <span className="text-sm font-semibold">John Doe</span>
-                        <span className="text-sm text-gray-500">
+                        <span
+                          className={`${
+                            theme === "dark" ? "text-gray-400" : "text-gray-500"
+                          } text-sm`}
+                        >
                           • 2 days ago
                         </span>
                       </div>
-                      <p className="text-gray-700">
+                      <p
+                        className={`${
+                          theme === "dark" ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
                         Amazing smartwatch! The battery life is impressive and
                         the health tracking features are spot-on. Highly
                         recommended!
@@ -283,26 +357,44 @@ export default function NewProductDetails() {
 
               {activeTab === "qa" && (
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-semibold">
-                      Questions & Answers
-                    </h2>
-                  </div>
+                  <h2 className="text-2xl font-semibold mb-6">
+                    Questions & Answers
+                  </h2>
                   <div className="space-y-4">
-                    <div className="bg-white border rounded-lg p-4">
+                    <div
+                      className={`border rounded-lg p-4 ${
+                        theme === "dark"
+                          ? "bg-gray-800 border-gray-700"
+                          : "bg-white border-gray-300"
+                      }`}
+                    >
                       <p className="font-semibold mb-2">
                         Q: Is this watch compatible with iOS?
                       </p>
-                      <p className="text-gray-700">
+                      <p
+                        className={`${
+                          theme === "dark" ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
                         A: Yes, the SmartWatch Pro X1 is compatible with both
                         iOS and Android devices.
                       </p>
                     </div>
-                    <div className="bg-white border rounded-lg p-4">
+                    <div
+                      className={`border rounded-lg p-4 ${
+                        theme === "dark"
+                          ? "bg-gray-800 border-gray-700"
+                          : "bg-white border-gray-300"
+                      }`}
+                    >
                       <p className="font-semibold mb-2">
                         Q: What's the charging time?
                       </p>
-                      <p className="text-gray-700">
+                      <p
+                        className={`${
+                          theme === "dark" ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
                         A: The watch takes approximately 2 hours for a full
                         charge.
                       </p>
@@ -316,12 +408,20 @@ export default function NewProductDetails() {
                   <h2 className="text-2xl font-semibold mb-4">
                     Shipping Information
                   </h2>
-                  <p className="text-gray-700 mb-4">
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-300" : "text-gray-700"
+                    } mb-4`}
+                  >
                     We offer free standard shipping on all orders. Orders are
                     typically processed within 1-2 business days.
                   </p>
                   <h3 className="text-xl font-semibold mb-2">Returns Policy</h3>
-                  <p className="text-gray-700">
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     We accept returns within 30 days of delivery. The product
                     must be unused and in its original packaging.
                   </p>
@@ -335,11 +435,19 @@ export default function NewProductDetails() {
                       placeholder="Write a comment..."
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
-                      className="flex-1 min-h-[100px] p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+                      className={`flex-1 min-h-[100px] p-3 border rounded-lg focus:outline-none focus:ring-2 transition ${
+                        theme === "dark"
+                          ? "bg-gray-800 text-white border-gray-700 focus:ring-gray-500"
+                          : "bg-white text-black border-gray-300 focus:ring-gray-500"
+                      }`}
                     />
                     <button
                       onClick={handleAddComment}
-                      className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors h-fit"
+                      className={`px-6 py-2 rounded-lg transition-colors h-fit ${
+                        theme === "dark"
+                          ? "bg-gray-700 text-white hover:bg-gray-600"
+                          : "bg-gray-600 text-white hover:bg-gray-700"
+                      }`}
                     >
                       Post Comment
                     </button>
@@ -348,15 +456,29 @@ export default function NewProductDetails() {
                     {comments.map((comment) => (
                       <div
                         key={comment.id}
-                        className="bg-white border rounded-lg p-4"
+                        className={`border rounded-lg p-4 ${
+                          theme === "dark"
+                            ? "bg-gray-800 border-gray-700"
+                            : "bg-white border-gray-300"
+                        }`}
                       >
-                        <p className="text-gray-700 mb-3">{comment.text}</p>
+                        <p
+                          className={`${
+                            theme === "dark" ? "text-gray-300" : "text-gray-700"
+                          } mb-3`}
+                        >
+                          {comment.text}
+                        </p>
                         <div className="flex items-center gap-4">
                           <button
                             onClick={() => handleLikeComment(comment.id)}
                             className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors ${
                               comment.isLiked
-                                ? "text-gray-600 bg-gray-50"
+                                ? theme === "dark"
+                                  ? "text-gray-300 bg-gray-700"
+                                  : "text-gray-600 bg-gray-50"
+                                : theme === "dark"
+                                ? "text-gray-400 hover:bg-gray-700"
                                 : "text-gray-600 hover:bg-gray-100"
                             }`}
                           >
