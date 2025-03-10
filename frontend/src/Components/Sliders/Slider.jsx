@@ -103,132 +103,141 @@ export default function Slider({ Sliders, Headline, setQuickViewProduct }) {
               : `mySwiper bg-gradient-to-t from-zinc-50 to-zinc-200 z-40 `
           }`}
         >
-          {Sliders.map((Slider, index) => (
-            <SwiperSlide
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              onClick={() => handleCardClick(index)}
-              className="w-full h-full shadow-lg rounded-lg relative group"
-            >
-              <AnimatePresence>
-                {hoveredItem === index && (
-                  <motion.div
-                    onClick={() => FavHandler(Slider)}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute top-0 right-0 p-3 z-50"
-                  >
-                    <motion.span
-                      className="text-xs cursor-pointer group-hover:block"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+          {Sliders.map((Slider, index) => {
+            if (
+              Slider.img === null ||
+              !Slider.img ||
+              !Slider.img === undefined
+            ) {
+              return null;
+            }
+            return (
+              <SwiperSlide
+                key={index}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleCardClick(index)}
+                className="w-full h-full shadow-lg rounded-lg relative group"
+              >
+                <AnimatePresence>
+                  {hoveredItem === index && (
+                    <motion.div
+                      onClick={() => FavHandler(Slider)}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute top-0 right-0 p-3 z-50"
                     >
-                      <FavoriteBorderOutlined className="w-5 h-5 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
-                    </motion.span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      <motion.span
+                        className="text-xs cursor-pointer group-hover:block"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <FavoriteBorderOutlined className="w-5 h-5 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                      </motion.span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-              <AnimatePresence>
-                {hoveredItem === index && (
-                  <motion.div
-                    onClick={() => setQuickViewProduct(Slider)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute top-0 left-0 p-3 z-50"
-                  >
-                    <motion.span
-                      className="text-xs cursor-pointer group-hover:block"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                <AnimatePresence>
+                  {hoveredItem === index && (
+                    <motion.div
+                      onClick={() => setQuickViewProduct(Slider)}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute top-0 left-0 p-3 z-50"
                     >
-                      <GoEye className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
-                    </motion.span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      <motion.span
+                        className="text-xs cursor-pointer group-hover:block"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <GoEye className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                      </motion.span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-              <AnimatePresence>
-                {hoveredItem === index && (
-                  <motion.div
-                    onClick={() => AddToCompareHandler(Slider)}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute top-0 transform -translate-x-1/2  p-3 z-50"
-                  >
-                    <motion.span
-                      className="text-xs cursor-pointer group-hover:block"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                <AnimatePresence>
+                  {hoveredItem === index && (
+                    <motion.div
+                      onClick={() => AddToCompareHandler(Slider)}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute top-0 transform -translate-x-1/2  p-3 z-50"
                     >
-                      <CompareArrows className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
-                    </motion.span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      <motion.span
+                        className="text-xs cursor-pointer group-hover:block"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <CompareArrows className="w-6 h-6 bg-black rounded-lg hover:bg-red-600 text-white p-2 transition-all duration-300 ease-in-out" />
+                      </motion.span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-              <div className="w-full h-full rounded-lg overflow-hidden flex flex-col relative">
-                <div className="w-full h-80 md:h-full">
-                  <img
-                    className="w-full h-full md:!h-60 object-fill"
-                    src={Slider.img}
-                    alt="Bioxin Keratin Argan Oil"
-                  />
-                </div>
-
-                <div className="cursor-pointer h-6 bg-gradient-to-l from-orange-500 to-orange-200 text-white flex justify-center items-center text-center text-xs relative">
-                  <img className="!w-8 !h-8" src={award} alt="award" />
-                  <span>{t("3rd best-selling product")}</span>
-                </div>
-
-                <div className={`text-black p-4 text-xs h-full`}>
-                  <div className="flex justify-between items-center">
-                    <span className="bg-green-500 text-white px-2 py-1 text-xs font-bold uppercase">
-                      {t("Fast Delivery")}
-                    </span>
-                    <span className="bg-gray-600 text-white px-2 py-1 text-xs font-bold uppercase">
-                      {t("Free Shipping")}
-                    </span>
+                <div className="w-full h-full rounded-lg overflow-hidden flex flex-col relative">
+                  <div className="w-full h-80 md:h-full">
+                    <img
+                      className="w-full h-full md:!h-60 object-fill"
+                      src={Slider.img}
+                      alt="Bioxin Keratin Argan Oil"
+                    />
                   </div>
-                  <h2 className="text-xs font-extrabold mt-2 text-black">
-                    {Slider.name}
-                  </h2>
-                  <div className="flex items-center mt-1">
-                    <span className="text-yellow-500">★★★★☆</span>
-                    <span className="text-zinc-500 ml-2">
-                      ({Slider.ratingCount})
-                    </span>
+
+                  <div className="cursor-pointer h-6 bg-gradient-to-l from-orange-500 to-orange-200 text-white flex justify-center items-center text-center text-xs relative">
+                    <img className="!w-8 !h-8" src={award} alt="award" />
+                    <span>{t("3rd best-selling product")}</span>
                   </div>
-                  <p className="text-red-600 font-bold mt-2">
-                    {t("Lowest Price In")} {Slider.lowestPriceInDays}{" "}
-                    {t("Days")}!
-                  </p>
-                  <p className="text-lg font-bold mt-1">
-                    {Slider.price}
-                    <span className="line-through text-muted">
-                      {Slider.fakePrice}
-                    </span>
-                  </p>
-                  <button className="bg-[#FFF6EE] font-semibold mt-4 py-2 px-4 rounded-lg">
-                    {t("Buy More Pay Less")}
-                  </button>
+
+                  <div className={`text-black p-4 text-xs h-full`}>
+                    <div className="flex justify-between items-center">
+                      <span className="bg-green-500 text-white px-2 py-1 text-xs font-bold uppercase">
+                        {t("Fast Delivery")}
+                      </span>
+                      <span className="bg-gray-600 text-white px-2 py-1 text-xs font-bold uppercase">
+                        {t("Free Shipping")}
+                      </span>
+                    </div>
+                    <h2 className="text-xs font-extrabold mt-2 text-black">
+                      {Slider.name}
+                    </h2>
+                    <div className="flex items-center mt-1">
+                      <span className="text-yellow-500">★★★★☆</span>
+                      <span className="text-zinc-500 ml-2">
+                        ({Slider.ratingCount})
+                      </span>
+                    </div>
+                    <p className="text-red-600 font-bold mt-2">
+                      {t("Lowest Price In")} {Slider.lowestPriceInDays}{" "}
+                      {t("Days")}!
+                    </p>
+                    <p className="text-lg font-bold mt-1">
+                      {Slider.price}
+                      <span className="line-through text-muted">
+                        {Slider.fakePrice}
+                      </span>
+                    </p>
+                    <button className="bg-[#FFF6EE] font-semibold mt-4 py-2 px-4 rounded-lg">
+                      {t("Buy More Pay Less")}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            );
+          })}
 
           <div className="swiper-button-next-baby absolute right-0 top-1/2 z-50 bg-gray-50 text-black rounded-full border-2 w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 hover:bg-[#F48118] hover:text-white transition-all duration-500 cursor-pointer">
             <ArrowForward />
